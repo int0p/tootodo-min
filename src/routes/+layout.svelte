@@ -19,7 +19,7 @@
 	import '../app.postcss';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+	// import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 	import {PomoTimer} from "$lib/pomodoro";

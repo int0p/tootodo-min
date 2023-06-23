@@ -31,7 +31,7 @@
 
 <!-- result table-->
 <div class="text-center text-sm
-         w-full h-full max-h-[calc(100%-160px)]
+         w-full h-full max-h-[calc(100%-164px)]
          overflow-y-scroll hide-scrollbar"
 >
     <table class="w-full border-collapse">
