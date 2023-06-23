@@ -20,7 +20,7 @@
 
 
 <div class="flex-col h-[calc(100vh-2rem)]  w-[calc(100vw-2rem)] m-auto">
-	<div class="relative w-1/3 h-auto min-w-[290px] max-w-[600px]">
+	<div class="relative w-1/3 h-auto min-w-[330px] max-w-[600px]">
 		<TabGroup>
 			<TabAnchor href="/" selected={$page.url.pathname === '/'}>Too</TabAnchor>
 			<TabAnchor href="/daying" selected={$page.url.pathname === '/daying'}>Do</TabAnchor>

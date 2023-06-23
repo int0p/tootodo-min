@@ -1,1 +1,1 @@
-export { default as PomoTimer } from './pomodoro.svelte'
+export { default as PomoTimer } from './Pomodoro.svelte'

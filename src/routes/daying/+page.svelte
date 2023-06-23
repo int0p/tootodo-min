@@ -9,7 +9,8 @@
     import {currentTime} from '$lib/stores/time.ts';
 
     let valueSingle: string = 'FE';
-    let week = ['M', 'T', 'W', 'T', 'F', 'S','S'];
+    // let week = ['M', 'T', 'W', 'T', 'F', 'S','S'];
+    let week = ['월', '화', '수', '목', '금', '토','일'];
     $: isTodayDay = (week)=>{
         if(week == $currentTime.day)
             return true;
@@ -18,7 +19,7 @@
 </script>
 
 <div class="flex w-full h-full">
-    <div class="flex-col w-1/3 h-full min-w-[290px] max-w-[600px]">
+    <div class="flex-col w-1/3 h-full min-w-[330px] max-w-[600px]">
         <div class="flex w-full justify-center mb-2 space-x-2 font-bold uppercase">
             {#each Array(7) as _, i}
                 {@const monDate = $currentTime.date - $currentTime.day +1}
@@ -85,6 +86,6 @@
 
 <style>
     .today{
-        opacity: 70%;
+        @apply bg-primary-200 text-black border-double border-4 py-0.5 border-primary-400;
     }
 </style>
