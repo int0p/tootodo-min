@@ -4,13 +4,14 @@ import {TableOfContents} from "@skeletonlabs/skeleton";
 import HomeIcon from "~icons/eva/home-fill"
 import MenuIcon from "~icons/eva/menuFill"
 import {goto} from "$app/navigation";
+import {page} from "$app/stores";
 
 </script>
 
 <ol class="breadcrumb relative left-3">
     <li class="crumb"><a class="anchor" href="/do"><HomeIcon transform="translate(10 1) scale(-1 1)" /></a></li>
     <li class="crumb-separator" aria-hidden>&rsaquo;</li>
-    <li class="crumb"><a class="anchor" href="/do/weekly">Week</a></li>
+    <li class="crumb"><a class="anchor" href="/do/weekly">{$page.url.pathname}</a></li>
     <li class="crumb-separator" aria-hidden>&rsaquo;</li>
     <li class="crumb"><a class="anchor" href="/do/daily">Day</a></li>
     <li class="crumb-separator" aria-hidden>-</li>

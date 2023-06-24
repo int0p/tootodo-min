@@ -65,12 +65,12 @@
     <svelte:fragment slot="setting">
         <button class="flex space-x-2 absolute top-1.5 right-0 scale-[115%]"><AddIcon/><DownloadIcon/></button>
         <div class="flex space-x-2 absolute top-8 right-0  text-lg">
-            <div class="text-sm font-digital relative left-3 w-[80px] ">
+            <div class="text-sm font-digital relative left-3 w-[84px] ">
                 <span class="text-error-500 dark:text-error-400">todo mode:</span>
                 {#if modeShowTodo}
                      show detail
                 {:else}
-                     add editor
+                     add at editor
                 {/if}
             </div>
             <SlideToggle name="slider-label" bind:checked={modeShowTodo} label="mode" size="sm"
