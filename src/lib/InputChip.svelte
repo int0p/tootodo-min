@@ -171,7 +171,7 @@
     <!-- Interface -->
     <!-- todo: 내가 추가한 기능-  에디터에 투두들 추가하는 버튼 -->
     <div class="absolute top-1 -right-1">
-        <button class="bg-primary-500 hover:bg-primary-700 text-white dark:text-black font-semibold py-2 px-3 rounded scale-[80%]" on:click={addChip}>
+        <button class="bg-primary-500 hover:bg-primary-700 text-white dark:text-black font-semibold py-1 px-3 rounded scale-[80%]" on:click={addChip}>
             add at editor
         </button>
     </div>

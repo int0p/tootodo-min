@@ -7,7 +7,7 @@
     <hr class="!border-t-3 mb-1 " />
 
     <div class="flex justify-between mb-2 w-full h-[56px] relative">
-        <div class="w-[calc(100%-120px)] h-full ">
+        <div class="w-[calc(100%-130px)] h-full ">
             <slot name="workList"/>
         </div>
         <div class="relative text-lg">
@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <hr class="!border-b-3 mb-1.5 w-[calc(100%-140px)]" />
+    <hr class="!border-b-3 mb-1.5 w-[calc(100%-135px)]" />
 
     <div class="w-full h-full relative max-h-[calc(100%-162px)] overflow-y-scroll hide-scrollbar">
         <slot name="contents"/>
