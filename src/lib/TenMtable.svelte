@@ -18,7 +18,7 @@
         <tr class="sticky top-0">
             <th class="p-2 bg-primary-100 border border-primary-100"></th>
             {#each dayMinutes as min}
-                <td class="text-xs sticky text-center py-1 px-1
+                <td class="text-xs sticky text-center py-0.5 px-1
                             border border-primary-100
                             bg-primary-600
                             text-primary-50 font-bold">
