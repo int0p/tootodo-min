@@ -10,7 +10,7 @@ export const current = readable(new Date(), set => {
 });
 
 Date.prototype.getWeek = function() {
-    var dt = new Date(this.getFullYear(),0,1);
+    let dt = new Date(this.getFullYear(),0,1);
     return Math.ceil((((this - dt) / 86400000) + dt.getDay()+1)/7);
 };
 export const currentTime = derived(current, $current => {
