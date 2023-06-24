@@ -3,7 +3,7 @@ import {Editor} from "$lib/editor/index.ts";
 </script>
 
 <div class="flex w-full h-full">
-    <div class="flex-col w-1/3 h-full min-w-[330px] max-w-[600px]">
+    <div class="flex-col w-1/3 h-full relative min-w-[330px] max-w-[600px]">
         <slot/>
     </div>
 

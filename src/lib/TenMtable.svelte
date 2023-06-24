@@ -7,32 +7,12 @@
     let dayHours = Array.from({length: 24}, (_, i) =>(i+startTime-1)%12+1); //0시때문에 +1함
 
     let table = Array.from(Array(dayMinutes.length), () => Array(dayHours.length).fill(false));
-    //
-    // const sourceData =
-    // [
-    //     { hour: '9', one: true, two:true,three:true, four:true,five:true,six:true },
-    // ];
-    //
-    // const tableSimple: TableSource = {
-    //     // A list of heading labels.
-    //     head: dayMinutes,
-    //     // The data visibly shown in your table body UI.
-    //     body: tableMapperValues(sourceData, ['hour', 'one','two','three','four','five','six']),
-    //     // Optional: The data returned when interactive is enabled and a row is clicked.
-    //     meta: tableMapperValues(sourceData, ['hour', 'one','two','three','four','five','six']),
-    //     // Optional: A list of footer labels.
-    //     // foot: ['','','','','','Total', '<code class="code">5H 30M</code>'],
-    // };
-    //
-    // function mySelectionHandler(){
-    //     //해당시간에 editor에 작성한 내용 알려줌.
-    // }
+
 </script>
 
 <!-- result table-->
 <div class="text-center text-sm
-         w-full h-full max-h-[calc(100%-164px)]
-         overflow-y-scroll hide-scrollbar"
+         w-full h-full "
 >
     <table class="w-full border-collapse">
         <tr class="sticky top-0">
@@ -69,40 +49,4 @@
         {/each}
     </table>
 </div>
-
-<!-- plan table-->
-<!--<div class="text-center text-sm absolute top-0 left-6-->
-<!--         w-[27%] h-full max-h-[calc(100%-160px)]-->
-<!--         overflow-y-scroll hide-scrollbar"-->
-<!--&gt;-->
-<!--    <table class="w-full border-collapse">-->
-<!--        <tr class="sticky top-0">-->
-<!--            <th class="p-2 bg-primary-100"></th>-->
-<!--                <td class="text-xs sticky text-center py-1 px-1-->
-<!--                                border bg-primary-700-->
-<!--                                text-white font-bold">-->
-<!--                    <span class="font-digital">{dayMinutes[0]}</span>-->
-<!--                </td>-->
-<!--        </tr>-->
-
-<!--        {#each plan as min}-->
-<!--            <tr class="">-->
-<!--                <th class="text-xs py-0 border bg-primary-700 text-white font-bold">-->
-<!--                    <span class="font-digital ">{min}</span>-->
-<!--                </th>-->
-<!--                <td class="py-2 border border-primary-500"></td>-->
-<!--            </tr>-->
-<!--        {/each}-->
-<!--    </table>-->
-<!--</div>-->
-
-<!-- by using skeleton component-->
-<!--<div class="flex-col w-full h-full">-->
-    <!--    <Table source={tableSimple} interactive={true} on:selected={mySelectionHandler}-->
-    <!--           class="text-center text-sm-->
-    <!--           absolute top-10-->
-    <!--           w-full h-full max-h-[calc(100%-230px)]-->
-    <!--           overflow-y-scroll hide-scrollbar"-->
-    <!--    />-->
-<!--</div>-->
 

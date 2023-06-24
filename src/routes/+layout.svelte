@@ -3,7 +3,7 @@
 	import '@skeletonlabs/skeleton/themes/theme-gold-nouveau.css';
 	// import '@skeletonlabs/skeleton/themes/theme-modern.css'; //팝팦 핑크
 	// import '@skeletonlabs/skeleton/themes/theme-skeleton.css'; //깔끔초록
-	// import '@skeletonlabs/skeleton/themes/theme-rocket.css'; //옥..?
+	// import '@skeletonlabs/skeleton/themes/theme-rocket.css'; //옥..? 이상함.
 	// import '@skeletonlabs/skeleton/themes/theme-seafoam.css'; //별로인 초록
 	// import '@skeletonlabs/skeleton/themes/theme-vintage.css'; //옛 주황
 	// import '@skeletonlabs/skeleton/themes/theme-sahara.css'; //별로인 빨강
@@ -40,7 +40,8 @@
 <!--		tab-->
 		<div class="relative w-1/3 h-auto min-w-[330px] max-w-[600px]">
 			<TabGroup>
-				<TabAnchor href="/too" selected={$page.url.pathname === '/too'}>Too</TabAnchor>
+				<TabAnchor href="/too" selected={$page.url.pathname === '/too'}>Too </TabAnchor>
+				<TabAnchor selected="true"><div class="crumb-separator" aria-hidden>&rsaquo;</div></TabAnchor>
 				<TabAnchor href="/do" selected={$page.url.pathname === '/do' || $page.url.pathname === '/'}>Do</TabAnchor>
 				<TabAnchor href="/blog" selected={$page.url.pathname === '/blog'}>Blog</TabAnchor>
 				<LightSwitch class="absolute right-0 top-2.5"/>
