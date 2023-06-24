@@ -6,7 +6,6 @@ import BreadCrumb from "./breadcrumb.svelte"
     <!--		breadcrumb-->
     <BreadCrumb/>
     <!--        editor-->
-    <div class="w-[calc(100%-1rem)] h-[calc(100%-2rem)] bg-white opacity-40 ml-5 mt-2 rounded-xl border-white relative">
-            <slot name="editor"></slot>
-    </div>
+    <textarea class="w-[calc(100%-1rem)] h-[calc(100%-2rem)] bg-white opacity-40 ml-5 mt-2 rounded-xl border-white relative">
+    </textarea>
 </div>
