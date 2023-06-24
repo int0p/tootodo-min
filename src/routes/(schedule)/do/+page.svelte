@@ -30,7 +30,7 @@
                 <span class="bg-white/50 text-black border-primary-400 text-xs w-full rounded-md border-t-2">{$currentTime.date-1}</span>
             </button>
 <!--            today -->
-            <button class="chip bg-primary-200 w-1/2 uppercase flex-col justify-center items-center border-double border-4 border-primary-500 py-0 text-black" >
+            <button class="chip bg-primary-200 w-1/2 uppercase flex-col justify-center items-center border-double border-4 border-primary-500 py-1 text-black" >
                 {week.at($currentTime.day)}
                 <span class="variant-filled border-primary-400 text-xs w-full rounded-md border-t-2">{$currentTime.date}</span>
             </button>

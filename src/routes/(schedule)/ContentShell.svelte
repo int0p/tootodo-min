@@ -1,6 +1,6 @@
 
 <div class="flex-col w-full h-full">
-    <div class="flex w-full mb-2 justify-center space-x-2 font-bold">
+    <div class="flex w-full mb-2 justify-center space-x-2 font-bold scale-95">
         <slot name="area"/>
     </div>
 
