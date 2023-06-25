@@ -72,13 +72,18 @@
                 <Autocomplete bind:input={inputChip} denylist={inputChipList} options={flavorOptions} on:selection={onInputChipSelect}
                               class="h-full max-h-[calc(100%-40px)] overflow-y-auto"  />
                 <input bind:value={inputChip} placeholder="Search..."
-                       class="input absolute right-0 bottom-0 w-full rounded-lg variant-glass-primary border-2 " type="search" name="todomode"
+                       class="input absolute right-2 bottom-2 w-[calc(100%-1rem)] rounded-lg
+                       variant-glass-primary border-1 border-double
+                       shadow-md dark:shadow-primary-50/50 dark:shadow-sm"
+                       type="search" name="todomode"
                 />
             {:else}
                 <Autocomplete bind:input={inputChip} denylist={inputChipList} options={flavorOptions} on:selection={onInputChipSelect}
                               class="h-full max-h-[calc(100%-160px)] overflow-y-auto" />
                 <InputChip bind:input={inputChip} bind:value={inputChipList} name="addmode"
-                           class="absolute right-0 bottom-0 variant-glass-error border-2"
+                           class="absolute right-2 bottom-2 w-[calc(100%-1rem)]
+                           variant-glass-error border-1 border-double
+                           shadow-md dark:shadow-primary-50/50 dark:shadow-sm"
                 />
             {/if}
         </div>
