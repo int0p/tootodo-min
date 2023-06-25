@@ -1,7 +1,7 @@
 <script lang='ts'>
 	// theme
 	import '@skeletonlabs/skeleton/themes/theme-gold-nouveau.css';
-	// import '@skeletonlabs/skeleton/themes/theme-test.css';
+	import '@skeletonlabs/skeleton/themes/theme-test.css';
 
 	// import '@skeletonlabs/skeleton/themes/theme-modern.css'; //팝팦 핑크
 	// import '@skeletonlabs/skeleton/themes/theme-skeleton.css'; //깔끔초록
