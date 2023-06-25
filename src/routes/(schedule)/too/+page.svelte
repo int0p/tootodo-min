@@ -67,7 +67,7 @@
     </svelte:fragment>
 
     <svelte:fragment slot="contents">
-        <div class="card w-full h-full p-2 bg-white/40 " tabindex="-1">
+        <div class="card w-full h-full p-2 bg-white/40 dark:bg-white/10" tabindex="-1">
             {#if modeShowTodo}
                 <Autocomplete bind:input={inputChip} denylist={inputChipList} options={flavorOptions} on:selection={onInputChipSelect}
                               class="h-full max-h-[calc(100%-40px)] overflow-y-auto"  />

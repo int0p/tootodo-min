@@ -1,26 +1,24 @@
 <script lang='ts'>
 	// theme
-	import '@skeletonlabs/skeleton/themes/theme-gold-nouveau.css';
-	import '@skeletonlabs/skeleton/themes/theme-test.css';
-
+	import "../theme.postcss";
+	// import '@skeletonlabs/skeleton/themes/theme-gold-nouveau.css';
 	// import '@skeletonlabs/skeleton/themes/theme-modern.css'; //팝팦 핑크
 	// import '@skeletonlabs/skeleton/themes/theme-skeleton.css'; //깔끔초록
 	// import '@skeletonlabs/skeleton/themes/theme-rocket.css'; //옥..? 이상함.
 	// import '@skeletonlabs/skeleton/themes/theme-seafoam.css'; //별로인 초록
-	// import '@skeletonlabs/skeleton/themes/theme-vintage.css'; //옛 주황
 	// import '@skeletonlabs/skeleton/themes/theme-sahara.css'; //별로인 빨강 -> primary바꾸면 예쁠듯.
 	// import '@skeletonlabs/skeleton/themes/theme-hamlindigo.css'; //파스텔 퍼렁
 	// import '@skeletonlabs/skeleton/themes/theme-crimson.css'; //깔끔 빨강
 	// import '@skeletonlabs/skeleton/themes/theme-seasonal.css'; //깔끔 초록
-
+	// import '@skeletonlabs/skeleton/themes/theme-vintage.css'; //옛 주황
 
 	// If you have source.organizeImports set to true in VSCode, then it will auto change this ordering
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
 	import {LightSwitch, TableOfContents} from '@skeletonlabs/skeleton';
-	// import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 
+	// import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 
 	// navigation
 	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
@@ -31,10 +29,9 @@
 	import DragableBox from "$lib/DragableBox.svelte";
 </script>
 
-<DragableBox>
-	<PomoTimer/>
-</DragableBox>
-
+<!--<DragableBox>-->
+<!--	<PomoTimer/>-->
+<!--</DragableBox>-->
 
 <div class="flex-col h-[calc(100vh-2rem)]  w-[calc(100vw-2rem)] m-auto">
 	<div class="flex">
