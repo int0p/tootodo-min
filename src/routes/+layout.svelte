@@ -37,7 +37,7 @@
 <div class="flex-col h-[calc(100vh-2rem)]  w-[calc(100vw-2rem)] m-auto">
 	<div class="flex">
 <!--		tab-->
-		<div class="relative left-0 top-0 w-1/4 h-auto min-w-[330px] max-w-[600px]">
+		<div class="relative left-0 top-0 w-1/3 h-auto min-w-[330px] max-w-[600px]">
 			<TabGroup>
 				<TabAnchor href="/too" selected={$page.url.pathname === '/too'}>Too </TabAnchor>
 				<TabAnchor selected={$page.url.pathname === '/too' || $page.url.pathname === '/do' || $page.url.pathname === '/'}><div class="crumb-separator" aria-hidden>&rsaquo;</div></TabAnchor>
