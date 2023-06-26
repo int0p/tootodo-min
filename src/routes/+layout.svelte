@@ -1,3 +1,4 @@
+<!-- theme, tab bar-->
 <script lang='ts'>
 	// theme
 	import "../theme.postcss";
@@ -19,19 +20,19 @@
 	import {LightSwitch, TableOfContents} from '@skeletonlabs/skeleton';
 
 	// import { AppShell, AppBar } from '@skeletonlabs/skeleton';
-
+	//icon
+	import {Music4, Sticker} from 'lucide-svelte';
 	// navigation
 	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
 
 	// pomodoro timer
 	import { page } from '$app/stores';
-	import {PomoTimer} from "$lib/pomodoro";
-	import DragableBox from "$lib/DragableBox.svelte";
+	import {DragableBox,PomoTimer} from "$components";
 </script>
 
-<!--<DragableBox>-->
-<!--	<PomoTimer/>-->
-<!--</DragableBox>-->
+<DragableBox>
+	<PomoTimer/>
+</DragableBox>
 
 <div class="flex-col h-[calc(100vh-2rem)]  w-[calc(100vw-2rem)] m-auto">
 	<div class="flex">
@@ -39,9 +40,11 @@
 		<div class="relative w-1/4 h-auto min-w-[330px] max-w-[600px]">
 			<TabGroup>
 				<TabAnchor href="/too" selected={$page.url.pathname === '/too'}>Too </TabAnchor>
-				<TabAnchor selected="true"><div class="crumb-separator" aria-hidden>&rsaquo;</div></TabAnchor>
+				<TabAnchor selected={$page.url.pathname === '/too' || $page.url.pathname === '/do' || $page.url.pathname === '/'}><div class="crumb-separator" aria-hidden>&rsaquo;</div></TabAnchor>
 				<TabAnchor href="/do" selected={$page.url.pathname === '/do' || $page.url.pathname === '/'}>Do</TabAnchor>
-				<TabAnchor href="/blog" selected={$page.url.pathname === '/blog'}>Blog</TabAnchor>
+				<TabAnchor href="/music-home" selected={$page.url.pathname === '/music-home'} class="w-1/6"><Music4 size="20" class="absolute top-3.5" strokeWidth={1.5} /></TabAnchor>
+				<TabAnchor href="/blog" selected={$page.url.pathname === '/blog'} class="w-1/6"><Sticker size="22" class="absolute top-3" strokeWidth={1.5} /></TabAnchor>
+
 				<LightSwitch class="absolute right-0 top-2.5"/>
 			</TabGroup>
 		</div>

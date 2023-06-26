@@ -1,11 +1,8 @@
 <script lang="ts">
-    import TenMtable from "$lib/TenMtable.svelte"
 
     import {currentTime} from '$lib/stores/time.ts';
-    import WorkList from "$lib/WorkList.svelte";
-    import AddIcon from "~icons/eva/plus-fill"
-    import CalendarIcon from "~icons/eva/calendar-fill"
-    import DownloadIcon from "~icons/eva/downloadFill"
+    import {WorkList, TenMtable} from "$components";
+    import {CalendarRange, Plus, Share} from "lucide-svelte"
     import Shell from "../ContentShell.svelte";
     let week = ['SUN','MON', 'TUE', 'WED', 'THU', 'FRE', 'SAT'];
     // let week = ['일', '월', '화', '수', '목', '금', '토'];
@@ -21,7 +18,7 @@
         <div class="flex w-full justify-center space-x-2 font-bold uppercase">
 <!--            choose another date-->
             <button class="chip variant-soft-secondary w-1/12 flex-col items-center text-lg px-2" >
-                <CalendarIcon/>
+                <CalendarRange size=22/>
             </button>
 <!--            yesterday-->
             <button class="chip bg-gradient-to-bl variant-gradient-primary-secondary w-1/3 uppercase flex-col justify-center items-center" >
@@ -53,7 +50,7 @@
     </svelte:fragment>
 
     <svelte:fragment slot="setting">
-        <button class="flex space-x-2 absolute top-1.5 right-0 scale-[115%]"><AddIcon/><DownloadIcon/></button>
+        <button class="flex space-x-2 absolute top-1 right-0 scale-95"><Plus/><Share/></button>
         <div class="flex space-x-2 absolute right-0 top-8 text-lg">
             <h1 class="relative -bottom-1.5 left-0.5 font-digital">Total</h1>
             <code class="code text-lg font-digital font-bold">5H 30M</code>

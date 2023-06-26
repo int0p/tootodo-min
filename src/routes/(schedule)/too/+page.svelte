@@ -1,9 +1,8 @@
 <script lang="ts">
     import Shell from '../ContentShell.svelte';
-    import WorkList from "$lib/WorkList.svelte";
-    import AddIcon from "~icons/eva/plus-fill"
-    import CalendarIcon from "~icons/eva/calendar-fill"
-    import DownloadIcon from "~icons/eva/downloadFill"
+    import {WorkList} from "$components";
+
+    import {Plus, Share} from "lucide-svelte"
 
     import { Autocomplete, SlideToggle } from '@skeletonlabs/skeleton';
     import type { AutocompleteOption } from '@skeletonlabs/skeleton';
@@ -17,7 +16,7 @@
         { label: 'Pineapple', value: 'pineapple', keywords: 'fruit', meta: { healthy: true } },
         { label: 'Peach', value: 'peach', keywords: 'fruit', meta: { healthy: true } },
     ];
-    import InputChip from "$lib/InputChip.svelte"
+    import {InputChip} from "$components"
     let inputChip = '';
     let inputChipList: string[] = ['vanilla', 'chocolate'];
     function onInputChipSelect(event: any): void {
@@ -51,7 +50,7 @@
     </svelte:fragment>
 
     <svelte:fragment slot="setting">
-        <button class="flex space-x-2 absolute top-1.5 right-0 scale-[115%]"><AddIcon/><DownloadIcon/></button>
+        <button class="flex space-x-2 absolute top-1 right-0 scale-95"><Plus/><Share/></button>
         <div class="flex space-x-2 absolute top-8 right-0  text-lg">
             <div class="text-sm font-digital relative -top-1 left-3 w-[84px] ">
                 <span class="text-error-500 dark:text-error-400">todo mode:</span>

@@ -1,13 +1,9 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
-import Icons from 'unplugin-icons/vite'
 
 export default defineConfig({
 	plugins: [sveltekit(),
-		Icons({
-			compiler: 'svelte',
-			// autoInstall: true,
-		})
+
 	],
 	// vite가 Rust 오류를 감추지 않게 한다.
 	clearScreen: false,

@@ -1,5 +1,5 @@
 <script>
-import {Editor} from "$lib/editor/index.ts";
+import {Editor} from "$components";
 </script>
 
 <div class="flex w-full h-full">
