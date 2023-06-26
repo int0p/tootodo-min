@@ -8,7 +8,7 @@ import {page} from "$app/stores";
 </script>
 
 <ol class="breadcrumb relative left-5">
-    <li class="crumb"><a class="anchor" href="/do"><LampDesk size="20px" /></a></li>
+    <li class="crumb"><a class="anchor" href="/do"><LampDesk size="20px" class="dark:shadow-lg dark:shadow-primary-300"/></a></li>
     <li class="crumb-separator" aria-hidden>&rsaquo;</li>
     <li class="crumb"><a class="anchor" href="/do">{$page.url.pathname}</a></li>
     <li class="crumb-separator" aria-hidden>&rsaquo;</li>

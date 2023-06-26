@@ -37,16 +37,16 @@
 <div class="flex-col h-[calc(100vh-2rem)]  w-[calc(100vw-2rem)] m-auto">
 	<div class="flex">
 <!--		tab-->
-		<div class="relative w-1/4 h-auto min-w-[330px] max-w-[600px]">
+		<div class="relative left-0 top-0 w-1/4 h-auto min-w-[330px] max-w-[600px]">
 			<TabGroup>
 				<TabAnchor href="/too" selected={$page.url.pathname === '/too'}>Too </TabAnchor>
 				<TabAnchor selected={$page.url.pathname === '/too' || $page.url.pathname === '/do' || $page.url.pathname === '/'}><div class="crumb-separator" aria-hidden>&rsaquo;</div></TabAnchor>
 				<TabAnchor href="/do" selected={$page.url.pathname === '/do' || $page.url.pathname === '/'}>Do</TabAnchor>
 				<TabAnchor href="/music-home" selected={$page.url.pathname === '/music-home'} class="w-1/6"><Music4 size="20" class="absolute top-3.5" strokeWidth={1.5} /></TabAnchor>
 				<TabAnchor href="/blog" selected={$page.url.pathname === '/blog'} class="w-1/6"><Sticker size="22" class="absolute top-3" strokeWidth={1.5} /></TabAnchor>
-
-				<LightSwitch class="absolute right-0 top-2.5"/>
+				<LightSwitch class="relative left-4 top-2.5 border-primary-300 border dark:bg-zinc-950 "/>
 			</TabGroup>
+
 		</div>
 	</div>
 
