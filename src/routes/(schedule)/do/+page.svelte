@@ -52,7 +52,7 @@
     <svelte:fragment slot="setting">
         <button class="flex space-x-2 absolute top-1 right-0 scale-95"><Plus/><Share/></button>
         <div class="flex space-x-2 absolute right-0 top-8 text-lg">
-            <h1 class="relative -bottom-1.5 left-0.5 font-digital">Total</h1>
+            <h1 class="relative -bottom-2.5 left-0.5 font-digital">Total</h1>
             <code class="code text-lg font-digital font-bold">5H 30M</code>
         </div>
     </svelte:fragment>

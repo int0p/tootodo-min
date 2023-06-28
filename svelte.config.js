@@ -15,7 +15,7 @@ const config = {
 			]
 		},
 		scss:{
-			prependData: "@use 'src/styles/functions';"
+			prependData: "@use 'src/styles/functions'; @use '@unsass/breakpoint';"
 		}
 	}),
 	
@@ -35,6 +35,7 @@ const config = {
 		}),
 		alias:{
 			$components: 'src/lib/components',
+			$styles: 'src/styles',
 		}
 	}
 };
