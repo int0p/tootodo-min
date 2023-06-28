@@ -28,12 +28,7 @@
 	// pomodoro timer
 	import { page } from '$app/stores';
 	import {goto} from "$app/navigation";
-	import {DragableBox,PomoTimer} from "$components";
 </script>
-
-<DragableBox>
-	<PomoTimer/>
-</DragableBox>
 
 <div class="flex-col h-[calc(100vh-2rem)]  w-[calc(100vw-2rem)] m-auto mt-1">
 	<div class="flex">

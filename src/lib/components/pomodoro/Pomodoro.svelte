@@ -38,5 +38,8 @@
         box-shadow: inset 0 0 3px 3px #52525b,
             inset 0 0 1px 2px rgba(50, 50, 50, 0.2);
         background-color: rgba(247, 244, 245, 0.4);
+        width: 300px;
+        height: 360px;
     }
+
 </style>

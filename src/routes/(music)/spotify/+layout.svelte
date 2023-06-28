@@ -8,11 +8,24 @@
     $: user = data.user;
 </script>
 
-{#if user}
-    <div class="flex w-full flex-between">
-        <p> Hello {user.display_name}</p>
-        <LogoutButton />
+<div id="main">
+    <div id="content">
+        <main id="main-content">
+            <slot />
+        </main>
     </div>
-{/if}
-<slot/>
+</div>
+
+<style lang="scss">
+  #main {
+    #content {
+      main#main-content {
+        padding: 30px 15px 60px;
+        @include breakpoint.up('md') {
+          padding: 30px 30px 60px;
+        }
+      }
+    }
+  }
+</style>
 
