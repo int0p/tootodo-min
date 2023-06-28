@@ -1,24 +1,5 @@
 <script>
-    import {page} from "$app/stores";
-    import {goto} from "$app/navigation"
+    import {Button} from "$components";
 </script>
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-<input />
-<select>
-    <option>Option</option>
-</select>
-<button on:click={()=>goto('./spotify/login')}>Login</button>
 
-<style lang="scss">
-  h1 {
-    color: red;
-    font-size: functions.toRem(36);
-    @include breakpoint.up('md') {
-      color: green;
-    }
-    @include breakpoint.up('lg') {
-      color: blue;
-    }
-  }
-</style>
+<!--<Button element="a" variant="solid" href="./api/auth/login">Login</Button>-->
