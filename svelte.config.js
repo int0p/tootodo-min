@@ -24,9 +24,6 @@ const config = {
 		inspector: true,   
 	},
 	kit: {
-		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
-		// If your environment is not supported or you settled on a specific environment, switch out the adapter.
-		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		// static adapter
 		// adapter: adapter({
 		// 	out:'build',
@@ -36,8 +33,7 @@ const config = {
 		// 	precompress: false,
 		// }),
 		// vercel adapter
-		adapter: adapter({
-		}),
+		adapter: adapter(),
 		alias:{
 			$components: 'src/lib/components',
 			$styles: 'src/styles',
