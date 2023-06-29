@@ -1,4 +1,5 @@
-import adapter from '@sveltejs/adapter-static';
+// import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-vercel';
 // import { vitePreprocess } from '@sveltejs/kit/vite';
 import preprocess from 'svelte-preprocess';
 import tailwind from 'tailwindcss';
@@ -26,12 +27,16 @@ const config = {
 		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
 		// If your environment is not supported or you settled on a specific environment, switch out the adapter.
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
+		// static adapter
+		// adapter: adapter({
+		// 	out:'build',
+		// 	pages: 'build',
+		// 	assets: 'build',
+		// 	fallback: 'index.html',
+		// 	precompress: false,
+		// }),
+		// vercel adapter
 		adapter: adapter({
-			out:'build',
-			pages: 'build',
-			assets: 'build',
-			fallback: 'index.html',
-			precompress: false,
 		}),
 		alias:{
 			$components: 'src/lib/components',
