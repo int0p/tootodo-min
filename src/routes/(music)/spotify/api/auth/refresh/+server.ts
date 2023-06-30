@@ -1,3 +1,4 @@
+//스포티파이 access token이 만료됐을 때 access token을 새로 받아오는 api
 import type { RequestHandler } from './$types';
 import { SPOTIFY_APP_CLIENT_ID, SPOTIFY_APP_CLIENT_SECRET } from '$env/static/private';
 import { error, json } from '@sveltejs/kit';
