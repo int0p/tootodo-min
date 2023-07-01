@@ -1,16 +1,18 @@
 <script lang="ts">
     import type { LayoutData } from './$types';
-    import {LogoutButton} from "$components";
     export let data: LayoutData;
 
     $: user = data.user;
 </script>
-<h1>Welcome to Spotify</h1>
-<div class="flex">
-    <p> Hello {user.display_name}</p>
-    <LogoutButton/>
-</div>
 
+<h1>Welcome to SvelteKit</h1>
+
+<input />
+
+<select>
+    <option>Option</option>
+</select>
+<div style="height: 1000px" />
 
 <style lang="scss">
   h1 {

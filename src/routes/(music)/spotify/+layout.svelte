@@ -1,16 +1,40 @@
 <script lang="ts">
-    import "$styles/spotify.scss";
+    import {LogoutButton, Navigation} from '$components';
     import type { LayoutData } from './$types';
-    import {invalidateAll} from "$app/navigation";
-    import {LogoutButton} from "$components";
-    export let data: LayoutData;
+    import "$styles/spotify.scss"
 
+    let topbar: HTMLElement;
+    let scrollY: number;
+    let headerOpacity = 0;
+
+    $: if (topbar) {
+        headerOpacity = scrollY / topbar.offsetHeight < 1 ? scrollY / topbar.offsetHeight : 1;
+    }
+
+    export let data: LayoutData;
+    // $: console.log(topbar && scrollY / topbar.offsetHeight);
+    // $: console.log(scrollY)
     $: user = data.user;
 </script>
 
+
 <div id="main">
-    <div id="content">
-        <main id="main-content">
+    {#if user}
+        <div id="sidebar">
+            <Navigation desktop={true} />
+        </div>
+    {/if}
+    <div id="content" >
+        <div id="topbar" bind:this={topbar}>
+            <div
+                    class="topbar-bg"
+                    style:background-color="var(--header-color)"
+                    style:opacity={headerOpacity}
+            ></div>
+            <LogoutButton/>
+        </div>
+        <main id="main-content" class:logged-in={user}
+              on:scroll={(e) => (scrollY = e.target.scrollTop)}>
             <slot />
         </main>
     </div>
@@ -18,14 +42,40 @@
 
 <style lang="scss">
   #main {
+    display: flex;
     #content {
+      flex: 1;
+      #topbar {
+        position: fixed;
+        height: var(--header-height);
+        padding: 0 15px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        z-index: 100;
+        .topbar-bg {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          z-index: -1;
+        }
+        @include breakpoint.up('md') {
+          padding: 0 30px;
+          width: calc(100% - var(--sidebar-width));
+        }
+      }
       main#main-content {
         padding: 30px 15px 60px;
         @include breakpoint.up('md') {
           padding: 30px 30px 60px;
         }
+        &.logged-in {
+          padding-top: calc(30px + var(--header-height));
+          @apply overflow-y-scroll max-h-[calc(100%-70px)] hide-scrollbar;
+        }
       }
     }
   }
 </style>
-
