@@ -1,14 +1,16 @@
 <script>
     import {LogoutButton, Navigation} from '$components';
+    import { browser } from '$app/environment';
 </script>
 
 <div class="content">
     <div class="left">
-        <Navigation desktop={false} />
+        {#if browser}
+            <Navigation desktop={false} />
+        {/if}
     </div>
-    <div class="right">Right  <LogoutButton/>
+    <div class="right"><LogoutButton/>
     </div>
-
 </div>
 
 <style lang="scss">

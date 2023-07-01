@@ -29,11 +29,11 @@
                 <div
                         class="topbar-bg"
                         style:background-color="var(--header-color)"
-                        style:opacity={headerOpacity}
+                        style:opacity={`${headerOpacity}`}
                 ></div>
                 <Header/>
             </div>
-        <main id="main-content" class:logged-in={user}
+        <main id="main-content" class:logged-in={user} class="hide-scrollbar"
               on:scroll={(e) => (scrollY = e.target.scrollTop)}>
             <slot />
         </main>
@@ -73,7 +73,7 @@
         }
         &.logged-in {
           padding-top: calc(30px + var(--header-height));
-          @apply overflow-y-scroll max-h-[calc(100%-70px)] hide-scrollbar;
+          @apply overflow-y-scroll max-h-[calc(100%-70px)] ;
         }
       }
     }

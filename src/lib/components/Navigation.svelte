@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { Home, Search, ListMusic, type Icon } from 'lucide-svelte';
+    import { Home, Search, ListMusic, Menu, X, type Icon } from 'lucide-svelte';
     import {tick, type ComponentType } from 'svelte';
+    import { IconButton } from '$components';
     import logo from '$assets/Spotify_Logo_RGB_White.png';
     import { page } from '$app/stores';
     import { fade } from 'svelte/transition';
@@ -10,8 +11,8 @@
 
     let isMobileMenuOpen = false;
     $: isOpen = desktop || isMobileMenuOpen;
-    let openMenuButton: HTMLButtonElement;
-    let closeMenuButton: HTMLButtonElement;
+    let openMenuButton: IconButton;
+    let closeMenuButton: IconButton;
     let lastFocusableElement: HTMLAnchorElement;
     const menuItems: { path: string; label: string; icon: ComponentType<Icon> }[] = [
         {
@@ -34,12 +35,12 @@
     const openMenu = async () => {
         isMobileMenuOpen = true;
         await tick();
-        closeMenuButton.focus();
+        closeMenuButton.getButton().focus();
     };
     const closeMenu = async () => {
         isMobileMenuOpen = false;
         await tick();
-        openMenuButton.focus();
+        openMenuButton.getButton().focus();
     };
     //focus trap (mobile에서, menu버튼을 눌렀을 때, tap키를 누를 수 있는 범위 제한(only 메뉴바 내부))
         //제일 위(close button)에서 shift tab눌렀을 경우 제일 밑으로 focus이동
@@ -55,7 +56,7 @@
         if (desktop) return;
         if (e.key === 'Tab' && !e.shiftKey) {
             e.preventDefault();
-            closeMenuButton.focus();
+            closeMenuButton.getButton().focus();
         }
     };
     //esc버튼을 누르면 메뉴가 닫힌다.
@@ -91,21 +92,24 @@
 <!--    모바일일 때 menu를 열면, 좌측에서부터 메뉴가 스윽 등장. 데스크탑일땐 menu가 디폴트로 존재. -->
     <nav aria-label="Main">
         {#if !desktop}
-            <button on:click={openMenu}
-                    bind:this={openMenuButton}
-                    aria-expanded={isOpen}
-            >Open</button>
+            <IconButton icon={Menu} label="Open menu"
+                        on:click={openMenu}
+                        bind:this={openMenuButton}
+                        aria-expanded={isOpen}/>
         {/if}
         <div class="nav-content-inner" class:is-hidden={!isOpen}
              style:visibility={isOpen ? 'visible' : 'hidden'}
              on:keyup={handleEscape}
         >
             {#if !desktop}
-                <button on:click={closeMenu}
+                <IconButton
+                        icon={X}
+                        label="Close Menu"
                         bind:this={closeMenuButton}
-                        aria-expanded={closeMenu}
+                        on:click={closeMenu}
                         on:keydown={moveFocusToBottom}
-                >Close</button>
+                        class="close-menu-button"
+                />
             {/if}
             <img src={logo} class="logo" alt="Spotify" />
             <ul>
@@ -217,6 +221,16 @@
       @include breakpoint.down('md') {
         display: block;
       }
+    }
+    :global(.menu-button) {
+      @include breakpoint.up('md') {
+        display: none;
+      }
+    }
+    :global(.close-menu-button) {
+      position: absolute;
+      right: 20px;
+      top: 20px;
     }
   }
 </style>
