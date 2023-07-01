@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {LogoutButton, Navigation} from '$components';
+    import {LogoutButton, Navigation, Header} from '$components';
     import type { LayoutData } from './$types';
     import "$styles/spotify.scss"
 
@@ -17,22 +17,22 @@
     $: user = data.user;
 </script>
 
-
 <div id="main">
     {#if user}
         <div id="sidebar">
             <Navigation desktop={true} />
         </div>
     {/if}
+
     <div id="content" >
-        <div id="topbar" bind:this={topbar}>
-            <div
-                    class="topbar-bg"
-                    style:background-color="var(--header-color)"
-                    style:opacity={headerOpacity}
-            ></div>
-            <LogoutButton/>
-        </div>
+            <div id="topbar" bind:this={topbar}>
+                <div
+                        class="topbar-bg"
+                        style:background-color="var(--header-color)"
+                        style:opacity={headerOpacity}
+                ></div>
+                <Header/>
+            </div>
         <main id="main-content" class:logged-in={user}
               on:scroll={(e) => (scrollY = e.target.scrollTop)}>
             <slot />
