@@ -69,7 +69,7 @@
     beforeNavigate(() => {
         isMobileMenuOpen = false;
     });
-    $:console.log(desktop);
+    //todo: 화면크기에 따라 desktop 값 받도록 코드 수정. (지금은 class뗐다붙였다로 화면에서 보일까말까 구현
 </script>
 
 <svelte:head>
