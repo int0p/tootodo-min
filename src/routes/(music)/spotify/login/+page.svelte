@@ -29,13 +29,13 @@
 <style lang="scss">
   :global(body) {
     background-image: linear-gradient(230deg, var(--sidebar-color), var(--bg-color));
-    height: 100vh;
   }
   .wrapper {
     display: flex;
     width: 100%;
     max-width: 1200px;
-    margin: 80px auto 0;
+    margin: auto;
+    height: 80vh;
     align-items: center;
     flex-direction: column;
     @include breakpoint.up('md') {

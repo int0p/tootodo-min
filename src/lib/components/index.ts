@@ -7,8 +7,8 @@ export {default as TenMtable} from './TenMtable.svelte'
 export {default as WorkList} from './WorkList.svelte'
 
 //spotify
-export {default as LogoutButton} from './LogoutButton.svelte'
-export {default as Button} from './Button.svelte'
-export {default as Navigation} from './Navigation.svelte'
-export { default as Header } from './Header.svelte';
-export { default as IconButton } from './IconButton.svelte';
+export {default as LogoutButton} from './spotify/LogoutButton.svelte'
+export {default as Button} from './spotify/Button.svelte'
+export {default as Navigation} from './spotify/Navigation.svelte'
+export { default as Header } from './spotify/Header.svelte';
+export { default as IconButton } from './spotify/IconButton.svelte';

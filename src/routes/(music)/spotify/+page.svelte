@@ -12,7 +12,6 @@
 <select>
     <option>Option</option>
 </select>
-<div style="height: 1000px" />
 
 <style lang="scss">
   h1 {

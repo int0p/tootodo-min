@@ -16,66 +16,66 @@
     // $: console.log(scrollY)
     $: user = data.user;
 </script>
-
-<div id="main">
-    {#if user}
-        <div id="sidebar">
-            <Navigation desktop={true} />
-        </div>
-    {/if}
-
-    <div id="content" >
-            <div id="topbar" bind:this={topbar}>
-                <div
-                        class="topbar-bg"
-                        style:background-color="var(--header-color)"
-                        style:opacity={`${headerOpacity}`}
-                ></div>
-                <Header/>
+<div class="m-auto h-[calc(100vh - 4rem)] w-[calc(100vh - 2rem)]">
+    <div id="main" class="w-full h-full">
+        {#if user}
+            <div id="sidebar">
+                <Navigation desktop={true} />
             </div>
-        <main id="main-content" class:logged-in={user} class="hide-scrollbar"
-              on:scroll={(e) => (scrollY = e.target.scrollTop)}>
-            <slot />
-        </main>
+        {/if}
+
+        <div id="content" class="w-full relative">
+            {#if user}
+                <div id="topbar" bind:this={topbar} class="border-b-2 fixed w-[calc(100%-2rem)]">
+                    <div
+                            class="topbar-bg w-full absolute"
+                            style:background-color="var(--header-color)"
+                            style:opacity={`${headerOpacity}`}
+                    />
+                    <Header />
+                </div>
+            {/if}
+            <main id="main-content" class:logged-in={user} class="hide-scrollbar w-full p-4"
+                  on:scroll={(e) => (scrollY = e.target.scrollTop)}>
+                <slot />
+            </main>
+        </div>
     </div>
 </div>
 
 <style lang="scss">
+
   #main {
     display: flex;
+    @apply bg-zinc-500/30 rounded-2xl shadow-lg items-center;
+
     #content {
       flex: 1;
       #topbar {
-        position: fixed;
         height: var(--header-height);
         padding: 0 15px;
         display: flex;
         align-items: center;
-        width: 100%;
         z-index: 100;
         .topbar-bg {
-          position: absolute;
-          width: 100%;
+          @apply rounded-t-2xl rounded-l-none;
           height: 100%;
           top: 0;
           left: 0;
           z-index: -1;
         }
         @include breakpoint.up('md') {
-          padding: 0 30px;
-          width: calc(100% - var(--sidebar-width));
+          width: calc(100% - var(--sidebar-width) - 2rem);
         }
       }
       main#main-content {
-        padding: 30px 15px 60px;
-        @include breakpoint.up('md') {
-          padding: 30px 30px 60px;
-        }
+        height: calc(100vh - 4rem);
         &.logged-in {
           padding-top: calc(30px + var(--header-height));
           @apply overflow-y-scroll max-h-[calc(100%-70px)] ;
         }
       }
+
     }
   }
 </style>

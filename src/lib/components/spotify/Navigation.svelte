@@ -81,7 +81,7 @@
     {/if}
 </svelte:head>
 
-<div class="nav-content" class:desktop class:mobile={!desktop}>
+<div class="nav-content" class:desktop class:mobile={!desktop} >
 <!--    모바일에서 menu를 열면, 뒷 버튼 눌리지 않게 overlay-->
     {#if !desktop && isMobileMenuOpen}
         <div class="overlay" on:click={closeMenu} transition:fade={{ duration: 200 }}
@@ -163,7 +163,7 @@
       padding: 20px;
       min-width: var(--sidebar-width);
       background-color: var(--sidebar-color);
-      height: 100vh;
+      height: calc(100vh - 4rem);
       overflow: auto;
       display: none;
       ul {
