@@ -28,7 +28,12 @@
 	// pomodoro timer
 	import { page } from '$app/stores';
 	import {goto} from "$app/navigation";
+	$:console.log($page.data.title);
 </script>
+
+<svelte:head>
+	<title>Tootodo {$page.data.title ? ` - ${$page.data.title}` : ''}</title>
+</svelte:head>
 
 <div class="flex-col h-[calc(100vh-2rem)]  w-[calc(100vw-2rem)] m-auto mt-1">
 	<div class="flex">

@@ -28,6 +28,7 @@
 					interactive: true,
 					theme: 'menu',
 					appendTo: document.body,
+					hideOnPopperBlur: true
 				}}>
                 {#if user?.images && user.images.length > 0}
                     <img src={user.images[0].url} alt="" />
@@ -44,7 +45,8 @@
                         >View on Spotify<ExternalLink focusable="false" aria-hidden size={20} class="inline"/>
                         </a>
                     </li>
-                    <li><a href="/profile">View Profile</a></li>
+                    <li><a href="/spotify/profile">View Profile</a></li>
+                    <hr/>
                     <li><LogoutButton /></li>
                 </ul>
             </div>
