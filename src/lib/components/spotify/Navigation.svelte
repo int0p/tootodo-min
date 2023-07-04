@@ -69,6 +69,7 @@
     beforeNavigate(() => {
         isMobileMenuOpen = false;
     });
+    $:console.log(desktop);
 </script>
 
 <svelte:head>
@@ -95,6 +96,7 @@
             <IconButton icon={Menu} label="Open menu"
                         on:click={openMenu}
                         bind:this={openMenuButton}
+                        class="menu-button"
                         aria-expanded={isOpen}/>
         {/if}
         <div class="nav-content-inner" class:is-hidden={!isOpen}
@@ -166,6 +168,9 @@
       height: calc(100vh - 4rem);
       overflow: auto;
       display: none;
+      @include breakpoint.down('md') {
+        height: 100vh;
+      }
       ul {
         padding: 0;
         margin: 20px 0 0;
