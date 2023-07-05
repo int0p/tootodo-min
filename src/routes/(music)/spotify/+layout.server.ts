@@ -26,7 +26,7 @@ export const load: LayoutServerLoad = async ({ cookies, fetch, url }) => {
     //프로필을 app.d.ts파일의 PageData에 저장.
     if (profileRes.ok) {
         const profile: SpotifyApi.CurrentUsersProfileResponse = await profileRes.json();
-        console.log(profile);
+        // console.log(profile);
         return {
             user: profile
         };
