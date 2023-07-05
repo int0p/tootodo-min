@@ -28,7 +28,19 @@
 	// pomodoro timer
 	import { page } from '$app/stores';
 	import {goto} from "$app/navigation";
-	$:console.log($page.data.title);
+
+	// page info
+	// $:console.log($page.data.title);
+	import NProgress from 'nprogress';
+	import 'nprogress/nprogress.css';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
+	NProgress.configure({ showSpinner: false });
+	afterNavigate(() => {
+		NProgress.done();
+	});
+	beforeNavigate(() => {
+		NProgress.start();
+	});
 </script>
 
 <svelte:head>
