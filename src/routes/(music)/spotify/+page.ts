@@ -44,6 +44,7 @@ export const load: PageLoad = async ({ fetch: _fetch, parent }) => {
 
     //각각의 요청이 성공적으로 이루어졌다면, 결과를 JSON형식으로 변환하여 반환한다.
     //as Promise<SpotifyApi.ListOfNewReleasesResponse>)를 통해 외부에서 어떤 해당 객체에 어떤 파라미터가 저장되어있는지 확인 할 수 있다.
+    // await console.log(newReleasesRes);
     return {
         newReleases: newReleasesRes.ok
             ? (newReleasesRes.json() as Promise<SpotifyApi.ListOfNewReleasesResponse>)

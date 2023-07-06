@@ -1,4 +1,5 @@
 @use 'functions';
+@use '@unsass/breakpoint';
 @import '@fontsource/metropolis';
 @import '@fontsource/metropolis/300';
 @import '@fontsource/metropolis/500';
@@ -13,7 +14,7 @@
   --text-color: #fff;
   --accent-color: #1db954;
   --menu-background-color: #2e2e2e;
-  --light-gray: #a7a7a7;
+  --light-gray: #dcdcdc;
   --medium-gray: #2e2e2e;
   --dark-gray: #181818;
   --menu-text-color: #fff;
@@ -33,7 +34,8 @@ h2,
 h3,
 h4,
 h5,
-h6,code {
+h6,
+code {
   font-weight: 700;
   line-height: 1.4;
   //margin-top: 0.5em;
@@ -74,7 +76,7 @@ select,
 input,
 button,
 a {
-  &:focus{
+  &:focus-visible {
     outline: 2px solid var(--accent-color);
     outline-offset: 2px;
   }
@@ -88,4 +90,34 @@ a {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+.grid-items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  .card {
+      height: 100%;
+    }
+  @include breakpoint.up('sm') {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include breakpoint.up('md') {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @include breakpoint.up('xl') {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+// 텍스트가 두줄이 넘으면 자름! 
+@for $i from 1 through 3 {
+  .truncate-#{$i} {
+    display: -webkit-box;
+    -webkit-line-clamp: $i;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
