@@ -22,5 +22,5 @@
 		}
 	}}
 >
-	<Button element="button" variant="solid">Logout</Button>
+	<Button element="button" type="submit" variant="solid">Logout</Button>
 </form>
