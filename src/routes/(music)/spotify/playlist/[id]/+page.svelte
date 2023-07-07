@@ -62,7 +62,7 @@
 
 	<div class="playlist-actions">
 		{#if data.user?.id === playlist.owner.id}
-			<Button element="a" variant="outline" href="/playlist/{playlist.id}/edit"
+			<Button element="a" variant="outline" href="/spotify/playlist/{playlist.id}/edit"
 				>Edit Playlist</Button
 			>
 		{:else if isFollowing !== null}
