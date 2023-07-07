@@ -15,13 +15,13 @@ const config = {
 				autoprefixer,
 			]
 		},
-		scss:{
+		scss: {
 			prependData: "@use 'src/styles/functions'; @use '@unsass/breakpoint';"
 		}
 	}),
-	
+
 	vitePlugin: {
-		inspector: true,   
+		inspector: true,
 	},
 	kit: {
 		// static adapter
@@ -34,12 +34,13 @@ const config = {
 		// }),
 		// vercel adapter
 		adapter: adapter(),
-		alias:{
+		alias: {
 			$components: 'src/lib/components',
 			$styles: 'src/styles',
 			$assets: 'src/assets',
 			$actions: 'src/lib/actions',
 			$helpers: 'src/lib/helpers',
+			$stores: 'src/lib/stores',
 		}
 	}
 };

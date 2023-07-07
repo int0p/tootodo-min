@@ -16,3 +16,4 @@ export { default as Card } from './spotify/Card.svelte';
 export { default as ItemPage } from './spotify/ItemPage.svelte';
 export { default as TrackList } from './spotify/TrackList.svelte';
 export { default as Player } from './spotify/Player.svelte';
+export { default as Toasts } from './spotify/Toasts.svelte';

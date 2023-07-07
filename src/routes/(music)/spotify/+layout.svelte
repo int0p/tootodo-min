@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { LogoutButton, Navigation, Header } from '$components';
+	import { Navigation, Header, Toasts } from '$components';
 	import type { LayoutData } from './$types';
 	import '$styles/spotify.scss';
 	import { page } from '$app/stores';
@@ -52,6 +52,8 @@
 		</div>
 	</div>
 </div>
+
+<Toasts />
 
 <style lang="scss">
 	#main {

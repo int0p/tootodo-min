@@ -1,10 +1,18 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import { applyAction, enhance } from '$app/forms';
+
 	import { Button, ItemPage, TrackList } from '$components';
+	import { Heart } from 'lucide-svelte';
+	import type { ActionData, PageData } from './$types';
+	import { tick } from 'svelte';
+
 	export let data: PageData;
+	export let form: ActionData;
+
 	$: color = data.color;
 	$: playlist = data.playlist;
 	$: tracks = data.playlist.tracks;
+	$: isFollowing = data.isFollowing;
 	let filteredTracks: SpotifyApi.TrackObjectFull[];
 	$: {
 		filteredTracks = [];
@@ -16,6 +24,8 @@
 
 	// playlist tracks load more
 	let isLoading = false;
+	let isLoadingFollow = false;
+	let followButton: Button<'button'>;
 	const loadMoreTracks = async () => {
 		if (!tracks.next) return;
 		isLoading = true;
@@ -26,7 +36,7 @@
 		if (res.ok) {
 			tracks = { ...resJSON, items: [...tracks.items, ...resJSON.items] };
 		} else {
-			alert(resJSON.error.message || 'Could not load data!');
+			toasts.error(resJSON.error.message || 'Could not load data!');
 		}
 		isLoading = false;
 	};
@@ -46,6 +56,50 @@
 			<span>{followersFormat.format(playlist.followers.total)}</span>
 			<span>{playlist.tracks.total} Tracks</span>
 		</p>
+	</div>
+
+	<div class="playlist-actions">
+		{#if data.user?.id === playlist.owner.id}
+			<Button element="a" variant="outline">Edit Playlist</Button>
+		{:else if isFollowing !== null}
+			<form
+				class="follow-form"
+				method="POST"
+				action={`?/${isFollowing ? 'unFollowPlaylist' : 'followPlaylist'}`}
+				use:enhance={() => {
+					isLoadingFollow = true;
+					return async ({ result }) => {
+						isLoadingFollow = false;
+
+						if (result.type === 'success') {
+							await applyAction(result);
+							isFollowing = !isFollowing;
+						} else if (result.type === 'failure') {
+							toasts.error(result.data?.followError);
+							await tick();
+						} else {
+							await applyAction(result);
+						}
+						followButton.focus();
+					};
+				}}
+			>
+				<Button
+					bind:this={followButton}
+					element="button"
+					type="submit"
+					variant="outline"
+					disabled={isLoadingFollow}
+				>
+					<Heart aria-hidden focusable="false" fill={isFollowing ? 'var(--text-color)' : 'none'} />
+					{isFollowing ? 'Unfollow' : 'Follow'}
+					<span class="visually-hidden">{playlist.name} playlist</span>
+				</Button>
+				{#if form?.followError}
+					<p class="error">{form.followError}</p>
+				{/if}
+			</form>
+		{/if}
 	</div>
 
 	{#if playlist.tracks.items.length > 0}
@@ -96,5 +150,26 @@
 	.load-more {
 		padding: 15px;
 		text-align: center;
+	}
+	.playlist-actions {
+		display: flex;
+		justify-content: flex-end;
+		margin: 10px 0 30px;
+		.follow-form {
+			:global(.button) {
+				display: flex;
+				align-items: center;
+				:global(svg) {
+					margin-right: 10px;
+					width: 22px;
+					height: 22px;
+				}
+			}
+			p.error {
+				text-align: right;
+				color: var(--error);
+				font-size: functions.toRem(14);
+			}
+		}
 	}
 </style>
