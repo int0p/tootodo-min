@@ -69,7 +69,7 @@
 					>
 					<TabAnchor
 						on:click={() => goto('/spotify')}
-						selected={$page.url.pathname === '/spotify'}
+						selected={$page.url.pathname.includes('/spotify')}
 						class="w-1/5 "
 						><Music4 size="22" class="relative top-0.5" strokeWidth={1.5} /></TabAnchor
 					>
