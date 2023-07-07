@@ -9,7 +9,7 @@
 
 :root {
   //--bg-color: #191414;
-  --sidebar-color: rgb(0, 0, 0);
+  --sidebar-color: rgba(0, 0, 0, 0.8);
   --header-color: rgba(29, 185, 84, 0.7);
   --text-color: #fff;
   --accent-color: #1db954;
@@ -120,4 +120,13 @@ a {
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+}
+
+input {
+  border: none;
+  padding: 0 20px;
+  height: 35px;
+  border-radius: 20px;
+  font-size: functions.toRem(14);
+  color: var(--medium-gray);
 }

@@ -1,37 +1,40 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
-
+	import { page } from '$app/stores';
 	import { Button, ItemPage, TrackList } from '$components';
+	import { toasts } from '$stores';
 	import { Heart } from 'lucide-svelte';
-	import type { ActionData, PageData } from './$types';
 	import { tick } from 'svelte';
+	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
 	export let form: ActionData;
+
+	let isLoading = false;
+	let isLoadingFollow = false;
+	let followButton: Button<'button'>;
 
 	$: color = data.color;
 	$: playlist = data.playlist;
 	$: tracks = data.playlist.tracks;
 	$: isFollowing = data.isFollowing;
+	$: currentPage = $page.url.searchParams.get('page') || 1;
+
 	let filteredTracks: SpotifyApi.TrackObjectFull[];
+
 	$: {
 		filteredTracks = [];
 		tracks.items.forEach((item) => {
 			if (item.track) filteredTracks = [...filteredTracks, item.track];
 		});
 	}
+
 	const followersFormat = Intl.NumberFormat('en', { notation: 'compact' });
 
-	// playlist tracks load more
-	let isLoading = false;
-	let isLoadingFollow = false;
-	let followButton: Button<'button'>;
 	const loadMoreTracks = async () => {
 		if (!tracks.next) return;
 		isLoading = true;
-		const res = await fetch(
-			tracks.next.replace('https://api.spotify.com/v1/', '/spotify/api/spotify/')
-		);
+		const res = await fetch(tracks.next.replace('https://api.spotify.com/v1/', '/api/spotify/'));
 		const resJSON = await res.json();
 		if (res.ok) {
 			tracks = { ...resJSON, items: [...tracks.items, ...resJSON.items] };
@@ -40,7 +43,6 @@
 		}
 		isLoading = false;
 	};
-	// $: console.log(data);
 </script>
 
 <ItemPage
@@ -53,14 +55,16 @@
 		<p class="playlist-description">{@html playlist.description}</p>
 		<p class="meta">
 			<span>{playlist.owner.display_name}</span>
-			<span>{followersFormat.format(playlist.followers.total)}</span>
+			<span>{followersFormat.format(playlist.followers.total)} Followers</span>
 			<span>{playlist.tracks.total} Tracks</span>
 		</p>
 	</div>
 
 	<div class="playlist-actions">
 		{#if data.user?.id === playlist.owner.id}
-			<Button element="a" variant="outline">Edit Playlist</Button>
+			<Button element="a" variant="outline" href="/playlist/{playlist.id}/edit"
+				>Edit Playlist</Button
+			>
 		{:else if isFollowing !== null}
 			<form
 				class="follow-form"
@@ -111,6 +115,30 @@
 				>
 			</div>
 		{/if}
+		<div class="pagination">
+			<div class="previous">
+				{#if tracks.previous}
+					<Button
+						variant="outline"
+						element="a"
+						href="{$page.url.pathname}?{new URLSearchParams({
+							page: `${Number(currentPage) - 1}`
+						}).toString()}">← Previous Page</Button
+					>
+				{/if}
+			</div>
+			<div class="next">
+				{#if tracks.next}
+					<Button
+						variant="outline"
+						element="a"
+						href="{$page.url.pathname}?{new URLSearchParams({
+							page: `${Number(currentPage) + 1}`
+						}).toString()}">Next Page →</Button
+					>
+				{/if}
+			</div>
+		</div>
 	{:else}
 		<div class="empty-playlist">
 			<p>No items added to this playlist yet.</p>
@@ -150,6 +178,17 @@
 	.load-more {
 		padding: 15px;
 		text-align: center;
+		:global(html.no-js) & {
+			display: none;
+		}
+	}
+	.pagination {
+		display: none;
+		margin-top: 40px;
+		justify-content: space-between;
+		:global(html.no-js) & {
+			display: flex;
+		}
 	}
 	.playlist-actions {
 		display: flex;

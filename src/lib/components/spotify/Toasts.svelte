@@ -49,6 +49,7 @@
 			margin-bottom: 10px;
 			font-weight: 500;
 			position: relative;
+			color: white;
 			&.error {
 				background-color: var(--error);
 			}

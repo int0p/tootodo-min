@@ -17,3 +17,5 @@ export { default as ItemPage } from './spotify/ItemPage.svelte';
 export { default as TrackList } from './spotify/TrackList.svelte';
 export { default as Player } from './spotify/Player.svelte';
 export { default as Toasts } from './spotify/Toasts.svelte';
+export { default as Pagination } from './spotify/Pagination.svelte';
+export { default as PlaylistForm } from './spotify/PlaylistForm.svelte';

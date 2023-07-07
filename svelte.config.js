@@ -41,6 +41,7 @@ const config = {
 			$actions: 'src/lib/actions',
 			$helpers: 'src/lib/helpers',
 			$stores: 'src/lib/stores',
+			$spotify: 'src/routes/(music)/spotify',
 		}
 	}
 };
