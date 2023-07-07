@@ -18,7 +18,7 @@
 		</div>
 	{/if}
 	<h4 class="truncate-1">
-		<a href="spotify/{item.type}/{item.id}" title={item.name}>{item.name}</a>
+		<a href="/spotify/{item.type}/{item.id}" title={item.name}> {item.name}</a>
 	</h4>
 	{#if item.type === 'album'}
 		<p class="truncate-1">{item.artists.map((item) => item.name).join(', ')}</p>

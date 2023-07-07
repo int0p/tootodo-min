@@ -20,6 +20,7 @@ export const load: PageLoad = async ({ fetch: _fetch, params, depends, route, ur
         throw error(playlistRes.status, 'Failed to load playlist!');
     }
 
+
     let isFollowing: boolean | null = null;
 
     if (isFollowingRes.ok) {

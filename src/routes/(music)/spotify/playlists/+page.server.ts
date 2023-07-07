@@ -37,7 +37,7 @@ export const actions: Actions = {
             });
         } else {
             const resJSON: SpotifyApi.CreatePlaylistResponse = await res.json();
-            throw redirect(303, `/playlist/${resJSON.id}`);
+            throw redirect(303, `/spotify/playlist/${resJSON.id}`);
         }
     }
 };

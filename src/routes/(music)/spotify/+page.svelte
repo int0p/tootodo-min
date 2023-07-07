@@ -40,7 +40,7 @@
 		if (data.userPlaylists) {
 			sections.push({
 				title: 'Your Playlists',
-				path: '/playlists',
+				path: '/spotify/playlists',
 				items: data.userPlaylists.items
 			});
 		}
