@@ -390,6 +390,11 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.12.tgz#d70faba7039d5fca54c83c7dbab41051d2b6f6cb"
   integrity sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==
 
+"@types/micromodal@^0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@types/micromodal/-/micromodal-0.3.3.tgz#2ffc55fc90ca201054389b5eba118772c0189eaf"
+  integrity sha512-XQg6nqg15A6ZKkMkDdqLkC5LTxLb7CZU6BX8uHBj4AVU7+k/W6kfriW5HCsarrjFpONNOMAmhA1ReUsMm7297g==
+
 "@types/node@*":
   version "20.4.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.4.0.tgz#01d637d1891e419bc85763b46f42809cd2d5addb"
@@ -1590,6 +1595,11 @@ micromatch@^4.0.2, micromatch@^4.0.4, micromatch@^4.0.5:
   dependencies:
     braces "^3.0.2"
     picomatch "^2.3.1"
+
+micromodal@^0.4.10:
+  version "0.4.10"
+  resolved "https://registry.yarnpkg.com/micromodal/-/micromodal-0.4.10.tgz#d6f59c21d2f4a5af480f65909eb9608a1d558c73"
+  integrity sha512-BUrEnzMPFBwK8nOE4xUDYHLrlGlLULQVjpja99tpJQPSUEWgw3kTLp1n1qv0HmKU29AiHE7Y7sMLiRziDK4ghQ==
 
 mime@^3.0.0:
   version "3.0.0"

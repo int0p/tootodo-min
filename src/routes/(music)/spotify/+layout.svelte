@@ -3,6 +3,11 @@
 	import type { LayoutData } from './$types';
 	import '$styles/spotify.scss';
 	import { page } from '$app/stores';
+	import MicroModal from 'micromodal';
+	import { browser } from '$app/environment';
+	if (browser) {
+		MicroModal.init();
+	}
 	let topbar: HTMLElement;
 	let scrollY: number;
 	let headerOpacity = 0;
