@@ -19,3 +19,4 @@ export { default as Player } from './spotify/Player.svelte';
 export { default as Toasts } from './spotify/Toasts.svelte';
 export { default as Pagination } from './spotify/Pagination.svelte';
 export { default as PlaylistForm } from './spotify/PlaylistForm.svelte';
+export { default as SearchForm } from './spotify/SearchForm.svelte';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Navigation, Header, Toasts } from '$components';
+	import { Navigation, Header, Toasts, SearchForm } from '$components';
 	import type { LayoutData } from './$types';
 	import '$styles/spotify.scss';
 	import { page } from '$app/stores';
@@ -47,6 +47,11 @@
 				class="hide-scrollbar w-full p-4"
 				on:scroll={(e) => (scrollY = e.target.scrollTop)}
 			>
+				{#if $page.url.pathname.startsWith('/spotify/search')}
+					<div class="search-form">
+						<SearchForm />
+					</div>
+				{/if}
 				<slot />
 			</main>
 		</div>
@@ -82,6 +87,15 @@
 			}
 			main#main-content {
 				height: calc(100vh - 4rem);
+				.search-form {
+					margin-bottom: 40px;
+					@include breakpoint.up('md') {
+						display: none;
+					}
+					:global(input) {
+						width: 100%;
+					}
+				}
 				&.logged-in {
 					padding-top: calc(30px + var(--header-height));
 					@apply overflow-y-scroll max-h-[calc(100%-70px)];
