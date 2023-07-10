@@ -3,14 +3,17 @@
 	import { Clock8, ListPlus, ListX } from 'lucide-svelte';
 	import { tippy } from '$actions';
 	import { page } from '$app/stores';
-
+	import { enhance } from '$app/forms';
+	import { toasts } from '$stores';
+	import { hideAll } from 'tippy.js';
 	import playingGif from '$assets/playing.gif';
-	let currentlyPlaying: string | null = null;
-	let isPaused: boolean = false;
 	import { Player, Button } from '$components';
 	export let tracks: SpotifyApi.TrackObjectFull[] | SpotifyApi.TrackObjectSimplified[];
 	export let isOwner: boolean = false;
 	export let userPlaylists: SpotifyApi.PlaylistObjectSimplified[] | undefined;
+	let currentlyPlaying: string | null = null;
+	let isPaused: boolean = false;
+	let isAddingToPlaylist: string[] = [];
 </script>
 
 <div class="tracks">
@@ -66,6 +69,8 @@
 				<span class="duration">{msToTime(track.duration_ms)}</span>
 				<!-- <Clock8 aria-hidden focusable="false" color="var(--light-gray)" /> -->
 			</div>
+
+			<!--  -->
 			<div class="actions-column" class:is-owner={isOwner}>
 				{#if isOwner}
 					<ListX aria-hidden focusable="false" />
@@ -98,6 +103,30 @@
 								<form
 									method="POST"
 									action="/spotify/playlist?/addItem&redirect={$page.url.pathname}"
+									use:enhance={({ cancel }) => {
+										if (isAddingToPlaylist.includes(track.id)) {
+											cancel();
+										}
+										isAddingToPlaylist = [...isAddingToPlaylist, track.id];
+										return ({ result }) => {
+											if (result.type === 'error') {
+												toasts.error(result.error.message);
+											}
+											if (result.type === 'redirect') {
+												const url = new URL(`${$page.url.origin}${result.location}`);
+												const error = url.searchParams.get('error');
+												const success = url.searchParams.get('success');
+												if (error) {
+													toasts.error(error);
+												}
+												if (success) {
+													toasts.success(success);
+													hideAll();
+												}
+											}
+											isAddingToPlaylist = isAddingToPlaylist.filter((t) => t !== track.id);
+										};
+									}}
 								>
 									<input hidden value={track.id} name="track" />
 									<div class="field">
