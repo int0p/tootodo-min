@@ -27,8 +27,17 @@ export const load: LayoutServerLoad = async ({ cookies, fetch, url }) => {
     if (profileRes.ok) {
         const profile: SpotifyApi.CurrentUsersProfileResponse = await profileRes.json();
         // console.log(profile);
+        let userAllPlaylists: SpotifyApi.PlaylistObjectSimplified[] = [];
+        const userPlaylistsRes = await fetch('/spotify/api/spotify/me/playlists?limit=50');
+        if (userPlaylistsRes.ok) {
+            const userPlaylistsResJSON: SpotifyApi.ListOfCurrentUsersPlaylistsResponse =
+                await userPlaylistsRes.json();
+            userAllPlaylists = userPlaylistsResJSON.items;
+        }
+
         return {
-            user: profile
+            user: profile,
+            userAllPlaylists
         };
     }
     //프로필을 받아오지 못했을 경우, refresh_token을 이용해 새로운 access_token을 받아옴.(api/auth/refresh) -> 잘 받았다면, 홈 화면(/spotify)으로 리다이렉트

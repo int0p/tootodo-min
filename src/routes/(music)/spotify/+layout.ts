@@ -1,12 +1,11 @@
 //서버와 클라이언트 모두에서 실행
-
+// 로그인 여부에 따라 경로 설정. 
 
 import { redirect } from '@sveltejs/kit';
 import type { LayoutLoad } from './$types';
 
 export const load: LayoutLoad = ({ data, url }) => {
-    const { user } = data || {};
-
+    const { user, userAllPlaylists } = data || {};
     // 로그인 여부에 따라 경로 설정
     if (user && url.pathname === '/spotify/login') {
         throw redirect(307, '/spotify');
@@ -17,6 +16,7 @@ export const load: LayoutLoad = ({ data, url }) => {
     }
 
     return {
-        user
+        user,
+        userAllPlaylists
     };
 };

@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
 	import { LogoutButton, Navigation, SearchForm } from '$components';
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { ChevronDown, ExternalLink } from 'lucide-svelte';
+	export let userAllPlaylists: SpotifyApi.PlaylistObjectSimplified[] | undefined;
 	import { tippy } from '$actions';
 	$: user = $page.data.user;
 </script>
@@ -10,7 +11,7 @@
 <div class="content">
 	<div class="left">
 		{#if browser}
-			<Navigation desktop={false} />
+			<Navigation desktop={false} {userAllPlaylists} />
 		{/if}
 		{#if $page.url.pathname.startsWith('/spotify/search')}
 			<div class="search-form">

@@ -20,6 +20,8 @@
 	// $: console.log(topbar && scrollY / topbar.offsetHeight);
 	// $: console.log(scrollY)
 	$: user = data.user;
+	$: userAllPlaylists = data.userAllPlaylists;
+	// $: console.log(userAllPlaylists);
 </script>
 
 <!-- todo 나중에 music player 추가 -->
@@ -31,7 +33,7 @@
 	<div id="main" class="w-full h-full">
 		{#if user}
 			<div id="sidebar">
-				<Navigation desktop={true} />
+				<Navigation desktop={true} {userAllPlaylists} />
 			</div>
 		{/if}
 
@@ -43,7 +45,7 @@
 						style:background-color={$page.data.color ? $page.data.color : 'var(--header-color)'}
 						style:opacity={`${headerOpacity}`}
 					/>
-					<Header />
+					<Header {userAllPlaylists} />
 				</div>
 			{/if}
 			<main
