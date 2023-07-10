@@ -16,14 +16,14 @@
 		if (data.newReleases) {
 			sections.push({
 				title: 'New Releases',
-				path: '/sections/new-releases',
+				path: '/spotify/section/new-releases',
 				items: data.newReleases.albums.items
 			});
 		}
 		if (data.featuredPlaylists) {
 			sections.push({
 				title: 'Featured Playlists',
-				path: '/sections/featured-playlists',
+				path: '/spotify/section/featured-playlists',
 				items: data.featuredPlaylists.playlists.items
 			});
 		}
@@ -32,7 +32,7 @@
 			if (categoryPlaylist) {
 				sections.push({
 					title: category.name,
-					path: `/category/${category.id}`,
+					path: `/spotify/category/${category.id}`,
 					items: categoryPlaylist.playlists.items
 				});
 			}
