@@ -9,7 +9,7 @@
 	<div class="items">
 		{#each items as item}
 			<div class="item">
-				<a href="/category/{item.id}">
+				<a href="/spotify/category/{item.id}">
 					{#if item.icons.length > 0}
 						<img src={item.icons[0].url} alt="" />
 					{/if}
