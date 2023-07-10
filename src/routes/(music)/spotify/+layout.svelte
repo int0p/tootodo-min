@@ -5,18 +5,22 @@
 	import { page } from '$app/stores';
 	import MicroModal from 'micromodal';
 	import { browser } from '$app/environment';
-	if (browser) {
-		MicroModal.init();
-	}
+	import { X } from 'lucide-svelte';
+
+	export let data: LayoutData;
 	let topbar: HTMLElement;
 	let scrollY: number;
 	let headerOpacity = 0;
 
+	if (browser) {
+		MicroModal.init();
+	}
 	$: if (topbar) {
 		headerOpacity = scrollY / topbar.offsetHeight < 1 ? scrollY / topbar.offsetHeight : 1;
 	}
 
-	export let data: LayoutData;
+	$: hasError = $page.url.searchParams.get('error');
+	$: hasSuccess = $page.url.searchParams.get('success');
 	// $: console.log(topbar && scrollY / topbar.offsetHeight);
 	// $: console.log(scrollY)
 	$: user = data.user;
@@ -26,7 +30,7 @@
 
 <!-- todo 나중에 music player 추가 -->
 <div class="absolute top-4 right-10">
-	{$page.url}
+	<!-- {$page.url} -->
 </div>
 
 <div class="m-auto h-[calc(100vh - 4rem)] w-[calc(100vh - 2rem)]">
@@ -38,6 +42,14 @@
 		{/if}
 
 		<div id="content" class="w-full relative">
+			{#if hasError || hasSuccess}
+				<div class="message" role="status" class:error={hasError} class:success={hasSuccess}>
+					{hasError ?? hasSuccess}
+					<a href={$page.url.pathname} class="close">
+						<X aria-hidden focusable="false" /> <span class="visually-hidden">Close message</span>
+					</a>
+				</div>
+			{/if}
 			{#if user}
 				<div id="topbar" bind:this={topbar} class="border-b-2 fixed w-[calc(100%-2rem)]">
 					<div
@@ -74,6 +86,31 @@
 
 		#content {
 			flex: 1;
+			.message {
+				position: absolute;
+				width: 100%;
+				z-index: 9999;
+				padding: 10px 20px;
+				top: 0;
+				.close {
+					position: absolute;
+					right: 10px;
+					top: 5px;
+					&:focus {
+						outline-color: #fff;
+					}
+					:global(svg) {
+						stroke: var(--text-color);
+						vertical-align: middle;
+					}
+				}
+				&.error {
+					background-color: var(--error);
+				}
+				&.success {
+					background-color: var(--accent-color);
+				}
+			}
 			#topbar {
 				height: var(--header-height);
 				padding: 0 15px;

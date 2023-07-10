@@ -51,6 +51,7 @@
 		}
 		header {
 			margin-right: 30px;
+			color: white;
 			h2 {
 				font-size: functions.toRem(26);
 			}
@@ -62,7 +63,7 @@
 				right: 10px;
 				cursor: pointer;
 				:global(svg) {
-					stroke: var(--text-color);
+					stroke: white;
 				}
 			}
 		}
