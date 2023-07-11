@@ -80,6 +80,9 @@
 <Toasts />
 
 <style lang="scss">
+	:global(h2) {
+		font-size: functions.toRem(22);
+	}
 	#main {
 		display: flex;
 		@apply bg-zinc-500/30 rounded-2xl shadow-lg items-center;

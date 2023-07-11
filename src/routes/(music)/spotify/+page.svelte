@@ -70,26 +70,10 @@
 {/each}
 
 <style lang="scss">
-	h1 {
-		color: red;
-		font-size: functions.toRem(36);
-		@include breakpoint.up('md') {
-			color: blue;
-		}
-		@include breakpoint.up('lg') {
-			color: green;
-		}
-	}
-
 	.content-row {
 		margin-bottom: 40px;
 		.content-row-header {
 			margin-bottom: 20px;
-			.section-title {
-				font-size: functions.toRem(22);
-				font-weight: 600;
-				margin: 0;
-			}
 		}
 	}
 </style>

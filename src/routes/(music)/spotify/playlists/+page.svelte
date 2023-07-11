@@ -31,7 +31,7 @@
 <div class="content">
 	{#if playlists.items.length > 0}
 		<div class="title relative -top-2.5">
-			<h1>{data.title}</h1>
+			<h2>{data.title}</h2>
 			<Button
 				element="a"
 				href="/playlists/new"
