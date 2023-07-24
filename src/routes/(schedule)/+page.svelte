@@ -1,5 +1,5 @@
 <script>
-    import TodayPage from "./do/+page.svelte"
+    import TodayPage from "./too/+page.svelte"
 </script>
 
 <TodayPage/>

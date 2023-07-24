@@ -9,6 +9,9 @@ export { default as HeaderNav } from './HeaderNav.svelte';
 export { default as SelectDate } from './SelectDate.svelte';
 export { default as SelectDateSmall } from './SelectDateSmall.svelte';
 export {default as TodoList} from './TodoList.svelte';
+export {default as GanttTable} from './GanttTable.svelte';
+export{default as BreadcrumbDo} from './BreadcrumbDo.svelte';
+export{default as BreadcrumbToo} from './BreadcrumbToo.svelte';
 
 //spotify
 export { default as LogoutButton } from './spotify/LogoutButton.svelte'

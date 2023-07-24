@@ -1,10 +1,38 @@
 <script>
-    import {DragableBox, Editor, PomoTimer} from "$components";
+    import {TodoList} from "$components";
+    import BreadCrumb from "$components/BreadcrumbDo.svelte";
+    import SideShell from "$schedule/SideShell.svelte";
+    import {SelectDateSmall} from "$components/index.ts";
+    import {LampDesk} from "lucide-svelte";
 
+    let showTargetTodoList = true;
+    let showWeekly=false;
+    let showCalendar=true;
 </script>
 
 <div class="flex w-full h-full relative">
-    <slot />
+
+    {#if showTargetTodoList}
+        <SideShell>
+            <svelte:fragment slot="navi"><SelectDateSmall bind:showWeekly bind:showCalendar/></svelte:fragment>
+            <svelte:fragment slot="content"><TodoList {showWeekly} {showCalendar}/></svelte:fragment>
+        </SideShell>
+    {/if}
+
+    <div class="flex-col items-center justify-center w-full h-full relative">
+        <button on:click={()=>showTargetTodoList = !showTargetTodoList} class:flip={showTargetTodoList}
+                class="absolute left-0 top-2 z-10"
+        >
+            <LampDesk size="20px" class="dark:shadow-lg dark:shadow-primary-300" />
+        </button>
+        <slot />
+    </div>
+
+    <style>
+        .flip{
+            transform: scaleX(-1);
+        }
+    </style>
 <!--    <div class="flex-col w-1/3 h-full relative min-w-[330px] max-w-[380px]">-->
 <!--        <slot/>-->
 <!--    </div>-->

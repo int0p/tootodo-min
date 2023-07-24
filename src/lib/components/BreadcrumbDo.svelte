@@ -1,31 +1,29 @@
 <script>
-import {currentTime} from "$lib/stores/time.ts";
+import {currentTime} from "$stores/time.ts";
 import {TableOfContents} from "@skeletonlabs/skeleton";
-import {LampDesk, Blinds} from "lucide-svelte";
-import {goto} from "$app/navigation";
+import {Blinds, LampDesk, Plus} from "lucide-svelte";
 import {page} from "$app/stores";
-export let showTargetTodoList;
 export let showDailyLog;
-</script>
 
-<div class="w-full h-full">
+</script>
+<!--sidebar toggle하는 녀석땜에 left-7 -->
+<div class="w-full h-full relative left-7">
     <ol class="breadcrumb relative h-full">
-        <li class="crumb anchor"><button on:click={()=>showTargetTodoList = !showTargetTodoList} class:flip={showTargetTodoList}>
-            <LampDesk size="20px" class="dark:shadow-lg dark:shadow-primary-300" />
-        </button></li>
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
 
+<!--        show daily log-->
         <li><button on:click={()=>showDailyLog = true} >
             {$currentTime.shortDate}
         </button></li>
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
 
+<!--        show todo detail-->
         <li class="crumb"><button on:click={()=>showDailyLog = false} class="anchor">
             select todo! {$page.url.pathname}
         </button></li>
 
         {#if !showDailyLog}
-            <button type="button" class="btn-icon variant-ghost-primary absolute right-0 !rounded-b scale-[80%] ">
+            <button type="button" class="btn-icon variant-ghost-primary absolute right-6 !rounded-b scale-[80%] ">
                 <Blinds strokeWidth=1.5/>
                 <TableOfContents target="#toc-target" />
             </button>
@@ -33,9 +31,3 @@ export let showDailyLog;
     </ol>
 </div>
 
-
-<style>
-    .flip{
-        transform: scaleX(-1);
-    }
-</style>

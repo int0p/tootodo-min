@@ -1,5 +1,5 @@
 <script>
-import BreadCrumb from "./breadcrumb.svelte"
+import BreadCrumb from "../BreadcrumbDo.svelte"
 import {HeaderNav, Header} from "$components/index.ts";
 import DailyLog from "$schedule/dailyLog/[date]/+page.svelte"
 import {SelectDateSmall} from "$components/index.ts";
