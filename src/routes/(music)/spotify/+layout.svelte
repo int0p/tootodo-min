@@ -32,7 +32,7 @@
 	<!-- {$page.url} -->
 </div>
 
-<div class="m-auto h-[calc(100vh - 4rem)] w-[calc(100vh - 2rem)]">
+<div class="m-auto h-[calc(100vh - 4.5rem)] w-[calc(100vh - 2rem)]">
 	<div id="main" class="w-full h-full">
 		{#if user}
 			<div id="sidebar">

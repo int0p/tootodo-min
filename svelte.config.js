@@ -24,6 +24,7 @@ const config = {
 		inspector: true,
 	},
 	kit: {
+
 		// static adapter
 		// adapter: adapter({
 		// 	out:'build',

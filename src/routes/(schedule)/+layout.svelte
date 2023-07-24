@@ -27,6 +27,7 @@
         </button>
         <slot />
     </div>
+</div>
 
     <style>
         .flip{
@@ -45,7 +46,6 @@
 <!--    <div class="absolute right-0 timer ">-->
 <!--&lt;!&ndash;        <PomoTimer/>&ndash;&gt;-->
 <!--    </div>-->
-</div>
 
 <!--<style lang="scss">-->
 <!--    .timer{-->

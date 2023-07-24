@@ -1,27 +1,24 @@
 <script lang="ts">
-    import {currentTime} from "$lib/stores/time";
-    import {GanttTable} from "$components";
-    import SideShell from "$schedule/SideShell.svelte";
+
     import { TreeView, TreeViewItem, RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
     import {ListTree, BarChartHorizontalBig } from "lucide-svelte";
     import {BreadcrumbToo} from "$components";
+
     let state = [0,1,0];
     let value = 0;
 </script>
 
-<div class="flex-col space-y-2 w-full h-full justify-center items-center">
-    <div class="h-10 w-full">
-        <BreadcrumbToo/>
-    </div>
+<!--<div class="flex-col space-y-2 w-full h-full justify-center items-center">-->
+<!--    <div class="h-10 w-full">-->
+<!--        <BreadcrumbToo/>-->
+<!--    </div>-->
 
-    <RadioGroup class="justify-end border-none" background="none" display="flex" active="variant-filled-primary" hover="hover:variant-soft-primary">
-        <RadioItem bind:group={value} name="justify" value={0}><BarChartHorizontalBig class="scale-[90%]" /></RadioItem>
-        <RadioItem bind:group={value} name="justify" value={1}><ListTree class="scale-[90%]" /></RadioItem>
-    </RadioGroup>
-    {#if value == 0}
-        <GanttTable/>
-    {/if}
-</div>
+<!--    <RadioGroup class="justify-end border-none" background="none" display="flex" active="variant-filled-primary" hover="hover:variant-soft-primary">-->
+<!--        <RadioItem bind:group={value} name="justify" value={0}><BarChartHorizontalBig class="scale-[90%]" /></RadioItem>-->
+<!--        <RadioItem bind:group={value} name="justify" value={1}><ListTree class="scale-[90%]" /></RadioItem>-->
+<!--    </RadioGroup>-->
+<!--    <slot/>-->
+<!--</div>-->
 
 <!--<SideShell>-->
 <!--    <svelte:fragment slot="navi">-->

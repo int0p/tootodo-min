@@ -33,9 +33,9 @@ let flavors: Record<string, boolean> = {
             {/each}
         </button></li>
 
-        <button type="button" class="btn-icon variant-ghost-primary absolute right-7 !rounded-b scale-[80%] ">
-            <Plus class="scale-95"/>
-        </button>
+<!--        <button type="button" class="btn-icon variant-ghost-primary absolute right-7 !rounded-b scale-[80%] ">-->
+<!--            <Plus class="scale-95"/>-->
+<!--        </button>-->
     </ol>
 </div>
 
