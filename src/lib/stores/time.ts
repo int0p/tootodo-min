@@ -25,8 +25,9 @@ export const currentTime = derived(current, $current => {
         const ampm = hours >= 12 ? 'PM' : 'AM';
         const fullTime = `${(hours%12).toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         const shortTime = `${(hours%12).toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${ampm}`;
-        const shortDate = `${year.toString().padStart(4, '0')}/${month.toString().padStart(2, '0')}/${date.toString().padStart(2, '0')}`;
-        return { month, week, date, day, shortDate, hours, minutes, seconds, fullTime,shortTime };
+        const shortDate = `${month.toString().padStart(2, '0')}/${date.toString().padStart(2, '0')}`;
+        const fullDate = `${year.toString().padStart(4, '0')}-${month.toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
+        return { month, week, date, day, shortDate, hours, minutes, seconds, fullTime,shortTime, fullDate };
     }
 );
 

@@ -102,7 +102,7 @@
 				label="Open menu"
 				on:click={openMenu}
 				bind:this={openMenuButton}
-				class="menu-button"
+				class="menu-button !bg-black/0"
 				aria-expanded={isOpen}
 			/>
 		{/if}

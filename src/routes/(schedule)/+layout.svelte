@@ -4,29 +4,32 @@
 </script>
 
 <div class="flex w-full h-full relative">
-    <div class="flex-col w-1/3 h-full relative min-w-[330px] max-w-[450px]">
-        <slot/>
-    </div>
+    <slot />
+<!--    <div class="flex-col w-1/3 h-full relative min-w-[330px] max-w-[380px]">-->
+<!--        <slot/>-->
+<!--    </div>-->
 
-    <!--        editor-->
-    <div class="w-2/3 min-w-[calc(100%-770px)] h-full relative -top-9 editor">
-        <Editor/>
-    </div>
+<!--    &lt;!&ndash;        editor&ndash;&gt;-->
+<!--    <div class="w-3/4 ml-2 h-full">-->
+<!--        <Editor/>-->
+<!--    </div>-->
 
-    <div class="absolute right-0 timer ">
-        <PomoTimer/>
-    </div>
+<!--    <div class="absolute right-0 timer ">-->
+<!--&lt;!&ndash;        <PomoTimer/>&ndash;&gt;-->
+<!--    </div>-->
 </div>
 
-<style lang="scss">
-    .timer{
-          @include breakpoint.down('xl') {
-            visibility: hidden;
-          }
-    }
-    .editor{
-      @include breakpoint.up('xl') {
-        width: calc(100% - 770px);
-      }
-    }
-</style>
+<!--<style lang="scss">-->
+<!--    .timer{-->
+<!--          @include breakpoint.down('xl') {-->
+<!--            visibility: hidden;-->
+<!--          }-->
+<!--    }-->
+<!--    .editor{-->
+<!--      @include breakpoint.up('xl') {-->
+<!--        width: calc(100% - 770px);-->
+<!--      }-->
+<!--    }-->
+<!--</style>-->
+
+

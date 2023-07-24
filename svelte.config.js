@@ -35,6 +35,7 @@ const config = {
 		// vercel adapter
 		adapter: adapter(),
 		alias: {
+			$schedule:'src/routes/(schedule)',
 			$components: 'src/lib/components',
 			$styles: 'src/styles',
 			$assets: 'src/assets',

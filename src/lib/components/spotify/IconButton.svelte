@@ -18,21 +18,21 @@
 	<svelte:component
 		this={icon}
 		class="relative top-0 left-0.5"
-		color="var(--text-color)"
+		color="white"
 		aria-hidden="true"
 		focusable="false"
 	/>
-	<span class="visually-hidden">{label}</span>
+	<span class="hidden">{label}</span>
 </button>
 
 <style lang="scss">
 	button {
 		border: none;
-		background: none;
 		cursor: pointer;
 		padding: 0;
-		width: 38px;
-		height: 38px;
+		width: 30px;
+		height: 30px;
+		@apply bg-primary-500 ;
 		:global(svg) {
 			vertical-align: middle;
 		}
@@ -41,7 +41,7 @@
 			cursor: not-allowed;
 		}
 		&:active {
-			background-color: var(--menu-background-color);
+			@apply bg-primary-700 ;
 		}
 	}
 </style>

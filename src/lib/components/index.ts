@@ -5,6 +5,10 @@ export { default as DragableBox } from './DragableBox.svelte'
 export { default as InputChip } from './InputChip.svelte'
 export { default as TenMtable } from './TenMtable.svelte'
 export { default as WorkList } from './WorkList.svelte'
+export { default as HeaderNav } from './HeaderNav.svelte';
+export { default as SelectDate } from './SelectDate.svelte';
+export { default as SelectDateSmall } from './SelectDateSmall.svelte';
+export {default as TodoList} from './TodoList.svelte';
 
 //spotify
 export { default as LogoutButton } from './spotify/LogoutButton.svelte'
@@ -21,4 +25,3 @@ export { default as Pagination } from './spotify/Pagination.svelte';
 export { default as PlaylistForm } from './spotify/PlaylistForm.svelte';
 export { default as SearchForm } from './spotify/SearchForm.svelte';
 export { default as Modal } from './spotify/Modal.svelte';
-export { default as HeaderNav } from './spotify/HeaderNav.svelte';

@@ -1,81 +1,63 @@
 <script lang="ts">
-	import { currentTime } from '$lib/stores/time.ts';
-	import { WorkList, TenMtable } from '$components';
-	import { CalendarRange, Plus, Share } from 'lucide-svelte';
-	import Shell from '../ContentShell.svelte';
-	let week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRE', 'SAT'];
-	// let week = ['일', '월', '화', '수', '목', '금', '토'];
-	$: isTodayDay = (week) => {
-		if (week == $currentTime.day) return true;
-		else return false;
-	};
+import {Editor, TodoList} from "$components";
+import {SelectDateSmall} from "$components/index.ts";
+import DailyLog from "$schedule/dailyLog/[date]/+page.svelte";
+import BreadCrumb from "$components/editor/breadcrumb.svelte";
+import {currentTime} from "$stores/time";
+let showTargetTodoList = true;
+export let showDailyLog = true;
+let showWeekly=false;
+let showCalendar=true;
+
 </script>
 
-<Shell>
-	<svelte:fragment slot="area">
-		<div class="flex w-full justify-center space-x-2 font-bold uppercase">
-			<!--            choose another date-->
-			<button class="chip variant-soft-secondary w-1/12 flex-col items-center text-lg px-2">
-				<CalendarRange size="22" />
-			</button>
-			<!--            yesterday-->
-			<button
-				class="chip bg-gradient-to-bl variant-gradient-primary-secondary w-1/3 uppercase flex-col justify-center items-center"
-			>
-				{week.at($currentTime.day - 1)}
-				<!--todo: 오늘이 1일일때 어제는?-->
-				<span class="bg-white/50 text-black border-primary-400 text-xs w-full rounded-md border-t-2"
-					>{$currentTime.date - 1}</span
-				>
-			</button>
-			<!--            today -->
-			<button
-				class="chip bg-primary-200 dark:bg-primary-300 w-1/2 uppercase flex-col justify-center items-center border-double border-4 border-primary-500 py-1 text-black"
-			>
-				{week.at($currentTime.day)}
-				<span class="variant-filled border-primary-400 text-xs w-full rounded-md border-t-2"
-					>{$currentTime.date}</span
-				>
-			</button>
-			<!--            tomorrow-->
-			<button
-				class="chip bg-gradient-to-br variant-gradient-primary-secondary w-1/3 uppercase flex-col justify-center items-center"
-			>
-				{week.at($currentTime.day + 1)}
-				<!--todo: 오늘이 29,30,31일 때 내일은?-->
-				<span class="bg-white/50 text-black border-primary-400 text-xs w-full rounded-md border-t-2"
-					>{$currentTime.date + 1}</span
-				>
-			</button>
-			<!--            weekly plan-->
-			<button
-				class="chip variant-soft-secondary w-1/12 uppercase flex-col justify-center items-center divide-y-2"
-			>
-				W
-				<span>-{$currentTime.week}</span>
-			</button>
-		</div>
-	</svelte:fragment>
+<div class="w-full h-full flex ">
+    {#if showTargetTodoList}
+        <div class="flex-col dailyTodo w-[290px] min-w-[280px] h-[calc(100%-2.2rem)] relative mr-4">
+            <div class="header h-10 my-2 flex justify-between bg-none">
+                <SelectDateSmall bind:showWeekly bind:showCalendar/>
+            </div>
+            <hr class="!border-dashed border-2 mb-2 " />
+            <div class="w-full h-[clac(100%-80px)] overflow-y-auto">
+                <TodoList {showWeekly} {showCalendar}/>
+            </div>
+        </div>
+    {/if}
 
-	<svelte:fragment slot="workList">
-		<WorkList />
-	</svelte:fragment>
+    <div class="flex-col items-center justify-center w-full h-[calc(100%-4.5rem)] relative">
+        <div class=" h-10 w-full ">
+            <BreadCrumb bind:showTargetTodoList bind:showDailyLog/>
+        </div>
 
-	<svelte:fragment slot="setting">
-		<button class="flex space-x-2 absolute top-1 right-0 scale-95"><Plus /><Share /></button>
-		<div class="flex space-x-2 absolute right-0 top-8 text-lg">
-			<h1 class="relative -bottom-1 left-0.5 font-digital">Total</h1>
-			<code class="relative bottom-1.5 code text-lg font-digital font-bold">5H 30M</code>
-		</div>
-	</svelte:fragment>
+        {#if showDailyLog}
+            <div class="flex w-full h-full">
+                <div class="w-full min-w-[330px] max-w-[360px] h-[calc(100%-0.5rem)]">
+                    <DailyLog/>
+                </div>
 
-	<svelte:fragment slot="contents">
-		<TenMtable />
-	</svelte:fragment>
-</Shell>
+                <div class="flex-col relative w-full h-full">
+                    <div class="flex space-x-2 absolute right-0 text-lg z-10">
+<!--                        <h1 class="relative -bottom-1 font-digital">Total</h1>-->
+                        <code class="relative bottom-1.5 code text-lg font-digital font-bold">5H 30M</code>
+                    </div>
+                    <div class="w-[calc(100%-1rem)]  h-full bg-white/40 dark:bg-black/30 ml-4 relative -top-1 border-0  rounded-xl"
+                        >
+                        <div class="absolute left-3 top-3 text-xl font-semibold">{$currentTime.fullDate}</div>
+                        <textarea class="w-full h-[calc(100%-46px)] absolute bottom-0 border-0 rounded-xl dark:bg-black dark:text-white">Diary</textarea>
+                    </div>
+                </div>
+            </div>
+        {:else}
+            <textarea class="w-full h-full bg-white/40 border-0   rounded-xl dark:bg-black/30 dark:text-white">Note</textarea>
+        {/if}
+
+    </div>
+
+
+</div>
 
 <style>
-	.today {
-		@apply bg-primary-200 text-black border-double border-4 border-primary-400;
-	}
+    .dailyTodo{
+        @apply rounded-r-2xl rounded-l-none border-double border-4 border-primary-400;
+    }
 </style>

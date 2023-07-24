@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { afterNavigate, preloadData } from '$app/navigation';
-	import { IconButton } from '$components';
+	import { IconButton } from '$components/index.ts';
 	import { page } from '$app/stores';
 	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 	let backStack: string[] = []; // Stores previous route's pathnames
@@ -39,7 +39,7 @@
 	label="Go Back"
 	disabled={backStack.length === 0}
 	icon={ChevronLeft}
-	class="nav-button"
+	class="mr-1"
 />
 
 <IconButton
@@ -60,21 +60,18 @@
 	label="Go Forward"
 	disabled={forwardStack.length === 0}
 	icon={ChevronRight}
-	class="nav-button"
 />
 
 <style lang="scss">
-	:global(button.nav-button) {
-		background-color: var(--menu-background-color);
-		margin-right: 5px;
-		border-radius: 100%;
-		height: 30px;
-		width: 30px;
-		&:active {
-			background-color: var(--accent-color);
-		}
-		:global(html.no-js) & {
-			display: none;
-		}
-	}
+	//:global(button.nav-button) {
+	//	background-color: rgba(29,185,84,0.7);
+	//	margin-right: 4px;
+	//	margin-left: 4px;
+	//	border-radius: 100%;
+	//	height: 30px;
+	//	width: 30px;
+	//	&:active {
+	//		background-color: rgba(29,185,84,0.7);
+	//	}
+	//}
 </style>

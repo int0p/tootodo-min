@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Navigation, Header, Toasts, SearchForm } from '$components';
 	import type { LayoutData } from './$types';
-	import '$styles/spotify.scss';
 	import { page } from '$app/stores';
 	import MicroModal from 'micromodal';
 	import { browser } from '$app/environment';

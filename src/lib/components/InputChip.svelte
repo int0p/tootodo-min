@@ -170,19 +170,19 @@
     </div>
     <!-- Interface -->
     <!-- todo: 내가 추가한 기능-  에디터에 투두들 추가하는 버튼 -->
-    <div class="absolute top-1 -right-1">
+    <div class="absolute top-2.5 right-1">
         <button class="bg-primary-500 hover:bg-primary-700 text-white dark:text-black font-semibold py-1 px-3 rounded scale-[80%]" on:click={addChip}>
-            add at editor
+            + D
         </button>
     </div>
     <div class="input-chip-interface {classesInterface}">
         <!-- Input Field -->
-        <form on:submit={addChip} >
+        <form on:submit={addChip}>
             <input
                     type="text"
                     bind:value={input}
-                    placeholder={$$restProps.placeholder ?? 'Enter values...'}
-                    class="input-chip-field {classesInputField}"
+                    placeholder={$$restProps.placeholder ?? 'Add todo to daily'}
+                    class="input-chip-field {classesInputField} w-[calc(100%-50px)]"
                     on:input={onInputHandler}
                     on:input
                     on:focus

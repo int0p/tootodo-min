@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { LogoutButton, Navigation, SearchForm, HeaderNav } from '$components';
+	import { LogoutButton, Navigation, SearchForm } from '$components';
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { ChevronDown, ExternalLink } from 'lucide-svelte';
@@ -13,7 +13,6 @@
 		{#if browser}
 			<Navigation desktop={false} {userAllPlaylists} />
 		{/if}
-		<HeaderNav />
 		{#if $page.url.pathname.startsWith('/spotify/search')}
 			<div class="search-form">
 				<SearchForm />
