@@ -62,18 +62,33 @@
 	<title>Tootodo {$page.data.title ? ` - ${$page.data.title}` : ''}</title>
 </svelte:head>
 
-
 <div class="flex-col h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] m-auto">
-	<div class="flex h-14 relative top-4">
-		<div class="left-0 mr-2">
-			<HeaderNav />
+	<div class="flex justify-center w-full h-[48px]">
+<!--		control-->
+		<div class="flex w-full h-full absolute top-3">
+<!--			left-->
+			<div class="absolute left-4 flex space-x-1">
+				<HeaderNav />
+				<!--			current time-->
+				<div class=" font-digital text-primary-500 font-bold text-xl pl-2 relative top-0.5">{$currentTime.shortTime}</div>
+			</div>
+
+<!--			right-->
+			<div class="flex absolute right-4 top-0.5 space-x-2">
+				<!--		pomodoro -->
+				<div class="relative -top-1 left-2 scale-90">
+					<PomoSmall/>
+				</div>
+				<!--		dark/light mode switch-->
+				<LightSwitch class=" dark:bg-zinc-800 " />
+			</div>
 		</div>
 
-		<!--		tab-->
-		<div class="flex justify-between w-[calc(100%-400px)]  relative -top-3 space-x-2 ">
+<!--		tab-->
+		<div class="flex justify-between w-[calc(100%-410px)]  relative space-x-2 ">
 			<TabGroup
 					justify="justify-start"
-					class="w-[240px]"
+					class="w-[220px]"
 			>
 				<TabAnchor
 						on:click={() => goto('/too')}
@@ -100,28 +115,29 @@
 						class=""
 						selected={$page.url.pathname === '/blog'}
 				>
-					<Sticker size="24" class="relative top-1" strokeWidth={1.5} />
+					<Sticker size="23" class="relative top-1" strokeWidth={1.5} />
 				</TabAnchor>
 			</TabGroup>
 
 			<TabGroup
 					justify="justify-start"
-					class="w-full"
+					class="w-full relative top-0.5"
 			>
 				<TabAnchor
 						on:click={() => goto('/spotify')}
 						selected={$page.url.pathname.includes('/spotify')}
 						class="relative w-full h-full"
 				>
-					<Music4 size="24" class="relative top-1" strokeWidth={1.5} />
+					<Music4 size="23" class="relative top-1" strokeWidth={1.5} />
 					<div class="chip absolute top-1 left-4 w-[calc(100%-130px)] h-full px-2 text-[1rem]">재생중인 노래가 없습니다</div>
-					<div class="chip variant-glass-primary py-1 px-2 absolute bottom-1 right-24
+					<div class="chip variant-glass-primary py-1 px-2 absolute bottom-1 right-[5.9rem]
     									dark:bg-primary-500/50 dark:text-white">
 						<span><Repeat1 size={16} /></span>
 					</div>
 				</TabAnchor>
 
-				<div class="absolute flex -right-2.5 top-2.5 z-10 rounded-lg  text-black
+<!--				music controller-->
+				<div class="absolute flex -right-2 top-[0.56rem] z-10 rounded-lg  text-black
 				divide-x  divide-black dark:text-white dark:divide-white
 				border border-surface-400-500-token
 				 "
@@ -140,19 +156,9 @@
 			</TabGroup>
 		</div>
 
-		<div class="flex absolute right-0 top-1 space-x-2">
-			<!--		pomodoro -->
-			<div class="relative -top-1">
-				<PomoSmall/>
-			</div>
-<!--			current time-->
-			<div class=" font-digital text-primary-500 font-bold text-xl ">{$currentTime.shortTime}</div>
-			<!--		dark/light mode switch-->
-			<LightSwitch class=" dark:bg-zinc-950 " />
-		</div>
 	</div>
 
-	<div class="w-full h-full">
+	<div class="w-full h-full m-auto my-1">
 		<slot />
 	</div>
 </div>

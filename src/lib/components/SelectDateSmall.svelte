@@ -11,7 +11,7 @@
     export let showCalendar=true;
 </script>
 
-<div class="flex w-full justify-center space-x-2 font-bold uppercase mx-2">
+<div class="flex w-full justify-center space-x-2 font-bold mx-2">
     <!--            choose another date-->
     <button class="chip variant-soft-primary w-1/6 flex-col items-center text-lg px-2">
         <CalendarRange size="22" />
@@ -19,25 +19,24 @@
 
     <!--    week-->
     <button
-            class="chip variant-soft-secondary w-1/5 uppercase flex-col justify-center items-center divide-y-2"
+            class="chip variant-soft-secondary w-1/5 flex-col justify-center items-center divide-y-2 text-[0.9rem]"
             on:click={()=>{
                 showWeekly=true;
             }}
     >
-        W
-        <span>{$currentTime.week}</span>
+         [ {$currentTime.week} ]
     </button>
 
     <!--    date-->
     <button
-            class="chip bg-gradient-to-br variant-gradient-secondary-primary w-5/6 uppercase flex-col justify-center items-center"
+            class="chip uppercase bg-gradient-to-br variant-gradient-secondary-primary w-3/4 uppercase flex-col justify-center items-center"
             on:click={()=>{
                 showWeekly=false;
             }}
     >
         <div class="flex w-full h-full justify-center items-center space-x-2">
             <div class="text-lg text-white">{week.at($currentTime.day)}</div>
-            <div class="bg-white/50 text-black border-primary-400 text-lg w-full h-full rounded-md border-t-2">
+            <div class="bg-white/50 text-black/75 border-primary-400 leading-5 text-[1rem] w-full h-full rounded-md border-t-2">
                 {$currentTime.date}
             </div>
         </div>

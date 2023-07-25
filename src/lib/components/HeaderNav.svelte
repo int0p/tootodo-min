@@ -62,16 +62,16 @@
 	icon={ChevronRight}
 />
 
-<style lang="scss">
-	//:global(button.nav-button) {
-	//	background-color: rgba(29,185,84,0.7);
-	//	margin-right: 4px;
-	//	margin-left: 4px;
-	//	border-radius: 100%;
-	//	height: 30px;
-	//	width: 30px;
-	//	&:active {
-	//		background-color: rgba(29,185,84,0.7);
-	//	}
-	//}
-</style>
+<!--<style lang="scss">-->
+<!--	:global(button.nav-button) {-->
+<!--		background-color: rgba(29,185,84,0.7);-->
+<!--		margin-right: 4px;-->
+<!--		margin-left: 4px;-->
+<!--		border-radius: 100%;-->
+<!--		height: 30px;-->
+<!--		width: 30px;-->
+<!--		&:active {-->
+<!--			background-color: rgba(29,185,84,0.7);-->
+<!--		}-->
+<!--	}-->
+<!--</style>-->
