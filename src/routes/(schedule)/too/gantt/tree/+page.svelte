@@ -1,7 +1,13 @@
 <script lang="ts">
     import { onMount, getContext } from 'svelte';
     import moment from 'moment';
-    import { SvelteGantt, SvelteGanttTable, MomentSvelteGanttDateAdapter,SvelteGanttDependencies, } from '../dist';
+    import {
+        SvelteGantt,
+        SvelteGanttTable,
+        MomentSvelteGanttDateAdapter,
+        SvelteGanttDependencies,
+        SvelteGanttExternal,
+    } from 'svelte-gantt';
     import { time } from '../utils';
     import GanttOptions from '$components/gantt/GanttOptions.svelte';
     import {setView, moveView} from '$stores/gantt';
@@ -12,7 +18,7 @@
         console.log('trigger set view', val);
         if(val == 'none') return
         if(val == 'week'){
-            options.fitWidth = false;
+            options.fitWidth = true;
             options.columnUnit = 'hour';
             options.columnOffset = 1;
             currentStart = currentStart.clone().startOf('week');
@@ -198,11 +204,11 @@
         timeRanges,
         columnOffset: 15,
         magnetOffset: 15,
-        rowHeight: 52,
-        rowPadding: 6,
+        rowHeight: 42,
+        rowPadding: 4,
         headers: [{ unit: 'day', format: 'MMMM Do' }, { unit: 'hour', format: 'H:mm' }],
         fitWidth: true,
-        minWidth: 800,
+        minWidth: 600,
         from: currentStart,
         to: currentEnd,
         tableHeaders: [{ title: 'Label', property: 'label', width: 140, type: 'tree' }],
@@ -214,6 +220,27 @@
     let gantt;
     onMount(() => {
         window.gantt = gantt = new SvelteGantt({ target: document.getElementById('example-gantt'), props: options });
+        const external = new SvelteGanttExternal(document.getElementById('new-task'), {
+            gantt,
+            onsuccess: (row, date, gantt) => {
+                console.log(row.model.id, new Date(date).toISOString())
+                const id = 5000 + Math.floor(Math.random() * 1000);
+                gantt.updateTask({
+                    id,
+                    label: `Task #${id}`,
+                    from: date,
+                    to: date + 3 * 60 * 60 * 1000,
+                    classes: colors[(Math.random() * colors.length) | 0],
+                    resourceId: row.model.id
+                });
+            },
+            elementContent: () => {
+                const element = document.createElement('div');
+                element.innerHTML = 'New Task';
+                element.className = 'sg-external-indicator';
+                return element;
+            }
+        });
     });
 
     function onChangeOptions(event) {
@@ -223,7 +250,21 @@
     }
 </script>
 
+<div class="container">
+    <div id="example-gantt"></div>
+    <div id="new-task" class="absolute right-2 bottom-10 z-10">Drag to gantt</div>
+    <GanttOptions options={options} on:change={onChangeOptions}/>
+</div>
+
 <style>
+    #new-task {
+        background-color: #ee6e73;
+        color: white;
+        padding: 1rem;
+        margin: 0.5rem;
+        cursor: grab;
+    }
+
     #example-gantt {
         flex-grow: 1;
         overflow: auto;
@@ -236,7 +277,3 @@
     }
 </style>
 
-<div class="container">
-    <div id="example-gantt"></div>
-    <GanttOptions options={options} on:change={onChangeOptions}/>
-</div>

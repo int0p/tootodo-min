@@ -1,6 +1,6 @@
 <script lang="ts" >
-    //   todo import를 svelte-gantt로 하면 export 오류떠서 dist폴더에서 끌어다씀.
-    import { SvelteGantt, SvelteGanttTable, MomentSvelteGanttDateAdapter } from './dist';
+    //   todo import를 svelte-gantt로 하면 export 오류떠서 dist폴더에서 끌어다씀. -> browser에서만 불러오면 해결.
+    import { SvelteGantt, SvelteGanttTable, MomentSvelteGanttDateAdapter } from 'svelte-gantt';
     import { time } from './utils';
     import GanttOptions from '$components/gantt/GanttOptions.svelte';
     import {setView, moveView} from '$stores/gantt';
@@ -14,7 +14,7 @@
         console.log('trigger set view', val);
         if(val == 'none') return
         if(val == 'week'){
-            options.fitWidth = false;
+            options.fitWidth = true;
             options.columnUnit = 'hour';
             options.columnOffset = 1;
             currentStart = currentStart.clone().startOf('week');
@@ -87,7 +87,7 @@
         rowPadding: 6,
         headers: [{ unit: 'day', format: 'MMMM Do' }, { unit: 'hour', format: 'H:mm' }],
         fitWidth: true,
-        minWidth: 800,
+        minWidth: 600,
         from: currentStart,
         to: currentEnd,
         tableHeaders: [{ title: 'Label', property: 'label', width: 140, type: 'tree' }],

@@ -1,7 +1,7 @@
 <script lang="ts" >
     import { onMount, getContext } from 'svelte';
     import moment from 'moment';
-    import { SvelteGantt, SvelteGanttDependencies, SvelteGanttTable, MomentSvelteGanttDateAdapter } from '../dist';
+    import { SvelteGantt, SvelteGanttDependencies, SvelteGanttTable, MomentSvelteGanttDateAdapter } from 'svelte-gantt';
     import { time } from '../utils';
     import GanttOptions from '$components/gantt/GanttOptions.svelte';
     import {setView, moveView} from '$stores/gantt';
@@ -13,7 +13,7 @@
         console.log('trigger set view', val);
         if(val == 'none') return
         if(val == 'week'){
-            options.fitWidth = false;
+            options.fitWidth = true;
             options.columnUnit = 'hour';
             options.columnOffset = 1;
             currentStart = currentStart.clone().startOf('week');
@@ -164,7 +164,7 @@
         rowPadding: 6,
         headers: [{ unit: 'day', format: 'MMMM Do' }, { unit: 'hour', format: 'H:mm' }],
         fitWidth: true,
-        minWidth: 800,
+        minWidth: 600,
         from: currentStart,
         to: currentEnd,
         tableHeaders: [{ title: 'Label', property: 'label', width: 140, type: 'tree' }],
