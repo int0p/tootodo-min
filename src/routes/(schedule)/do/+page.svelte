@@ -47,7 +47,7 @@ let showCalendar=true;
                     bg-white/90 dark:bg-black/60 dark:text-white">Note</textarea>
             </div>
 
-            <button type="button" class="btn-icon variant-ghost-primary absolute right-2 top-[2.7rem] scale-[85%] !rounded-b lg:top-10g lg:scale-[98%] ">
+            <button type="button" class="btn-icon variant-ghost-primary absolute right-2 top-[2.7rem] scale-[85%] !rounded-b lg:top-10 lg:scale-[98%] ">
                 <Blinds strokeWidth=1.5 size={26}/>
                 <TableOfContents target="#toc-target" />
             </button>

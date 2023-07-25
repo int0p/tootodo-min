@@ -23,7 +23,8 @@
 
 	// import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	//icon
-	import { Music4, Sticker } from 'lucide-svelte';
+	import {Play, SkipBack, SkipForward, Music4, Sticker, Repeat1, Maximize2} from 'lucide-svelte';
+
 	// navigation
 	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
 
@@ -46,6 +47,15 @@
 		NProgress.start();
 		console.log();
 	});
+
+	let onSpotify = false;
+	$: {
+		if ($page.url.pathname.includes('/spotify')) {
+			onSpotify = true;
+		} else {
+			onSpotify = false;
+		}
+	}
 </script>
 
 <svelte:head>
@@ -63,7 +73,7 @@
 		<div class="flex justify-between w-[calc(100%-400px)]  relative -top-3 space-x-2 ">
 			<TabGroup
 					justify="justify-start"
-					class="w-[250px]"
+					class="w-[240px]"
 			>
 				<TabAnchor
 						on:click={() => goto('/too')}
@@ -90,7 +100,7 @@
 						class=""
 						selected={$page.url.pathname === '/blog'}
 				>
-					<Sticker size="24" class="relative top-0.5" strokeWidth={1.5} />
+					<Sticker size="24" class="relative top-1" strokeWidth={1.5} />
 				</TabAnchor>
 			</TabGroup>
 
@@ -101,13 +111,34 @@
 				<TabAnchor
 						on:click={() => goto('/spotify')}
 						selected={$page.url.pathname.includes('/spotify')}
+						class="relative w-full h-full"
 				>
-					<Music4 size="24" class="relative top-0.5" strokeWidth={1.5} />
+					<Music4 size="24" class="relative top-1" strokeWidth={1.5} />
+					<div class="chip absolute top-1 left-4 w-[calc(100%-130px)] h-full px-2 text-[1rem]">재생중인 노래가 없습니다</div>
+					<div class="chip variant-glass-primary py-1 px-2 absolute bottom-1 right-24
+    									dark:bg-primary-500/50 dark:text-white">
+						<span><Repeat1 size={16} /></span>
+					</div>
 				</TabAnchor>
+
+				<div class="absolute flex -right-2.5 top-2.5 z-10 rounded-lg  text-black
+				divide-x  divide-black dark:text-white dark:divide-white
+				border border-surface-400-500-token
+				 "
+					 class:onSpotify
+				>
+					<button class="btn py-1.5 px-2 rounded-none">
+						<span><SkipBack size={14} class="dark:fill-white/70 " /></span>
+					</button>
+					<button class="btn py-1.5 px-2 rounded-none ">
+						<span><Play size={16} class="dark:fill-white/70 fill-surface-900" /></span>
+					</button>
+					<button class="btn py-1.5 px-2 rounded-none">
+						<span><SkipForward size={14} class="dark:fill-white/70" /></span>
+					</button>
+				</div>
 			</TabGroup>
-
 		</div>
-
 
 		<div class="flex absolute right-0 top-1 space-x-2">
 			<!--		pomodoro -->
@@ -125,3 +156,9 @@
 		<slot />
 	</div>
 </div>
+
+<style>
+	.onSpotify{
+		@apply border-2 border-surface-900 dark:border-white;
+	}
+</style>
