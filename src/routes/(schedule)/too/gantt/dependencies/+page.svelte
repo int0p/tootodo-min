@@ -185,6 +185,13 @@
     }
 </script>
 
+
+<div class="container w-full h-full !max-w-[calc(100%-5px)]">
+    <div id="example-gantt"></div>
+    <GanttOptions options={options} on:change={onChangeOptions}/>
+</div>
+
+
 <style>
     #example-gantt {
         flex-grow: 1;
@@ -197,8 +204,3 @@
         flex: 1;
     }
 </style>
-
-<div class="container">
-    <div id="example-gantt"></div>
-    <GanttOptions options={options} on:change={onChangeOptions}/>
-</div>

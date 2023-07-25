@@ -21,6 +21,11 @@ let flavors: Record<string, boolean> = {
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
 
         <li class="crumb"><button >
+            <span
+                    class="chip mr-2 variant-filled-tertiary"
+                    on:click={() => { }}
+            ><Plus size={10} class="scale-[120%]"/></span>
+
             {#each Object.keys(flavors) as f}
                 <span
                         class="chip mr-2 {flavors[f] ? 'variant-filled' : 'variant-soft'}"

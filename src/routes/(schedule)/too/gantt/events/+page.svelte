@@ -217,6 +217,12 @@
     }
 </script>
 
+
+<div class="container w-full h-full !max-w-[calc(100%-5px)]">
+    <div id="example-gantt-events"></div>
+    <GanttOptions options={options} on:change={onChangeOptions}/>
+</div>
+
 <style>
     #example-gantt-events {
         flex-grow: 1;
@@ -237,8 +243,3 @@
         background-color: #00000008;
     }
 </style>
-
-<div class="container">
-    <div id="example-gantt-events"></div>
-    <GanttOptions options={options} on:change={onChangeOptions}/>
-</div>

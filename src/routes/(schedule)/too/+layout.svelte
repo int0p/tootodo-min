@@ -30,7 +30,7 @@
         <BreadcrumbToo/>
     </div>
 
-    <div class="w-[calc(100%)] h-[calc(100%-85px)] content">
+    <div class="w-[calc(100%)] h-[calc(100%-85px)]">
         <slot/>
     </div>
 

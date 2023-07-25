@@ -54,7 +54,7 @@
     }
 
     let currentStart = time('06:00');
-    let currentEnd = time('18:00');
+    let currentEnd = time('23:00');
 
     const colors = ['blue', 'green', 'orange']
 
@@ -202,7 +202,7 @@
         tasks: data.tasks,
         dependencies: data.dependencies,
         timeRanges,
-        columnOffset: 15,
+        columnOffset: 30,
         magnetOffset: 15,
         rowHeight: 42,
         rowPadding: 4,
@@ -250,21 +250,21 @@
     }
 </script>
 
-<div class="container">
+
+
+<div class="container w-full h-full  !max-w-[calc(100%-5px)]">
+    <div id="new-task"
+         class="absolute right-4 bottom-12 z-20 px-4 py-2
+    bg-tertiary-500 shadow-lg shadow-black/30 rounded-lg text-white text-center font-bold cursor-grab
+    border-r-8 border-tertiary-900
+">Add new task</div>
     <div id="example-gantt"></div>
-    <div id="new-task" class="absolute right-2 bottom-10 z-10">Drag to gantt</div>
     <GanttOptions options={options} on:change={onChangeOptions}/>
 </div>
 
-<style>
-    #new-task {
-        background-color: #ee6e73;
-        color: white;
-        padding: 1rem;
-        margin: 0.5rem;
-        cursor: grab;
-    }
 
+
+<style>
     #example-gantt {
         flex-grow: 1;
         overflow: auto;

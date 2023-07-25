@@ -159,7 +159,7 @@
     }
 </script>
 
-<div class="container">
+<div class="container w-full h-full !max-w-[calc(100%-5px)]">
     <GanttOptions options={options} on:change={onChangeOptions}/>
     <div id="example-gantt"></div>
 </div>
