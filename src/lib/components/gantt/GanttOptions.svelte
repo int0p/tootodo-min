@@ -16,7 +16,7 @@
 
 
 {#if $showOptions}
-<div class="controls">
+<div class="controls bg-tertiary-200 h-full max-h-full overflow-y-scroll hide-scrollbar text-black">
     <h3>Options</h3>
     <div class="form-group">
         <label for="columnOffset" class="form-label"> columnOffset </label>
@@ -46,7 +46,7 @@
         <input id="rowPadding" type="range" bind:value={options.rowPadding} min="0" max="20" step="2">
     </div>
 
-    <div class="form-group">
+    <div class="form-group relative h-10">
         <label for="fitWidth" class="form-label"> fitWidth </label>
         <input id="fitWidth" type=checkbox bind:checked={options.fitWidth}>
     </div>
@@ -80,7 +80,6 @@
 
 <style>
     .controls {
-        background: #ffc0c3;
         padding: 16px;
     }
 
@@ -94,12 +93,13 @@
         margin-bottom: 0.5rem;
     }
 
-    input, select {
-        border: 0;
-        border-bottom: 1px solid #cc595e;
-        background: #cc595e36;
+    input, select{
+        @apply bg-tertiary-400 text-white border-tertiary-600 border-0 border-b-2 h-9;
     }
 
+    #fitWidth{
+        @apply w-6 h-6 absolute right-0;
+    }
     h3 {
         margin: 0;
         margin-bottom: 1.5rem;

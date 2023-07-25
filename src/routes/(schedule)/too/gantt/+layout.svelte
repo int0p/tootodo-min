@@ -31,11 +31,11 @@ import {page} from "$app/stores";
 
     <TabGroup
             active="variant-filled-primary"
-            hover="hover:variant-soft-primary"
+            hover="hover:bg-surface-100-800-token hover:text-surface-900-50-token"
             flex="flex-1 lg:flex-none"
             rounded="rounded-2xl"
             border=""
-            class=" absolute right-0 bg-surface-900-50-token text-white border-primary-300 border-b-2
+            class=" absolute right-0 bg-surface-900-50-token text-white
                         dark:text-black  text-sm rounded-2xl scale-90 ">
         <input type="button" value="<" on:click={()=> {moveView.set('prevDay')}}/>
         <TabAnchor on:click={()=> {setView.set('day')}}>

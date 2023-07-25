@@ -11,6 +11,7 @@
     import { time } from '../utils';
     import GanttOptions from '$components/gantt/GanttOptions.svelte';
     import {setView, moveView} from '$stores/gantt';
+    import {Plus} from 'lucide-svelte';
     $ : triggerSetView($setView)
     $ : triggerMoveView($moveView)
 
@@ -254,10 +255,10 @@
 
 <div class="container w-full h-full  !max-w-[calc(100%-5px)]">
     <div id="new-task"
-         class="absolute right-4 bottom-12 z-20 px-4 py-2
+         class="absolute right-5 bottom-12 z-20 px-3 py-2
     bg-tertiary-500 shadow-lg shadow-black/30 rounded-lg text-white text-center font-bold cursor-grab
     border-r-8 border-tertiary-900
-">Add new task</div>
+"><Plus/></div>
     <div id="example-gantt"></div>
     <GanttOptions options={options} on:change={onChangeOptions}/>
 </div>
