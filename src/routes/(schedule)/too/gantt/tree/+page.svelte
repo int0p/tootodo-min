@@ -262,8 +262,6 @@
     <GanttOptions options={options} on:change={onChangeOptions}/>
 </div>
 
-
-
 <style>
     #example-gantt {
         flex-grow: 1;

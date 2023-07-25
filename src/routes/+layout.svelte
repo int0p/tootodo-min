@@ -36,7 +36,7 @@
 	import NProgress from 'nprogress';
 	import 'nprogress/nprogress.css';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
-	import {HeaderNav} from "$components";
+	import {HeaderNav, PomoSmall} from "$components";
 	import {currentTime} from "$stores/time";
 	NProgress.configure({ showSpinner: false });
 	afterNavigate(() => {
@@ -60,7 +60,7 @@
 		</div>
 
 		<!--		tab-->
-		<div class="flex justify-between w-[calc(100%-250px)]  relative -top-3 space-x-2 ">
+		<div class="flex justify-between w-[calc(100%-400px)]  relative -top-3 space-x-2 ">
 			<TabGroup
 					justify="justify-start"
 					class="w-[250px]"
@@ -109,8 +109,14 @@
 		</div>
 
 
-		<div class="flex absolute right-0 space-x-2">
-			<div class="curTime font-digital ">{$currentTime.shortTime}</div>
+		<div class="flex absolute right-0 top-1 space-x-2">
+			<!--		pomodoro -->
+			<div class="relative -top-1">
+				<PomoSmall/>
+			</div>
+<!--			current time-->
+			<div class=" font-digital text-primary-500 font-bold text-xl ">{$currentTime.shortTime}</div>
+			<!--		dark/light mode switch-->
 			<LightSwitch class=" dark:bg-zinc-950 " />
 		</div>
 	</div>
@@ -119,10 +125,3 @@
 		<slot />
 	</div>
 </div>
-
-<style>
-	.curTime{
-		@apply text-primary-500 font-bold text-xl;
-	}
-
-</style>
