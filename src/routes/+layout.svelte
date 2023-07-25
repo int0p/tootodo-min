@@ -85,7 +85,7 @@
 		</div>
 
 <!--		tab-->
-		<div class="flex justify-between w-[calc(100%-410px)]  relative space-x-2 ">
+		<div class="flex justify-between w-[calc(100%-400px)]  relative -left-2 space-x-2 ">
 			<TabGroup
 					justify="justify-start"
 					class="w-[220px]"
