@@ -18,6 +18,7 @@
             <svelte:fragment slot="navi"><SelectDateSmall bind:showWeekly bind:showCalendar/></svelte:fragment>
             <svelte:fragment slot="content"><TodoList {showWeekly} {showCalendar}/></svelte:fragment>
         </SideShell>
+
     {/if}
 
     <div class="flex-col items-center justify-center w-full h-full relative" class:reduceWidth={showTargetTodoList}>

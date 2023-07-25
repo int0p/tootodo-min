@@ -68,7 +68,7 @@
 				<TabAnchor
 						on:click={() => goto('/too')}
 						selected={$page.url.pathname.includes('/too')}
-				>Too
+				><span class="relative top-1 ">Too</span>
 				</TabAnchor>
 
 				<TabAnchor
@@ -76,13 +76,13 @@
 							$page.url.pathname.includes('/do')||
 							$page.url.pathname === '/'}
 				>
-					<div class="crumb-separator" aria-hidden>&rsaquo;</div>
+					<div class="crumb-separator relative top-1" aria-hidden>&rsaquo;</div>
 				</TabAnchor>
 
 				<TabAnchor
 						on:click={() => goto('/do')}
 						selected={$page.url.pathname.includes('/do') || $page.url.pathname === '/'}
-				>Do
+				><span class="relative top-1">Do</span>
 				</TabAnchor>
 
 				<TabAnchor

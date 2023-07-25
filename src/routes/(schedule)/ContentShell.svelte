@@ -17,7 +17,8 @@
 
     <hr class="!border-b-3 mb-2 w-[calc(100%-30px)]" />
 
-    <div class="w-full h-full relative max-h-[calc(100%-80px)] overflow-y-scroll hide-scrollbar">
+    <div class="w-full h-full relative max-h-[calc(100%-80px)] overflow-y-scroll hide-scrollbar
+        border-b !border-primary-600-300-token">
         <slot name="contents"/>
     </div>
 </div>
