@@ -22,12 +22,6 @@ export let showDailyLog;
             select todo! {$page.url.pathname}
         </button></li>
 
-        {#if !showDailyLog}
-            <button type="button" class="btn-icon variant-ghost-primary absolute right-6 !rounded-b scale-[80%] ">
-                <Blinds strokeWidth=1.5/>
-                <TableOfContents target="#toc-target" />
-            </button>
-        {/if}
     </ol>
 </div>
 

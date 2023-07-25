@@ -12,6 +12,6 @@
 
 <style>
     .dailyTodo{
-        @apply rounded-r-2xl rounded-l-none border-double border-4 border-primary-400;
+        @apply rounded-r-2xl rounded-l-none border-double border-4 border-primary-400 dark:border-primary-600;
     }
 </style>
