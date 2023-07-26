@@ -42,7 +42,7 @@ export let showDailyLog = true;
                     text-surface-900-50-token bg-white/75 dark:bg-black/50">Note</textarea>
             </div>
 
-            <button type="button" class="btn-icon variant-ghost-primary absolute right-2 top-[3.6rem] scale-[85%] !rounded-b lg:top-[3.4rem] lg:scale-[98%] ">
+            <button type="button" class="btn-icon variant-ghost-primary absolute right-2 top-[3.57rem] scale-[85%] !rounded-b lg:top-[3.4rem] lg:scale-[98%] ">
                 <Blinds strokeWidth=1.5 size={26}/>
                 <TableOfContents target="#toc-target" />
             </button>

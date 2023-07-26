@@ -19,11 +19,11 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
-	import { LightSwitch, TableOfContents } from '@skeletonlabs/skeleton';
+	import { LightSwitch,} from '@skeletonlabs/skeleton';
 
 	// import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	//icon
-	import {Play, SkipBack, SkipForward, Music4, Sticker, Repeat1, Maximize2} from 'lucide-svelte';
+	import {Play, SkipBack, SkipForward, Music4, Sticker, Repeat1, } from 'lucide-svelte';
 
 	// navigation
 	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
@@ -37,7 +37,7 @@
 	import NProgress from 'nprogress';
 	import 'nprogress/nprogress.css';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
-	import {HeaderNav, PomoSmall} from "$components";
+	import {HeaderNav, PomoNavi} from "$components";
 	import {currentTime} from "$stores/time";
 	NProgress.configure({ showSpinner: false });
 	afterNavigate(() => {
@@ -77,7 +77,7 @@
 			<div class="flex absolute right-0 top-0.5 space-x-2">
 				<!--		pomodoro -->
 				<div class="relative -top-1 left-2 scale-90">
-					<PomoSmall/>
+					<PomoNavi/>
 				</div>
 				<!--		dark/light mode switch-->
 				<LightSwitch class=" dark:bg-zinc-800 " />

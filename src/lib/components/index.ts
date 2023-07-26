@@ -1,5 +1,5 @@
-export { default as PomoTimer } from './pomodoro/Pomodoro.svelte'
-export{default as PomoSmall} from './pomodoro/PomoSmall.svelte';
+export { default as Pomodoro } from './pomodoro/Pomodoro.svelte'
+export{default as PomoNavi} from './PomoNavi.svelte';
 
 export { default as Editor } from './editor/Editor.svelte'
 

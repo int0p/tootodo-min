@@ -35,15 +35,14 @@
 <style>
     .clock {
         border-radius: 10%;
-        /*border: 12px solid rgb(55, 55, 55);*/
+        border: 9px solid rgb(55, 55, 55);
         padding: 8px;
         box-shadow: inset 0 0 5px 5px ,
             inset 0 0 1px 2px rgba(50, 50, 50, 0.2);
         /*background-color: rgba(247, 244, 245, 0.4);*/
-        width: 92%;
-        height:57%;
-        max-width: 300px;
-        max-height: 360px;
+
+        width: 300px;
+        height: 360px;
     }
 
 </style>
