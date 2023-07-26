@@ -26,14 +26,14 @@
 
 /////////////////////// POMODORO ///////////////////////
 .tippy-box[data-theme~='pomodoro'] {
-  @apply bg-zinc-100 mx-2 text-surface-900;
+  @apply bg-zinc-50 mx-2 text-surface-900;
   border-radius: 10%;
   box-shadow: 0 13px 20px rgba(0, 0, 0, 0.3);
 }
 
 .tippy-box[data-theme~='pomodoro'] .tippy-content {
   padding: 0px;
-  width: 100%;
+  width: 300px;
 }
 
 .tippy-box[data-theme~='pomodoro'][data-placement^='top'] > .tippy-arrow::before {

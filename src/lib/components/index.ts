@@ -1,4 +1,5 @@
 export { default as Pomodoro } from './pomodoro/Pomodoro.svelte'
+export { default as PomoForm } from './pomodoro/PomoForm.svelte'
 export{default as PomoNavi} from './PomoNavi.svelte';
 
 export { default as Editor } from './editor/Editor.svelte'
