@@ -77,10 +77,10 @@ $:
                                 on:click={() => onSelection(option)} on:click on:keypress >
                             <button class="chip btn_select_date z-10">07.27</button>
                             <input checked={option.selected}
-                                    type="checkbox" class=" relative left-10 z-10
-                                        checked:bg-surface-800 dark:checked:bg-surface-600/80
-                                        border-0 border-l-2 border-double border-tertiary-400-500-token shadow"/>
-                            <div class=" w-[calc(100%-70px)] h-full text-start relative left-9" on:click={() => option.selected = !option.selected }> {@html option.label} </div>
+                                    type="checkbox" class=" relative left-10 z-10 w-[1.4rem] h-5
+                                        checked:bg-secondary-700/50 dark:checked:bg-secondary-800/80
+                                        border-0 border-l-4 border-double !border-tertiary-500 shadow"/>
+                            <div class=" w-[calc(100%-74px)] h-full text-start relative left-8" on:click={() => option.selected = !option.selected }> {@html option.label} </div>
                             <button class="btn_delete z-20"><X size={16} /></button>
                         </button>
                     </li>
@@ -94,9 +94,9 @@ $:
 
 <style lang="scss">
     .btn_delete{
-      @apply px-1 py-1 absolute right-3  bg-tertiary-300/20 rounded-md aspect-square dark:bg-tertiary-500/50;
+      @apply px-1 py-1 absolute right-3  bg-tertiary-300/20 rounded-md aspect-square dark:bg-tertiary-400/40;
       &:hover{
-        @apply bg-tertiary-400 text-white dark:bg-tertiary-500/90;
+        @apply bg-tertiary-400 text-white dark:bg-tertiary-400;
       }
     }
     .btn_select_date{
