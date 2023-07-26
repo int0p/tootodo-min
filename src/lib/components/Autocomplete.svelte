@@ -73,11 +73,15 @@ $:
             <ul class="autocomplete-list {classesList}">
                 {#each optionsFiltered.slice(0, sliceLimit) as option (option)}
                     <li class="autocomplete-item relative {classesItem}">
-                        <button class="autocomplete-button !py-3 {classesButton}" type="button" on:click={() => onSelection(option)} on:click on:keypress>
-                            <button class="chip btn_select_date">07.27</button>
-                            <input type="checkbox" class=" relative left-10"/>
-                            <span class="absolute left-20">{@html option.label}</span>
-                            <button class="btn_delete "><X size={16} /></button>
+                        <button class="autocomplete-button {classesButton} !py-2.5" type="button"
+                                on:click={() => onSelection(option)} on:click on:keypress >
+                            <button class="chip btn_select_date z-10">07.27</button>
+                            <input checked={option.selected}
+                                    type="checkbox" class=" relative left-10 z-10
+                                        checked:bg-surface-800 dark:checked:bg-surface-600/80
+                                        border-0 border-l-2 border-double border-tertiary-400-500-token shadow"/>
+                            <div class=" w-[calc(100%-70px)] h-full text-start relative left-9" on:click={() => option.selected = !option.selected }> {@html option.label} </div>
+                            <button class="btn_delete z-20"><X size={16} /></button>
                         </button>
                     </li>
                 {/each}
@@ -90,15 +94,15 @@ $:
 
 <style lang="scss">
     .btn_delete{
-      @apply px-1 py-1 absolute right-3  z-10  bg-tertiary-300/20 rounded-md aspect-square dark:bg-tertiary-500/50;
+      @apply px-1 py-1 absolute right-3  bg-tertiary-300/20 rounded-md aspect-square dark:bg-tertiary-500/50;
       &:hover{
         @apply bg-tertiary-400 text-white dark:bg-tertiary-500/90;
       }
     }
     .btn_select_date{
-      @apply px-2 py-1 absolute left-3 z-10 bg-blue-500/20 w-[50px] dark:bg-blue-500/50;
+      @apply px-2 py-1 absolute left-3  bg-surface-500/20 w-[50px] dark:bg-surface-500/40;
       &:hover{
-        @apply bg-blue-500 text-white dark:bg-blue-500/90;
+        @apply bg-surface-800 text-white dark:bg-surface-400 dark:text-black;
       }
     }
 </style>

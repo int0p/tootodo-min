@@ -62,19 +62,19 @@
 	<title>Tootodo {$page.data.title ? ` - ${$page.data.title}` : ''}</title>
 </svelte:head>
 
-<div class="flex-col h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] m-auto">
-	<div class="flex justify-center w-full h-[48px]">
+<div class="flex-col h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] justify-center items-center m-auto my-4">
+	<div class="flex justify-center items-center w-full h-[30px] relative lg:top-3">
 <!--		control-->
-		<div class="flex w-full h-full absolute top-3">
+		<div class="flex w-full h-full absolute">
 <!--			left-->
-			<div class="absolute left-4 flex space-x-1">
+			<div class=" flex space-x-1">
 				<HeaderNav />
 				<!--			current time-->
 				<div class=" font-digital text-primary-500 font-bold text-xl pl-2 relative top-0.5">{$currentTime.shortTime}</div>
 			</div>
 
 <!--			right-->
-			<div class="flex absolute right-4 top-0.5 space-x-2">
+			<div class="flex absolute right-0 top-0.5 space-x-2">
 				<!--		pomodoro -->
 				<div class="relative -top-1 left-2 scale-90">
 					<PomoSmall/>
@@ -85,7 +85,7 @@
 		</div>
 
 <!--		tab-->
-		<div class="flex justify-between w-[calc(100%-400px)]  relative -left-2 space-x-2 ">
+		<div class="flex justify-between w-[calc(100%-400px)]  space-x-2 relative -top-1.5 -left-2.5 ">
 			<TabGroup
 					justify="justify-start"
 					class="w-[220px]"
@@ -93,7 +93,7 @@
 				<TabAnchor
 						on:click={() => goto('/too')}
 						selected={$page.url.pathname.includes('/too')}
-				><span class="relative top-1 ">Too</span>
+				><span class="relative top-1  left-3">Too</span>
 				</TabAnchor>
 
 				<TabAnchor
@@ -107,7 +107,7 @@
 				<TabAnchor
 						on:click={() => goto('/do')}
 						selected={$page.url.pathname.includes('/do') || $page.url.pathname === '/'}
-				><span class="relative top-1">Do</span>
+				><span class="relative top-1 right-3">Do</span>
 				</TabAnchor>
 
 				<TabAnchor
@@ -128,16 +128,16 @@
 						selected={$page.url.pathname.includes('/spotify')}
 						class="relative w-full h-full"
 				>
-					<Music4 size="23" class="relative top-1" strokeWidth={1.5} />
+					<Music4 size="23" class="relative top-1 -left-2" strokeWidth={1.5} />
 					<div class="chip absolute top-1 left-4 w-[calc(100%-130px)] h-full px-2 text-[1rem]">재생중인 노래가 없습니다</div>
-					<div class="chip variant-glass-primary py-1 px-2 absolute bottom-1 right-[5.9rem]
+					<div class="chip variant-glass-primary py-1 px-2 absolute bottom-1 right-24
     									dark:bg-primary-500/50 dark:text-white">
 						<span><Repeat1 size={16} /></span>
 					</div>
 				</TabAnchor>
 
 <!--				music controller-->
-				<div class="absolute flex -right-2 top-[0.56rem] z-10 rounded-lg  text-black
+				<div class="absolute flex -right-2 top-[0.55rem] z-10 rounded-lg  text-black
 				divide-x  divide-black dark:text-white dark:divide-white
 				border border-surface-400-500-token
 				 "
@@ -158,7 +158,7 @@
 
 	</div>
 
-	<div class="w-full h-full m-auto my-1">
+	<div class="w-full h-[calc(100%-40px)] m-auto my-1 relative top-1.5 lg:h-[calc(100%-50px)] lg:top-4">
 		<slot />
 	</div>
 </div>

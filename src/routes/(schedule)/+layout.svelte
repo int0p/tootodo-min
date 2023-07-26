@@ -10,8 +10,8 @@
     let showCalendar=true;
 </script>
 
-<div class="flex w-full h-full relative">
-
+<div class="flex w-full h-full">
+<!-- left-->
     {#if showTargetTodoList}
         <!--290px-->
         <SideShell>
@@ -20,9 +20,10 @@
         </SideShell>
     {/if}
 
+<!-- right-->
     <div class="flex-col items-center justify-center w-full h-full relative" class:reduceWidth={showTargetTodoList}>
         <button on:click={()=>showTargetTodoList = !showTargetTodoList} class:flip={showTargetTodoList}
-                class="absolute left-0 top-2 z-10 anchor"
+                class="absolute left-0 top-3 z-10 anchor"
         >
             <LampDesk size="20px" class="dark:shadow-lg dark:shadow-primary-300" />
         </button>

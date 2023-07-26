@@ -9,7 +9,7 @@ let flavors: Record<string, boolean> = {
 </script>
 
 <!--sidebar toggle하는 녀석땜에 left-7 -->
-<div class="w-full h-full relative left-7">
+<div class="w-full h-full relative left-7 top-1">
     <ol class="breadcrumb relative h-full">
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
 

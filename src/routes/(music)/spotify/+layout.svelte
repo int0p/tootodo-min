@@ -15,7 +15,7 @@
 		MicroModal.init();
 	}
 	$: if (topbar) {
-		headerOpacity = scrollY / topbar.offsetHeight < 1 ? scrollY / topbar.offsetHeight : 1;
+		headerOpacity = scrollY / topbar.offsetHeight < 1 ? scrollY / topbar.offsetHeight : 0.8;
 	}
 
 	$: hasError = $page.url.searchParams.get('error');
@@ -27,20 +27,15 @@
 	// $: console.log(userAllPlaylists);
 </script>
 
-<!-- todo 나중에 music player 추가 -->
-<div class="absolute top-4 right-10">
-	<!-- {$page.url} -->
-</div>
+	<div id="main" class="w-full h-full flex ">
 
-<div class="m-auto h-[calc(100vh - 4.5rem)] w-[calc(100vh - 2rem)]">
-	<div id="main" class="w-full h-full">
 		{#if user}
-			<div id="sidebar">
+			<div class="h-full">
 				<Navigation desktop={true} {userAllPlaylists} />
 			</div>
 		{/if}
 
-		<div id="content" class="w-full relative">
+		<div id="content" class="w-full h-full">
 			{#if hasError || hasSuccess}
 				<div class="message" role="status" class:error={hasError} class:success={hasSuccess}>
 					{hasError ?? hasSuccess}
@@ -62,7 +57,7 @@
 			<main
 				id="main-content"
 				class:logged-in={user}
-				class="hide-scrollbar w-full p-4"
+				class="hide-scrollbar w-full h-full p-4"
 				on:scroll={(e) => (scrollY = e.target.scrollTop)}
 			>
 				{#if $page.url.pathname.startsWith('/spotify/search')}
@@ -74,7 +69,6 @@
 			</main>
 		</div>
 	</div>
-</div>
 
 <Toasts />
 
@@ -83,7 +77,6 @@
 		font-size: functions.toRem(22);
 	}
 	#main {
-		display: flex;
 		@apply bg-zinc-500/30 rounded-2xl shadow-lg items-center;
 
 		#content {
@@ -113,6 +106,7 @@
 					background-color: var(--accent-color);
 				}
 			}
+
 			#topbar {
 				height: var(--header-height);
 				padding: 0 15px;
@@ -132,7 +126,6 @@
 				}
 			}
 			main#main-content {
-				height: calc(100vh - 4rem);
 				.search-form {
 					margin-bottom: 40px;
 					@include breakpoint.up('md') {
@@ -144,7 +137,7 @@
 				}
 				&.logged-in {
 					padding-top: calc(30px + var(--header-height));
-					@apply overflow-y-scroll max-h-[calc(100%-70px)];
+					@apply overflow-y-scroll max-h-full;
 				}
 			}
 		}

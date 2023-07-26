@@ -11,7 +11,7 @@
     export let showCalendar=true;
 </script>
 
-<div class="flex w-full justify-center space-x-2 font-bold mx-2">
+<div class="flex w-full justify-center space-x-2 font-bold mx-2 -my-0.5">
     <!--            choose another date-->
     <button class="chip variant-soft-primary w-1/6 flex-col items-center text-lg px-2">
         <CalendarRange size="22" />

@@ -1,6 +1,6 @@
 <!-- sidebar shell-->
 
-<div class="flex-col dailyTodo w-[290px] min-w-[290px] h-[calc(100%-2.2rem)] relative mr-4">
+<div class="flex-col dailyTodo w-[290px] min-w-[290px] h-full relative mr-4">
     <div class="header h-8 my-2 flex justify-between bg-none">
         <slot name="navi"/>
     </div>

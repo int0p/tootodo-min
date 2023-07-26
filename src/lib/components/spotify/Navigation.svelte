@@ -83,7 +83,7 @@
 	{/if}
 </svelte:head>
 
-<div class="nav-content" class:desktop class:mobile={!desktop}>
+<div class="nav-content w-full h-full" class:desktop class:mobile={!desktop}>
 	<!--    모바일에서 menu를 열면, 뒷 버튼 눌리지 않게 overlay-->
 	{#if !desktop && isMobileMenuOpen}
 		<div
@@ -95,7 +95,7 @@
 		<!--        todo on:keyup={handleEscape} 왜 필요함? 얘 없어도 esc잘됨.-->
 	{/if}
 	<!--    모바일일 때 menu를 열면, 좌측에서부터 메뉴가 스윽 등장. 데스크탑일땐 menu가 디폴트로 존재. -->
-	<nav aria-label="Main">
+	<nav aria-label="Main" class="h-full w-full">
 		{#if !desktop}
 			<IconButton
 				icon={Menu}
@@ -107,7 +107,7 @@
 			/>
 		{/if}
 		<div
-			class="nav-content-inner"
+			class="nav-content-inner h-full w-full"
 			class:is-hidden={!isOpen}
 			style:visibility={isOpen ? 'visible' : 'hidden'}
 			on:keyup={handleEscape}
@@ -188,7 +188,7 @@
 			// padding: 20px;
 			min-width: var(--sidebar-width);
 			background-color: var(--sidebar-color);
-			height: calc(100vh - 4rem);
+			height: 100%;
 			// overflow: auto;
 			display: none;
 			.logo-and-menu {
@@ -217,7 +217,7 @@
 				}
 			}
 			@include breakpoint.down('md') {
-				height: 100vh;
+				height: 100%;
 			}
 			ul {
 				padding: 0;
