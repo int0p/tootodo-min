@@ -25,7 +25,7 @@
         <BreadcrumbToo/>
     </div>
 
-    <RadioGroup class="justify-end border-none top-10 lg:top-14 py-2.5 right-2.5 z-10 fixed"
+    <RadioGroup class="justify-end border-none top-11 lg:top-14 py-2.5 right-2.5 z-10 fixed"
                 background="none" display="flex" active="variant-filled-primary" hover="hover:variant-soft-primary">
         <RadioItem bind:group={value} name="justify" value={0}><Presentation class="scale-[90%]" /></RadioItem>
         <RadioItem bind:group={value} name="justify" value={1}><BarChartHorizontalBig class="scale-[90%]" /></RadioItem>

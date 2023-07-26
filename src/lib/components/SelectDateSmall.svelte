@@ -36,7 +36,7 @@
     >
         <div class="flex w-full h-full justify-center items-center space-x-2">
             <div class="text-lg text-white">{week.at($currentTime.day)}</div>
-            <div class="bg-white/50 text-black/75 border-primary-400 leading-5 text-[1rem] w-full h-full rounded-md border-t-2">
+            <div class="bg-white/50 text-secondary-900 border-primary-400 leading-6 text-[1rem] w-full h-full rounded-md border-t-2">
                 {$currentTime.date}
             </div>
         </div>
