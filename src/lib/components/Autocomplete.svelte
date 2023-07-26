@@ -78,6 +78,7 @@ $:
                             <button class="chip btn_select_date z-10">07.27</button>
                             <input checked={option.selected}
                                     type="checkbox" class=" relative left-10 z-10 w-[1.4rem] h-5
+                                        dark:bg-surface-50
                                         checked:bg-secondary-700/50 dark:checked:bg-secondary-800/80
                                         border-0 border-l-4 border-double !border-tertiary-500 shadow"/>
                             <div class=" w-[calc(100%-74px)] h-full text-start relative left-8" on:click={() => option.selected = !option.selected }> {@html option.label} </div>
