@@ -9,16 +9,16 @@
     ///////////////////// timer design  ///////////////////////
     const classGoal = "absolute top-2 left-0 w-full z-10 ";
     const classHour = "absolute top-12 left-0 w-full z-30";
-    const classOutline = "absolute top-0 w-full z-20 ";
+    const classOutline = "absolute top-0 w-full z-20 opacity-100 ";
     const widthGoal = "w-[95%]";
     const widthHour = "w-2/3";
 </script>
 
 <div class="clock w-full h-full mb-3 mx-auto">
 <!--    pomodoro-->
-    <div class="w-full relative top-0 aspect-square shadow">
+    <div class="w-full relative top-0 aspect-square shadow opacity-90">
         <!--    session, remain time-->
-        <div class="w-[160px] h-[70px] absolute translate-x-[3.95rem] translate-y-[6.6rem] z-50">
+        <div class="w-[160px] h-[70px] absolute translate-x-[3.95rem] translate-y-[6.7rem] z-50 opacity-100">
             <Status/>
         </div>
         <!--    timer -->
