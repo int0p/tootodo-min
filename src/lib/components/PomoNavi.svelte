@@ -1,9 +1,9 @@
 <script lang="ts">
     import { AlarmClock,Maximize2,Play,Pause } from 'lucide-svelte';
     import {Pomodoro, PomoForm} from "$components";
+    import {browser} from '$app/environment';
     import { tippy } from '$actions';
     let timerIDLE = true;
-    import {defaultTimerSet as defaultTimer} from "$lib/stores/defaultSet.js";
 </script>
 
 <div class="variant-soft-tertiary px-2 rounded-md dark:bg-secondary-900/80 ">
@@ -34,18 +34,20 @@
 <!--    pomodoro-->
     <div id="pomodoro" class="hidden">
         {#if timerIDLE}
-            <div class="p-6">
-                <PomoForm/>
+            <div class="p-5">
+                {#if browser}
+                    <PomoForm bind:timerIDLE/>
+                {/if}
             </div>
         {:else}
             <Pomodoro/>
         {/if}
     </div>
 
-    <div on:click={()=>timerIDLE = !timerIDLE}
+    <button on:click={()=>timerIDLE = !timerIDLE}
             class="chip variant-glass-tertiary  py-2 px-2
     dark:bg-tertiary-200 dark:text-black dark:opacity-70">
         <span><Play size={16} class="fill-current" /></span>
-    </div>
+    </button>
 </div>
 

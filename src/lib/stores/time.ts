@@ -1,5 +1,6 @@
 // 참고 링크: https://svelte.dev/repl/4dc8559756cf491abe7ad8f7189a8873?version=3.38.3
 import { readable, derived } from 'svelte/store'
+import moment from "moment";
 
 export const current = readable(new Date(), set => {
     const interval = setInterval(() => {

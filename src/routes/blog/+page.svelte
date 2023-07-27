@@ -1,15 +1,11 @@
 <script>
 	import {Pomodoro, PomoForm} from "$components";
+	import {browser} from "$app/environment";
 </script>
 
 <div class="flex">
-	<div class="p-6 w-[300px] bg-zinc-50">
-		<PomoForm/>
-	</div>
 	<Pomodoro/>
 </div>
-
-
 
 
 <div class="container h-full w-full m-auto flex justify-center items-center">
