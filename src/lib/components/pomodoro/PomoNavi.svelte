@@ -6,7 +6,7 @@
     let timerIDLE = true;
 </script>
 
-<div class="variant-soft-tertiary px-2 rounded-md dark:bg-secondary-900/80 ">
+<div class="variant-soft-tertiary px-2 rounded-md dark:bg-zinc-700">
 <!--    pomo popup button-->
     <div class="chip variant-filled-tertiary py-2 "
          use:tippy={{

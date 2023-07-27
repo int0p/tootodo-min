@@ -91,7 +91,7 @@
                 </div>
             </div>
 
-            <input  class="input w-full h-full text-surface-900 rounded-2xl variant-soft-surface mt-2"  type="file" accept="audio/*"
+            <input  class="input w-full h-full !text-surface-900 rounded-2xl variant-soft-surface mt-2"  type="file" accept="audio/*"
                    bind:value={timerSet.bgm}
             />
         </div>
