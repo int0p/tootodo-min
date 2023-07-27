@@ -7,8 +7,8 @@
     import {ArrowBigRightDash} from "lucide-svelte";
 
     ///////////////////// timer design  ///////////////////////
-    const classGoal = "absolute top-2 left-0 w-full  ";
-    const classHour = "absolute top-11 left-0 w-full z-20 ";
+    const classGoal = "absolute top-2 left-0 w-full   ";
+    const classHour = "absolute top-11 left-0 w-full z-20 opacity-80";
     const classOutline = "absolute top-0 w-full z-10 shadow";
     const widthGoal = "w-[95%]";
     const widthHour = "w-2/3";
