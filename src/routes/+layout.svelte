@@ -3,7 +3,10 @@
 	// theme
 	import '../theme.postcss';
 	import '$styles/spotify.scss';
-
+	// If you have source.organizeImports set to true in VSCode, then it will auto change this ordering
+	import '@skeletonlabs/skeleton/styles/skeleton.css';
+	// Most of your app wide CSS should be put in this file
+	import '../app.postcss';
 	// import '@skeletonlabs/skeleton/themes/theme-gold-nouveau.css';
 	// import '@skeletonlabs/skeleton/themes/theme-modern.css'; //팝팦 핑크
 	// import '@skeletonlabs/skeleton/themes/theme-skeleton.css'; //깔끔초록
@@ -15,25 +18,12 @@
 	// import '@skeletonlabs/skeleton/themes/theme-seasonal.css'; //깔끔 초록
 	// import '@skeletonlabs/skeleton/themes/theme-vintage.css'; //옛 주황
 
-	// If you have source.organizeImports set to true in VSCode, then it will auto change this ordering
-	import '@skeletonlabs/skeleton/styles/skeleton.css';
-	// Most of your app wide CSS should be put in this file
-	import '../app.postcss';
-	import { LightSwitch,} from '@skeletonlabs/skeleton';
 
-	// import { AppShell, AppBar } from '@skeletonlabs/skeleton';
-	//icon
-	import {Play, SkipBack, SkipForward, Music4, Sticker, Repeat1, } from 'lucide-svelte';
-
-	// navigation
-	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
-
-	// pomodoro timer
-	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
 
 	// page info
 	// $:console.log($page.data.title);
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 	import NProgress from 'nprogress';
 	import 'nprogress/nprogress.css';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
@@ -48,7 +38,15 @@
 		console.log();
 	});
 
-	let onSpotify = false;
+
+	import { tippy } from '$actions';
+	// navigation
+	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
+	//icon
+	import {Play, SkipBack, SkipForward, Music4, Sticker, Repeat1, Cog} from 'lucide-svelte';
+	import { SettingForm } from '$components';
+
+	let onSpotify = false; //스포티파이 페이지에서 스포티파이 border 두껍게하려고 만듦.
 	$: {
 		if ($page.url.pathname.includes('/spotify')) {
 			onSpotify = true;
@@ -79,8 +77,31 @@
 				<div class="relative -top-1 left-2 scale-90">
 					<PomoNavi/>
 				</div>
-				<!--		dark/light mode switch-->
-				<LightSwitch class=" dark:bg-zinc-800 " />
+				<!--		overall setting (darkmode, day start time)-->
+				<div class="chip variant-ringed-primary relative -top-1.5 shadow "
+					 use:tippy={{
+                    content: document.getElementById('settingForm') || undefined,
+                    onMount:  () => {
+                        const template = document.getElementById('settingForm');
+                        if (template) {
+                            template.style.display = 'block';
+                        }
+                    },
+                    trigger: 'click, mouseenter',
+                    placement: 'bottom',
+                    interactive: true,
+                    theme: 'setting',
+                    appendTo: document.body,
+                    hideOnPopperBlur: false,
+                    allowHTML: true,
+                }}
+				>
+					<Cog size={23} />
+				</div>
+
+				<div id="settingForm" class="hidden" >
+					<SettingForm/>
+				</div>
 			</div>
 		</div>
 

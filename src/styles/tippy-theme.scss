@@ -48,3 +48,28 @@
 .tippy-box[data-theme~='pomodoro'][data-placement^='right'] > .tippy-arrow::before {
   border-right-color: rgb(24 24 27);
 }
+
+/////////////////////// Setting ///////////////////////
+.tippy-box[data-theme~='setting'] {
+  @apply bg-zinc-50 mx-2 text-surface-900;
+  border-radius: 10%;
+  box-shadow: 0 13px 20px rgba(0, 0, 0, 0.3);
+}
+
+.tippy-box[data-theme~='setting'] .tippy-content {
+  padding: 0px;
+  width: 200px;
+}
+
+.tippy-box[data-theme~='setting'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: rgb(24 24 27); //bg-zinc-900
+}
+.tippy-box[data-theme~='setting'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: rgb(24 24 27);
+}
+.tippy-box[data-theme~='setting'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: rgb(24 24 27);
+}
+.tippy-box[data-theme~='setting'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: rgb(24 24 27);
+}

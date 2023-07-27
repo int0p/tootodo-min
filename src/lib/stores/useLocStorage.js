@@ -25,7 +25,7 @@ export function createLocStorage(key ,initialValue){
 
 export const todoList = createLocStorage('todoList', []);
 
-export const timerSetting = createLocStorage('timerSetting', {
+export const settings = createLocStorage('settings', {
         working: 50,
         breaking:10,
         repeat: 3, //tod o 마지막에 breaking없음

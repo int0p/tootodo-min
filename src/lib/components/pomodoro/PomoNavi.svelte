@@ -34,11 +34,9 @@
 <!--    pomodoro-->
     <div id="pomodoro" class="hidden">
         {#if timerIDLE}
-            <div class="p-5">
-                {#if browser}
-                    <PomoForm bind:timerIDLE/>
-                {/if}
-            </div>
+            {#if browser}
+                <PomoForm bind:timerIDLE/>
+            {/if}
         {:else}
             <Pomodoro/>
         {/if}

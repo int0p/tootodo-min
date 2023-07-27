@@ -1,9 +1,10 @@
 <script>
     // import {defaultTimerSet as defaultTimer} from "$stores/defaultSet.ts";
-    import {timerSetting} from "$stores/useLocStorage.js";
-    // import timerSetting from "$stores/timerSetting.js";
-    import {onMount} from "svelte";
+    import {settings} from "$stores/useLocStorage.js";
+    // import settings from "$stores/settings.js";
+    import {onMount,onDestroy} from "svelte";
     import {browser} from "$app/environment";
+    import {RotateCcw} from "lucide-svelte";
     export let timerIDLE;
 
     let timerDefaultSet;
@@ -20,37 +21,33 @@
     };
 
     onMount(()=>{
-        timerDefaultSet = {...$timerSetting};
+        timerDefaultSet = {...$settings};
         timerSet = {...timerDefaultSet};
-    }); //$timerSetting의 디폴트값  전달.
+    }); //$settings의 디폴트값  전달.
+
+
+    //저장하지 않고 종료시 초기화
+    let set=false; //저장 여부 확인
+
+    onDestroy(()=>{
+        timerSet = {...timerDefaultSet};
+    });
 
     $:{
-        // console.log(timerDefaultSet);
-        // console.log(timerSet.working);
+        console.log(timerDefaultSet);
+        console.log(timerSet.working);
     }
-
 </script>
 
-<form class="flex-col w-full h-full " action="#">
+<form class="flex-col w-full h-full p-5 " action="#"
+      on:mouseleave={() => {if(!set) timerSet = {...timerDefaultSet}}}
+>
     <h3 class="mb-4 text-xl font-medium">Timer Settings</h3>
-
-<!--    <div class="flex w-full justify-between space-x-3">-->
-<!--        <label class="space-y-2 w-1/2 ">-->
-<!--            <span class="title">하루 시작 시간</span>-->
-<!--            <input type="time"  name="day start time" placeholder="AM 07:00" required-->
-<!--                   bind:value={timerSet.dayStartTime}/>-->
-<!--        </label>-->
-<!--        <label class="space-y-2 w-1/2">-->
-<!--            <span class="title">하루 끝 시간</span>-->
-<!--            <input type="time" name="day end time" placeholder="PM 11:00" required-->
-<!--                   bind:value={timerSet.dayEndTime}/>-->
-<!--        </label>-->
-<!--    </div>-->
 
     <div class="flex w-full justify-between space-x-3">
         <label class="space-y-2 w-1/3">
             <span class="title">반복횟수</span>
-            <input type="number" name="repeat time" min="1" max="20" required
+            <input type="number" name="repeat time" min="1" max="20" required class="w-full"
                    bind:value={timerSet.repeat}
             />
         </label>
@@ -94,18 +91,24 @@
                 </div>
             </div>
 
-            <input  class="w-full input"  type="file" accept="audio/*"
+            <input  class="input w-full h-full text-surface-900 rounded-2xl variant-soft-surface mt-2"  type="file" accept="audio/*"
                    bind:value={timerSet.bgm}
             />
         </div>
     </div>
 
-    <div class="flex w-full justify-between space-x-2 mt-8">
-        <button type="button" class="w-1/3" on:click={()=>timerSet = timerDefaultSet}>초기화</button>
-        <button type="submit" class="w-2/3" on:click={()=>{
-            $timerSetting = {...timerSet};
+    <div class="flex w-full justify-between space-x-2 mt-5 border-t-2 pt-4 border-tertiary-500">
+        <button class="w-1/4 rounded-full variant-glass-primary btn !text-primary-900 " on:click={()=>{
+            timerSet = {...timerDefaultSet};
+            set=false;
+        }}>
+            <RotateCcw size={18} strokeWidth={3} />
+        </button>
+        <button class="w-3/4 shadow py-2 variant-soft-tertiary dark:text-tertiary-900 text-lg font-bold leading-5" on:click={()=>{
+            $settings = {...timerSet};
             timerIDLE=false;
-        }} >시작</button>
+            set=true;
+        }} >Start!</button>
     </div>
 </form>
 
