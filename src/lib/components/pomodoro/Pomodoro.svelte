@@ -4,29 +4,35 @@
     import Hour from "./hourRecord.svelte";
     import Controller from "./controller.svelte";
     import Status from "./status.svelte";
+    import {ArrowBigRightDash} from "lucide-svelte";
 
     ///////////////////// timer design  ///////////////////////
-    const classGoal = "absolute top-[0.9rem] left-0 w-full z-10 opacity-70";
-    const classHour = "absolute top-[3.3rem] left-0 w-full z-20 opacity-80";
-    const classOutline = "relative w-full z-50";
-    const widthGoal = "w-[90%]";
-    const widthHour = "w-[65%]";
+    const classGoal = "absolute top-2 left-0 w-full  ";
+    const classHour = "absolute top-11 left-0 w-full z-20 ";
+    const classOutline = "absolute top-0 w-full z-10 shadow";
+    const widthGoal = "w-[95%]";
+    const widthHour = "w-2/3";
 </script>
 
-<div class="clock relative w-full h-full mb-3 mx-auto">
-    <div class="h-4/5 w-full">
-        <div class="absolute w-1/2 h-1/5 top-1/3 left-1/4 z-30">
+<div class="clock w-full h-full mb-3 mx-auto">
+<!--    pomodoro-->
+    <div class="w-full relative top-0 aspect-square ">
+        <!--    session, remain time-->
+        <div class="w-[160px] h-[70px] absolute translate-x-[3.28rem] translate-y-[6.1rem] z-50">
             <Status/>
         </div>
         <!--    timer -->
         <Goal {classGoal} {widthGoal}/>
-        <div class="absolute rounded-full w-[74%] aspect-square bg-white z-10 translate-y-[1.93rem] translate-x-[1.93rem] opacity-90"></div>
         <Hour {classHour} {widthHour}/>
         <Outline {classOutline} />
-        <hr class="!border-t-8 mt-1 !border-double !border-secondary-400" />
+        <button class="absolute bottom-0 right-1 z-50">
+            <ArrowBigRightDash color="#4c0519" size={38} class="fill-rose-950" />
+        </button>
     </div>
 
-    <!--    controller -->
+    <hr class="!border-t-8 mt-1 !border-double !border-secondary-400" />
+
+    <!--  goal, current round -->
     <div class="w-full h-1/5">
         <Controller />
     </div>

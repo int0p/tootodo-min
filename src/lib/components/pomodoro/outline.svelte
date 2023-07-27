@@ -80,7 +80,7 @@
 
 <div class={classOutline}>
     <svg viewBox="0 0 {vw} {vh}">
-        <circle {cx} {cy} {r} stroke="black" fill="transparent"  />
+        <circle {cx} {cy} {r} stroke="black" fill="white"  />
 
         {#each lines as line}
             <line
