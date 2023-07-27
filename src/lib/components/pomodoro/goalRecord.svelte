@@ -2,8 +2,8 @@
     import { ConicGradient } from '@skeletonlabs/skeleton';
     import type { ConicStop } from '@skeletonlabs/skeleton';
     const conicStops: ConicStop[] = [
-        { color: 'rgb(188,24,55)', start: 0, end: 80 },
-        { color: '#f7f4f5', start: 80, end: 100 },
+        { color: '#c82636', start: 0, end: 90 },
+        { color: 'rgb(241,228,225)', start: 50, end: 100 },
     ];
     export let classGoal;
     export let widthGoal;

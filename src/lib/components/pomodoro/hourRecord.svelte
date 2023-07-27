@@ -2,8 +2,8 @@
     import { ConicGradient } from '@skeletonlabs/skeleton';
     import type { ConicStop } from '@skeletonlabs/skeleton';
     const conicStops: ConicStop[] = [
-        { color: 'rgb(227,11,56)', start: 0, end: 80 },
-        { color: 'rgba(246,237,240,0.8)', start: 80, end: 100 },
+        { color: 'rgba(241,228,225,0.97)', start: 0, end: 30 },
+        { color: '#D92B3A', start: 30, end: 100 },
     ];
     export let classHour;
     export let widthHour;
