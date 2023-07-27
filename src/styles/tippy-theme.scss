@@ -62,14 +62,14 @@
 }
 
 .tippy-box[data-theme~='setting'][data-placement^='top'] > .tippy-arrow::before {
-  border-top-color: rgb(24 24 27); //bg-zinc-900
+  border-top-color: rgb(250 250 250); //bg-zinc-50
 }
 .tippy-box[data-theme~='setting'][data-placement^='bottom'] > .tippy-arrow::before {
-  border-bottom-color: rgb(24 24 27);
+  border-bottom-color: rgb(250 250 250); //bg-zinc-50
 }
 .tippy-box[data-theme~='setting'][data-placement^='left'] > .tippy-arrow::before {
-  border-left-color: rgb(24 24 27);
+  border-left-color: rgb(250 250 250); //bg-zinc-50
 }
 .tippy-box[data-theme~='setting'][data-placement^='right'] > .tippy-arrow::before {
-  border-right-color: rgb(24 24 27);
+  border-right-color: rgb(250 250 250); //bg-zinc-50
 }
