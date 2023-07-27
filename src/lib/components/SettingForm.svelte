@@ -52,7 +52,7 @@
             daySet = {...dayDefaultSet};
             set = false;
         }}><RotateCcw size={18} strokeWidth={2.5} /></button>
-        <button type="button" class="w-2/3 shadow py-1 variant-soft-tertiary dark:text-tertiary-900 text-[0.9rem] font-bold " on:click={()=>{
+        <button type="button" class="w-2/3 !py-1 shadow variant-soft-tertiary dark:text-tertiary-900 text-[0.9rem] font-bold " on:click={()=>{
             $settings = {...daySet};
             set=true;
         }} >저장</button>

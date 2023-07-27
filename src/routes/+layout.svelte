@@ -78,7 +78,7 @@
 					<PomoNavi/>
 				</div>
 				<!--		overall setting (darkmode, day start time)-->
-				<div class="chip variant-ringed-primary relative -top-1.5 shadow "
+				<div class="chip bg-black/10 dark:bg-white/10 relative -top-2  px-2 py-1.5 "
 					 use:tippy={{
                     content: document.getElementById('settingForm') || undefined,
                     onMount:  () => {
