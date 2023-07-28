@@ -28,7 +28,8 @@
 	import 'nprogress/nprogress.css';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import {HeaderNav, PomoNavi} from "$components";
-	import {currentTime} from "$stores/time";
+	// import {currentTime} from "$stores/time";
+	import moment from "moment";
 	NProgress.configure({ showSpinner: false });
 	afterNavigate(() => {
 		NProgress.done();
@@ -68,7 +69,7 @@
 			<div class=" flex space-x-1">
 				<HeaderNav />
 				<!--			current time-->
-				<div class=" font-digital text-primary-500 font-bold text-xl pl-2 relative top-0.5">{$currentTime.shortTime}</div>
+				<div class=" font-digital text-primary-500 font-bold text-xl pl-2 relative top-0.5">{moment().format('hh:mm A')}</div>
 			</div>
 
 <!--			right-->

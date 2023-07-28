@@ -1,7 +1,8 @@
 <script lang="ts">
 import {Editor} from "$components";
 import DailyLog from "$schedule/dailyLog/[date]/+page.svelte";
-import {currentTime} from "$stores/time";
+// import {currentTime} from "$stores/time";
+import moment from "moment";
 import {BreadcrumbDo} from "$components";
 import {TableOfContents} from "@skeletonlabs/skeleton";
 import {Blinds} from "lucide-svelte";
@@ -27,7 +28,7 @@ export let showDailyLog = true;
                 </div>
                 <div class="w-full  h-full bg-white/40 dark:bg-black/30  relative  border-0  rounded-xl"
                     >
-                    <div class="absolute left-3 top-3 text-xl font-semibold">{$currentTime.fullDate}</div>
+                    <div class="absolute left-3 top-3 text-lg font-semibold">{moment().format('MMMM Do YYYY')}</div>
                     <textarea class="w-full h-[calc(100%-46px)] absolute bottom-0 border-0 rounded-xl
                                             text-surface-900-50-token bg-white/75 dark:bg-black/50">Diary</textarea>
                 </div>
@@ -36,7 +37,7 @@ export let showDailyLog = true;
             <!--            editor-->
             <div class="w-full  h-full bg-white/40 dark:bg-black/30 relative border-0  rounded-xl mt-0.5"
                 >
-                <div class="absolute left-3 top-3 text-xl font-semibold">tooltip</div>
+                <div class="absolute left-3 top-3 text-lg font-semibold">tooltip</div>
                 <textarea class="w-full h-[calc(100%-46px)] absolute bottom-0 rounded-xl
                     border-0 border-t border-primary-400-500-token
                     text-surface-900-50-token bg-white/75 dark:bg-black/50">Note</textarea>

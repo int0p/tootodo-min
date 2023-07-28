@@ -1,7 +1,6 @@
 <script>
     import {Plus, Share} from "lucide-svelte";
     import {TenMtable, WorkList} from "$components";
-    import {currentTime} from "$stores/time.ts";
     import Shell from "../../ContentShell.svelte";
 </script>
 

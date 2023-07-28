@@ -1,12 +1,9 @@
 <script lang="ts">
-    import { currentTime } from '$lib/stores/time.ts';
+    import moment from "moment";
     import { CalendarRange} from 'lucide-svelte';
     let week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT','SUN'];
     // let week = ['일', '월', '화', '수', '목', '금', '토'];
-    $: isTodayDay = (week) => {
-        if (week == $currentTime.day) return true;
-        else return false;
-    };
+
     export let showWeekly=false;
     export let showCalendar=true;
 </script>
@@ -24,7 +21,7 @@
                 showWeekly=true;
             }}
     >
-         [ {$currentTime.week} ]
+         [ {moment().weeks()} ]
     </button>
 
     <!--    date-->
@@ -35,9 +32,9 @@
             }}
     >
         <div class="flex w-full h-full justify-center items-center space-x-2">
-            <div class="text-lg text-white">{week.at($currentTime.day)}</div>
+            <div class="text-lg text-white">{moment().format('ddd')}</div>
             <div class="bg-white/50 text-secondary-900 border-primary-400 leading-6 text-[1rem] w-full h-full rounded-md border-t-2">
-                {$currentTime.date}
+                {moment().format('D')}
             </div>
         </div>
     </button>

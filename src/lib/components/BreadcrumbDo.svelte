@@ -1,5 +1,6 @@
 <script>
-import {currentTime} from "$stores/time.ts";
+// import {currentTime} from "$stores/time.ts";
+import moment from "moment";
 import {TableOfContents} from "@skeletonlabs/skeleton";
 import {Blinds, LampDesk, Plus} from "lucide-svelte";
 import {page} from "$app/stores";
@@ -12,8 +13,8 @@ export let showDailyLog;
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
 
 <!--        show daily log-->
-        <li><button on:click={()=>showDailyLog = true} >
-            {$currentTime.shortDate}
+        <li><button on:click={()=>showDailyLog = true} class="font-semibold">
+            {moment().format("MMM Do")}
         </button></li>
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
 

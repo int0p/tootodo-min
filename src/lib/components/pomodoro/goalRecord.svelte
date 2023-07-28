@@ -2,7 +2,7 @@
     import { ConicGradient } from '@skeletonlabs/skeleton';
     import type { ConicStop } from '@skeletonlabs/skeleton';
     const conicStops: ConicStop[] = [
-        { color: '#c82636', start: 0, end: 90 },
+        { color: '#c32734', start: 0, end: 90 }, //pomodoro-600
         { color: 'rgb(241,228,225)', start: 50, end: 100 },
     ];
     export let classGoal;
