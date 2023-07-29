@@ -1,55 +1,95 @@
-<script>
-    import Outline from "./outline.svelte";
-    import Goal from "./goalRecord.svelte";
-    import GoalTime from "./goalTime.svelte";
-    import Hour from "./hourRecord.svelte";
-    import Controller from "./controller.svelte";
-    import Status from "./status.svelte";
-    import {ArrowBigRightDash} from "lucide-svelte";
+<script lang="ts">
+    import { AlarmClock,Maximize2,Play,Pause } from 'lucide-svelte';
+    import {PomoPopup, PomoForm} from "$components";
+    import {browser} from '$app/environment';
+    import {settings} from "$stores/useLocStorage.js";
+    import { tippy } from '$actions';
+    import {getContext, onDestroy, setContext} from 'svelte';
+    import {writable} from "svelte/store";
+    import {pomoKey} from './pomodoro.js';
+    import moment from "moment/moment";
 
-    ///////////////////// timer design  ///////////////////////
-    const classGoal = "absolute top-2 left-0 w-full z-10 ";
-    const classHour = "absolute top-12 left-0 w-full z-30";
-    const classOutline = "absolute top-0 w-full z-20 opacity-100 ";
-    const widthGoal = "w-[95%]";
-    const widthHour = "w-2/3";
+    let pomoTime; //todo 디폴트: 초기 설정 working시간 -> 타이머 동작시 남은시간
+
+    setContext(pomoKey, writable({
+        isRunning:false,
+        timerStatus:"IDLE",
+        timerStatusBefore:"IDLE",
+        cycle:{
+            count:1,
+            start:"--:--",
+            end:"--:--",
+        },
+        timeLeft:0,
+    }));
+    $:pomoInfo= getContext(pomoKey);
+    $:console.log($pomoInfo);
+
+
+    $:{
+        if(browser) {
+            let workingTime = $settings.working;
+            const hour = Math.floor(workingTime / 60);
+            const minutes = workingTime % 60;
+            pomoTime = `${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        }else{
+            pomoTime = "00:25";
+        }
+    }
 </script>
 
-<div class="clock w-full h-full mb-3 mx-auto">
+<div class="variant-soft-tertiary px-2 rounded-md dark:bg-zinc-700">
+<!--    pomo popup button-->
+    <div class="chip variant-filled-tertiary py-2 "
+         use:tippy={{
+                    content: document.getElementById('pomodoro') || undefined,
+                    onMount:  () => {
+                        const template = document.getElementById('pomodoro');
+                        if (template) {
+                            template.style.display = 'block';
+                        }
+                    },
+                    trigger: 'click mouseenter',
+                    placement: 'bottom',
+                    interactive: true,
+                    theme: 'pomodoro',
+                    appendTo: document.body,
+                    hideOnPopperBlur: false,
+                    hideOnClick: 'toggle',
+                    allowHTML: true,
+                }}
+    >
+        <span><AlarmClock size={16} /></span>
+        <span class="font-digital text-[1rem]">{pomoTime}</span>
+    </div>
+
 <!--    pomodoro-->
-    <div class="w-full relative top-0 aspect-square shadow opacity-90">
-        <!--    session, remain time-->
-        <div class="w-[160px] h-[70px] absolute translate-x-[3.95rem] translate-y-[6.7rem] z-50 opacity-100">
-            <Status/>
-        </div>
-        <!--    timer -->
-        <Goal {classGoal} {widthGoal}/>
-        <Hour {classHour} {widthHour}/>
-        <Outline {classOutline} />
-        <button class="absolute bottom-0 right-1 z-50">
-            <ArrowBigRightDash color="#4c0519" size={38} class="fill-rose-950" />
-        </button>
+    <div id="pomodoro" class="hidden">
+        {#if $pomoInfo.timerStatus === "IDLE"}
+            {#if browser}
+                <!--setting후 start버튼 눌러서 timerStatus를 WORKING으로 변뽀-->
+                <PomoForm/>
+            {/if}
+        {:else}
+            <PomoPopup/>
+        {/if}
     </div>
 
-    <hr class="!border-t-8 mt-1 !border-double !border-zinc-600" />
-
-    <!--  goal, current round -->
-    <div class="w-full h-[60px] p-2 flex justify-around">
-        <GoalTime/>
-    </div>
+<!--    start/pause button-->
+    <button on:click={()=>{
+        if($pomoInfo.timerStatus === "IDLE") {
+            $pomoInfo.timerStatus = "WORKING";
+            $pomoInfo.timerStatusBefore = "IDLE";
+        }
+        $pomoInfo.isRunning = !$pomoInfo.isRunning;
+    }}
+            class="chip variant-glass-tertiary  py-2 px-2
+    dark:bg-tertiary-200 dark:text-black dark:opacity-70">
+        {#if $pomoInfo.isRunning}
+            <span><Pause size={16} class="fill-current" /></span>
+        {:else}
+            <span><Play size={16} class="fill-current" /></span>
+        {/if}
+    </button>
 </div>
 
-<style>
-    .clock {
-        border-radius: 10%;
-        border: 9px solid rgb(55, 55, 55);
-        padding: 8px;
-        box-shadow: inset 0 0 5px 5px ,
-            inset 0 0 1px 2px rgba(50, 50, 50, 0.2);
-        /*background-color: rgba(247, 244, 245, 0.4);*/
-
-        width: 320px;
-        height: 400px;
-    }
-
-</style>

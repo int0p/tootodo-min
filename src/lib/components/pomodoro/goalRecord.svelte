@@ -1,10 +1,19 @@
 <script lang="ts">
     import { ConicGradient } from '@skeletonlabs/skeleton';
     import type { ConicStop } from '@skeletonlabs/skeleton';
-    const conicStops: ConicStop[] = [
-        { color: '#c32734', start: 0, end: 90 }, //pomodoro-600
-        { color: 'rgb(241,228,225)', start: 50, end: 100 },
+    import {getContext} from "svelte";
+    import {settings} from "$stores/useLocStorage.js";
+    import {pomoKey} from "./pomodoro.js";
+    $:pomoInfo = getContext(pomoKey);
+
+    $:donePercent = 100-($pomoInfo.timeLeft/($settings.working*60))*100;
+
+    $:conicStops = [
+        { color: '#c32734', start: 0, end: donePercent }, //pomodoro-600
+        { color: 'rgb(241,228,225)', start: donePercent, end: 100 },
     ];
+    // $:console.log(donePercent);
+
     export let classGoal;
     export let widthGoal;
 </script>

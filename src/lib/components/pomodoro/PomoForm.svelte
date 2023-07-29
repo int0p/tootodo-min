@@ -1,13 +1,11 @@
 <script>
-    // import {defaultTimerSet as defaultTimer} from "$stores/defaultSet.ts";
     import {settings} from "$stores/useLocStorage.js";
-    // import settings from "$stores/settings.js";
-    import {onMount,onDestroy} from "svelte";
-    import {browser} from "$app/environment";
+    import {onMount,onDestroy,getContext} from "svelte";
+    import {pomoKey} from "./pomodoro.js";
     import {RotateCcw} from "lucide-svelte";
-    export let timerIDLE;
 
     let timerDefaultSet;
+    $:pomoInfo= getContext(pomoKey);
 
     let timerSet = {
         dayStartTime: "07:00",
@@ -33,10 +31,6 @@
         timerSet = {...timerDefaultSet};
     });
 
-    $:{
-        console.log(timerDefaultSet);
-        console.log(timerSet.working);
-    }
 </script>
 
 <form class="flex-col w-full h-full p-5 " action="#"
@@ -100,13 +94,18 @@
     <div class="flex w-full justify-between space-x-2 mt-5 border-t-2 pt-4 border-tertiary-500">
         <button class="w-1/4 rounded-full variant-glass-primary btn !text-primary-900 " on:click={()=>{
             timerSet = {...timerDefaultSet};
+            $pomoInfo.timerStatusBefore = $pomoInfo.timerStatus;
+            $pomoInfo.timerStatus = "IDLE";
+            $pomoInfo.isRunning = false;
             set=false;
         }}>
             <RotateCcw size={18} strokeWidth={3} />
         </button>
         <button class="w-3/4 shadow py-2 variant-soft-tertiary dark:text-tertiary-900 text-lg font-bold leading-5" on:click={()=>{
             $settings = {...timerSet};
-            timerIDLE=false;
+            $pomoInfo.timerStatus = "WORKING";
+            $pomoInfo.timerStatusBefore = "IDLE";
+            $pomoInfo.isRunning = true;
             set=true;
         }} >Start!</button>
     </div>

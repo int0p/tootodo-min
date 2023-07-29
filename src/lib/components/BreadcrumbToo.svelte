@@ -14,7 +14,7 @@ let flavors: Record<string, boolean> = {
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
 
         <li>
-            <button class="font-semibold">
+            <button >
                 Projects
             </button>
         </li>

@@ -13,7 +13,7 @@ export let showDailyLog;
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
 
 <!--        show daily log-->
-        <li><button on:click={()=>showDailyLog = true} class="font-semibold">
+        <li><button on:click={()=>showDailyLog = true} >
             {moment().format("MMM Do")}
         </button></li>
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>

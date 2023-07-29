@@ -11,7 +11,7 @@
 </script>
 
 <button class="w-full h-full flex-col items-center justify-center py-1 m-auto divide-y-2 divide-white !bg-rose-950 !rounded-2xl border-emerald-800 border-4 "
-        on:click={toggleTimer}
+        on:click={toggleTimer = !toggleTimer}
 >
     <div class="text-[19px] w-full h-1/2 font-digital font-bold text-white absolute left-0 top-2">{getFriendlyTime(timeLeft)}</div>
     <div class="text-[19px] w-full h-1/2   font-digital font-bold text-emerald-500 absolute left-0 bottom-0"> {state}</div>

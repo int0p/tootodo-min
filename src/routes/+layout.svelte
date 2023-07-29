@@ -27,9 +27,8 @@
 	import NProgress from 'nprogress';
 	import 'nprogress/nprogress.css';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
-	import {HeaderNav, PomoNavi} from "$components";
-	// import {currentTime} from "$stores/time";
-	import moment from "moment";
+	import {HeaderNav, Pomodoro} from "$components";
+
 	NProgress.configure({ showSpinner: false });
 	afterNavigate(() => {
 		NProgress.done();
@@ -39,9 +38,22 @@
 		console.log();
 	});
 
+	// get current time
+	import {onDestroy, onMount} from 'svelte';
+	import moment from "moment";
+	let currentTime;
+	onMount(()=>{
+		currentTime = setInterval(() => {
+			currentTime = moment().format('hh:mm A');
+		}, 1000);
+	});
+	onDestroy(()=>{
+		clearInterval(currentTime);
+	});
 
+	// tippy
 	import { tippy } from '$actions';
-	// navigation
+	// navigation ui
 	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
 	//icon
 	import {Play, SkipBack, SkipForward, Music4, Sticker, Repeat1, Cog} from 'lucide-svelte';
@@ -69,14 +81,14 @@
 			<div class=" flex space-x-1">
 				<HeaderNav />
 				<!--			current time-->
-				<div class=" font-digital text-primary-500 font-bold text-xl pl-2 relative top-0.5">{moment().format('hh:mm A')}</div>
+				<div class=" font-digital text-primary-500 font-bold text-xl pl-2 relative top-0.5">{currentTime}</div>
 			</div>
 
 <!--			right-->
 			<div class="flex absolute right-0 top-0.5 space-x-2">
 				<!--		pomodoro -->
 				<div class="relative -top-1 left-2 scale-90 z-50">
-					<PomoNavi/>
+					<Pomodoro/>
 				</div>
 				<!--		overall setting (darkmode, day start time)-->
 				<div class="chip bg-black/10 dark:bg-white/10 relative -top-2  px-2 py-1.5 "

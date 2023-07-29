@@ -1,0 +1,124 @@
+<script>
+    import Outline from "./outline.svelte";
+    import Goal from "./goalRecord.svelte";
+    import CycleInfo from "./cycleInfo.svelte";
+    import Hour from "./hourRecord.svelte";
+    import Controller from "./controller.svelte";
+    import {ArrowBigRightDash} from "lucide-svelte";
+    import {settings} from "$stores/useLocStorage.js";
+    import {browser} from "$app/environment";
+
+    ///////////////////// timer design  ///////////////////////
+    const classGoal = "absolute top-2 left-0 w-full z-10 ";
+    const classHour = "absolute top-12 left-0 w-full z-30";
+    const classOutline = "absolute top-0 w-full z-20 opacity-100 ";
+    const widthGoal = "w-[95%]";
+    const widthHour = "w-2/3";
+    function getFriendlyTime(minutesIN){
+        const hours = (Math.floor(minutesIN / 3600)).toString().padStart(2, '0');
+        const minutes = (Math.floor((minutesIN % 3600) / 60)).toString().padStart(2, '0');
+        const seconds = (Math.floor(minutesIN % 60)).toString().padStart(2, '0');
+        return `${hours}:${minutes}:${seconds}`
+    }
+    ///////////////////// timer operation  ///////////////////////
+    import {onMount, getContext, onDestroy} from "svelte";
+    import moment from "moment";
+    import {pomoKey,startTimer, pauseTimer} from "$components/pomodoro/pomodoro.js";
+    $:pomoInfo= getContext(pomoKey);
+
+    let pausedTime = 0;
+    let playInterval = null;
+
+    onMount(()=>{
+        // 타이머 초기화
+        $pomoInfo.isRunning = true;
+        $pomoInfo.timerStatus = "WORKING";
+        $pomoInfo.timeLeft = $settings.working * 60;
+        $pomoInfo.cycle.count = 1;
+        $pomoInfo.cycle.start = moment().format('hh:mm');
+        $pomoInfo.cycle.end= moment().add($settings.working, 'minutes').format('hh:mm');
+        startInterval();
+    });
+
+    onDestroy(()=>{
+        clearInterval(playInterval);
+    });
+    function startInterval(){
+        playInterval = setInterval(()=>{
+            $pomoInfo.timeLeft--;
+            if($pomoInfo.timeLeft <= 0){
+                clearInterval(playInterval);
+                $pomoInfo.timerStatus = "BREAKING";
+                $pomoInfo.timeLeft = $settings.breaking * 60;
+            }
+        }, 1000)
+    }
+
+
+</script>
+
+<div class="clock w-full h-full mb-3 mx-auto">
+<!--    pomodoro UI-->
+    <div class="w-full relative top-0 aspect-square shadow opacity-90">
+        <!--    session, remain time: isRunning, timeLeft 사용-->
+        <div class="w-[160px] h-[70px] absolute translate-x-[3.95rem] translate-y-[6.7rem] z-50 opacity-100"
+        >
+            <button class="w-full h-full flex-col items-center justify-center py-1 m-auto divide-y-2 divide-white !bg-rose-950 !rounded-2xl border-emerald-800 border-4 "
+                    on:click={()=>{
+                        $pomoInfo.isRunning = !$pomoInfo.isRunning;
+                        if($pomoInfo.isRunning) startInterval();
+                        else{
+                            clearInterval(playInterval);
+                        }
+                    }}>
+                <span class="text-[19px] w-full h-1/2 font-digital font-bold text-white absolute left-0 top-2">{getFriendlyTime($pomoInfo.timeLeft)}</span>
+                <span class="text-[19px] w-full h-1/2   font-digital font-bold text-emerald-500 absolute left-0 bottom-0"> {$pomoInfo.timerStatus}</span>
+            </button>
+        </div>
+
+        <!--    timer: isRunning, timeLeft 사용 -->
+        <Goal {classGoal} {widthGoal}/>
+        <Hour {classHour} {widthHour}/>
+        <Outline {classOutline} />
+
+<!--        next session: timerStatus변경-->
+        <button class="absolute bottom-0 right-1 z-50"
+                on:click={()=>{
+                    if($pomoInfo.timerStatus === "WORKING") $pomoInfo.timerStatus = "BREAKING";
+                    else if($pomoInfo.timerStatus === "BREAKING") $pomoInfo.timerStatus = "WORKING";
+                }}
+        >
+            <ArrowBigRightDash color="#6a151c" size={38} class="fill-[#6a151c]" />
+        </button>
+
+<!--        turn back setting: timerStatus변경-->
+        <button class="absolute top-0 left-1 z-50 rotate-180"
+                on:click={()=>$pomoInfo.timerStatus= "IDLE"}
+        >
+            <ArrowBigRightDash color="#a3202c" size={38} class="fill-[#a3202c] " />
+        </button>
+    </div>
+
+    <hr class="!border-t-8 mt-1 !border-double !border-zinc-600" />
+
+    <!--  goal, curret cycle 정보: isRunning, cycle정보 사용 -->
+    <div class="w-full h-[60px] p-2 flex justify-around">
+        {#if browser}
+            <CycleInfo {pausedTime}/>
+        {/if}
+    </div>
+</div>
+
+<style>
+    .clock {
+        border-radius: 10%;
+        border: 9px solid rgb(55, 55, 55);
+        padding: 8px;
+        box-shadow: inset 0 0 5px 5px ,
+            inset 0 0 1px 2px rgba(50, 50, 50, 0.2);
+        /*background-color: rgba(247, 244, 245, 0.4);*/
+
+        width: 320px;
+        height: 400px;
+    }
+</style>

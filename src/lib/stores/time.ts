@@ -5,7 +5,7 @@ import moment from "moment";
 export const current = readable(new Date(), set => {
     const interval = setInterval(() => {
         set(new Date());
-    }, 1000);
+    }, 60000);
 
     return () => clearInterval(interval);
 });
