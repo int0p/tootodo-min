@@ -2,7 +2,7 @@
     let currentVariant = '!bg-transparent';
 </script>
 
-<div class="w-full h-full overflow-y-scroll text-token grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-0.5 pr-2">
+<div class="w-full h-full overflow-y-scroll text-token grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-0.5 pr-2">
     {#each Array(13) as _, i}
     <a class="card {currentVariant} card-hover border-black dark:border-white border" href="/elements/cards">
         <header>
