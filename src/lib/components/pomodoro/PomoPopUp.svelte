@@ -27,7 +27,7 @@
     let totalStudyTime = 0;
 
     onMount(()=>{
-        // 타이머 초기화 (IDLE -> WORKING)
+        // 타이머 초기값 세팅 (IDLE -> WORKING)
         pausedTime = 0;
         totalPausedTime = 0;
         totalStudyTime = 0;
@@ -51,9 +51,13 @@
         clearInterval(playInterval);
         $pomoInfo.endTime = moment().format('hh:mm');
         saveCycle();
-        //todo cycles[] DB저장
+        //todo cycles[], startTime, endTime DB저장
+
+        //pomoInfo 초기화.
         $pomoInfo.cycles = [];
         $pomoInfo.isRunning = false;
+        $pomoInfo.timeLeft = 0;
+        $pomoInfo.cycle.count = 1;
         $pomoInfo.timerStatus = "IDLE";
     }
     function startInterval(){
