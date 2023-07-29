@@ -6,7 +6,7 @@
     import { tippy } from '$actions';
     import {getContext, onDestroy, setContext} from 'svelte';
     import {writable} from "svelte/store";
-    import {pomoKey} from './pomodoro.js';
+    import {pomoKey,getFriendlyTime} from './pomodoro.js';
     import moment from "moment/moment";
 
     let pomoTime; //todo 디폴트: 초기 설정 working시간 -> 타이머 동작시 남은시간
@@ -14,28 +14,23 @@
     setContext(pomoKey, writable({
         isRunning:false,
         timerStatus:"IDLE",
-        timerStatusBefore:"IDLE",
+        startTime:"",
+        endTime:"",
+        timeLeft:0,
         cycle:{
             count:1,
-            start:"--:--",
-            end:"--:--",
+            start:"00:00",
+            end:"00:00",
         },
-        timeLeft:0,
+        cycles:[{
+            start:"00:00",
+            end:"00:00",
+            studyTime:0,
+        }],
     }));
     $:pomoInfo= getContext(pomoKey);
-    $:console.log($pomoInfo);
+    // $:console.log($pomoInfo.cycles);
 
-
-    $:{
-        if(browser) {
-            let workingTime = $settings.working;
-            const hour = Math.floor(workingTime / 60);
-            const minutes = workingTime % 60;
-            pomoTime = `${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-        }else{
-            pomoTime = "00:25";
-        }
-    }
 </script>
 
 <div class="variant-soft-tertiary px-2 rounded-md dark:bg-zinc-700">
@@ -60,7 +55,9 @@
                 }}
     >
         <span><AlarmClock size={16} /></span>
-        <span class="font-digital text-[1rem]">{pomoTime}</span>
+        <span class="font-digital text-[1rem]">
+            {getFriendlyTime($pomoInfo.timeLeft)}
+        </span>
     </div>
 
 <!--    pomodoro-->
@@ -75,21 +72,17 @@
         {/if}
     </div>
 
-<!--    start/pause button-->
+<!--    show timer in big button-->
     <button on:click={()=>{
         if($pomoInfo.timerStatus === "IDLE") {
-            $pomoInfo.timerStatus = "WORKING";
-            $pomoInfo.timerStatusBefore = "IDLE";
+            //nothing
+        }else{
+            //todo: maximaize timer with modal
         }
-        $pomoInfo.isRunning = !$pomoInfo.isRunning;
     }}
             class="chip variant-glass-tertiary  py-2 px-2
     dark:bg-tertiary-200 dark:text-black dark:opacity-70">
-        {#if $pomoInfo.isRunning}
-            <span><Pause size={16} class="fill-current" /></span>
-        {:else}
-            <span><Play size={16} class="fill-current" /></span>
-        {/if}
+            <span><Maximize2 size={16} class="fill-current" strokeWidth={2.5}/></span>
     </button>
 </div>
 

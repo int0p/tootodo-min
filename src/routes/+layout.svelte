@@ -74,7 +74,7 @@
 </svelte:head>
 
 <div class="flex-col h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] justify-center items-center m-auto my-4">
-	<div class="flex justify-center items-center w-full h-[30px] relative lg:top-3">
+	<div class="flex justify-center items-center w-full h-[30px] relative lg:top-3 lg:text-lg ">
 <!--		control-->
 		<div class="flex w-full h-full absolute">
 <!--			left-->
@@ -119,7 +119,7 @@
 		</div>
 
 <!--		tab-->
-		<div class="flex justify-between w-[calc(100%-400px)]  space-x-2 relative -top-1.5 -left-2.5 ">
+		<div class="flex justify-between w-[calc(100%-410px)] max-w-[70%] space-x-2 relative -top-1.5 -left-4 ">
 			<TabGroup
 					justify="justify-start"
 					class="w-[220px]"

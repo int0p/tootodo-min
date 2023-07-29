@@ -55,7 +55,7 @@
             <label class="space-y-2 w-full">
                 <span class="title">쉬는 시간 [{timerSet.breaking}분]</span>
                 <input type="range" name="day end time" required max="30"
-                       bind:value={timerSet.breaking} step="5"
+                       bind:value={timerSet.breaking} step="1"
                 />
             </label>
         </div>

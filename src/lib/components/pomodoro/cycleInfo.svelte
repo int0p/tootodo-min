@@ -1,37 +1,12 @@
 <script lang="ts">
     import {settings} from "$stores/useLocStorage.js";
-    import {onMount, onDestroy,getContext} from "svelte";
-
-    import moment from "moment";
+    import {getContext} from "svelte";
     import {pomoKey} from "./pomodoro.js";
+    import {Pause} from "lucide-svelte";
     $:pomoInfo= getContext(pomoKey);
 
-    let startTime = "--:--";
-    let endTime = "--:--";
     export let pausedTime;
 
-    onMount(()=>{
-        startTime = moment().format('hh:mm');
-        endTime = moment().add($settings.working * $settings.repeat + $settings.breaking*($settings.repeat-1), 'minutes').format('hh:mm');
-    });
-
-
-    $:{
-        // switch($pomoInfo.timerStatus){
-        //     case "IDLE":
-        //         pausedTime = 0;
-        //         cycle = 1;
-        //         break;
-        //     case "WORKING":
-        //         cycleStartTime = moment().format('hh:mm');
-        //         cycleEndTime = moment().add($settings.working, 'minutes').format('hh:mm');
-        //         break;
-        //     case "BREAKING":
-        //         cycleStartTime = moment().format('hh:mm');
-        //         cycleEndTime = moment().add($settings.breaking, 'minutes').format('hh:mm');
-        //         break;
-        // }
-    }
 </script>
 
 <!-- cycle -->
@@ -49,12 +24,17 @@
 <!-- goal time-->
 <div class="flex-col h-full space-y-1">
     <!--            todo 타이머가 정지상태일땐 정지 시간 계산. -->
-    <div class="text-[18px] w-full h-1/2 font-digital font-bold  ">
+    <div class="text-[18px] w-full h-1/2 font-digital font-bold  text-center">
         {#if $pomoInfo.isRunning}
             {$pomoInfo.cycle.start}  - {$pomoInfo.cycle.end}
         {:else}
-            {pausedTime}
+            <div class="flex justify-between items-center">
+                {pausedTime}
+                <Pause size={20} class="fill-current" />
+            </div>
         {/if}
     </div>
-    <div class="text-[18px] w-full h-1/2 font-digital font-bold text-[#6a151c] ">{startTime} - {endTime} </div>
+    <div class="text-[18px] w-full h-1/2 font-digital font-bold text-[#6a151c] text-center ">
+        {$pomoInfo.startTime} - {$pomoInfo.endTime}
+    </div>
 </div>

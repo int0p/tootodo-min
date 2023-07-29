@@ -6,7 +6,14 @@
     import {pomoKey} from "./pomodoro.js";
     $:pomoInfo = getContext(pomoKey);
 
-    $:donePercent = 100-($pomoInfo.timeLeft/($settings.working*60))*100;
+    let donePercent = 0;
+    $:{
+        if ($pomoInfo.timerStatus === "WORKING") {
+            donePercent = 100 - ($pomoInfo.timeLeft / ($settings.working * 60)) * 100;
+        } else if ($pomoInfo.timerStatus === "BREAKING") {
+            donePercent = 100 - ($pomoInfo.timeLeft / ($settings.breaking * 60)) * 100;
+        }
+    }
 
     $:conicStops = [
         { color: '#c32734', start: 0, end: donePercent }, //pomodoro-600

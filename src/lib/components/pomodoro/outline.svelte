@@ -54,6 +54,7 @@
         const radians = line.angle * Math.PI / 180;
         let x = 0;
         let y = 0;
+
         if(line.angle<90){
             x = cx + Math.sin(radians) * (r + 0.03*r);
             y = cy - Math.cos(radians) * (r + 0.05*r);
