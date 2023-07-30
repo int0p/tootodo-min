@@ -79,18 +79,18 @@
         {/if}
     </div>
 
-<!--    show timer in big button-->
+<!--    start timer in IDLE status-->
     <button on:click={()=>{
         if($pomoInfo.timerStatus === "IDLE") {
             $pomoInfo.timerStatus = "WORKING";
         }
     }}
-            class="chip py-2 px-1
-    dark:bg-tertiary-200 dark:text-black dark:opacity-70">
-        {#if $pomoInfo.isRunning}
-            <ConicGradient stops={conicStops} spin width="w-4"></ConicGradient>
-        {:else}
+            class="chip py-2 px-1.5
+    dark:bg-tertiary-200 dark:text-black dark:opacity-60">
+        {#if $pomoInfo.timerStatus === "IDLE"}
             <Play size={16} class="fill-current" strokeWidth={2.5}/>
+        {:else}
+            <ConicGradient stops={conicStops} spin width="w-4"></ConicGradient>
         {/if}
     </button>
 
