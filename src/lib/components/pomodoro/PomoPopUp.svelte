@@ -5,7 +5,6 @@
     import Hour from "./hourRecord.svelte";
     import {ArrowBigRightDash} from "lucide-svelte";
     import {settings} from "$stores/useLocStorage.js";
-    import {browser} from "$app/environment";
 
     ///////////////////// timer design  ///////////////////////
     const classGoal = "absolute top-2 left-0 w-full z-10 ";
@@ -161,9 +160,7 @@
 
     <!--  goal, curret cycle 정보: isRunning, cycle정보 사용 -->
     <div class="w-full h-[60px] p-2 flex justify-around">
-        {#if browser}
-            <CycleInfo pausedTime = {getFriendlyTime(pausedTime)}/>
-        {/if}
+        <CycleInfo pausedTime = {getFriendlyTime(pausedTime)}/>
     </div>
 </div>
 

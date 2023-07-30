@@ -146,10 +146,9 @@
 
 				<TabAnchor
 						on:click={() => goto('/blog')}
-						class="lg:relative lg:top-1"
-						selected={$page.url.pathname === '/blog'}
+						selected={$page.url.pathname.includes('/blog')}
 				>
-					<Sticker size="23" class="relative top-1" strokeWidth={1.5} />
+					<Sticker size="23" class="relative top-1 lg:relative lg:top-2" strokeWidth={1.5} />
 				</TabAnchor>
 			</TabGroup>
 
