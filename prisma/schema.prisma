@@ -13,11 +13,9 @@ datasource db {
 }
 
 model studyRecord {
-  uid          String   @id @default(uuid())
-  created_at   DateTime @default(now())
-  todo_title   String
-  todo_id      String
-  startTime    DateTime
-  endTime      DateTime
-  studyMinutes Int
+  uid        String   @id @default(uuid())
+  created_at DateTime @default(now())
+  startTime  String
+  endTime    String
+  cycles     Int[]
 }

@@ -56,7 +56,7 @@
         //pomoInfo 초기화.
         $pomoInfo.cycles = [];
         $pomoInfo.isRunning = false;
-        $pomoInfo.timeLeft = 0;
+        $pomoInfo.timeLeft = $settings.working*60;
         $pomoInfo.cycle.count = 1;
         $pomoInfo.timerStatus = "IDLE";
     }

@@ -76,7 +76,7 @@
 <div class="flex-col h-[calc(100vh-2rem)] w-[calc(100vw-2rem)] justify-center items-center m-auto my-4">
 	<div class="flex justify-center items-center w-full h-[30px] relative lg:top-3 lg:text-lg ">
 <!--		control-->
-		<div class="flex w-full h-full absolute">
+		<div class="flex w-full h-full absolute ">
 <!--			left-->
 			<div class=" flex space-x-1">
 				<HeaderNav />
@@ -119,10 +119,10 @@
 		</div>
 
 <!--		tab-->
-		<div class="flex justify-between w-[calc(100%-410px)] max-w-[70%] space-x-2 relative -top-1.5 -left-4 ">
+		<div class="flex justify-between w-[calc(100%-400px)] max-w-[70%] space-x-2 relative -top-1.5 -left-3.5  ">
 			<TabGroup
 					justify="justify-start"
-					class="w-[220px]"
+					class="w-[220px] lg:relative lg:-top-1"
 			>
 				<TabAnchor
 						on:click={() => goto('/too')}
@@ -146,7 +146,7 @@
 
 				<TabAnchor
 						on:click={() => goto('/blog')}
-						class=""
+						class="lg:relative lg:top-1"
 						selected={$page.url.pathname === '/blog'}
 				>
 					<Sticker size="23" class="relative top-1" strokeWidth={1.5} />

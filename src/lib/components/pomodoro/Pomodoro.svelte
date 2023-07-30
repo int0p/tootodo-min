@@ -4,13 +4,16 @@
     import {browser} from '$app/environment';
     import {settings} from "$stores/useLocStorage.js";
     import { tippy } from '$actions';
-    import {getContext, onDestroy, setContext} from 'svelte';
+    import {getContext, onMount, setContext} from 'svelte';
     import {writable} from "svelte/store";
     import {pomoKey,getFriendlyTime} from './pomodoro.js';
-    import moment from "moment/moment";
+    import { ConicGradient } from '@skeletonlabs/skeleton';
+    import type { ConicStop } from '@skeletonlabs/skeleton';
 
-    let pomoTime; //todo 디폴트: 초기 설정 working시간 -> 타이머 동작시 남은시간
-
+    const conicStops: ConicStop[] = [
+        { color: 'transparent', start: 0, end: 25 },
+        { color: 'rgb(var(--color-pomodoro-800))', start: 85, end: 100 }
+    ];
     setContext(pomoKey, writable({
         isRunning:false,
         timerStatus:"IDLE",
@@ -28,6 +31,10 @@
             studyTime:0,
         }],
     }));
+
+    onMount(()=>{
+        $pomoInfo.timeLeft = $settings.working *60;
+    });
     $:pomoInfo= getContext(pomoKey);
     // $:console.log($pomoInfo.cycles);
 
@@ -75,14 +82,17 @@
 <!--    show timer in big button-->
     <button on:click={()=>{
         if($pomoInfo.timerStatus === "IDLE") {
-            //nothing
-        }else{
-            //todo: maximaize timer with modal
+            $pomoInfo.timerStatus = "WORKING";
         }
     }}
-            class="chip variant-glass-tertiary  py-2 px-2
+            class="chip py-2 px-1
     dark:bg-tertiary-200 dark:text-black dark:opacity-70">
-            <span><Maximize2 size={16} class="fill-current" strokeWidth={2.5}/></span>
+        {#if $pomoInfo.isRunning}
+            <ConicGradient stops={conicStops} spin width="w-4"></ConicGradient>
+        {:else}
+            <Play size={16} class="fill-current" strokeWidth={2.5}/>
+        {/if}
     </button>
+
 </div>
 
