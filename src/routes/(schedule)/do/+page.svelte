@@ -1,6 +1,6 @@
 <script >
     import {liveQuery} from "dexie";
-    import {db} from "$stores/appDB";
+    import {db} from "$stores/appDB.ts";
     import {BadgeCheck} from "lucide-svelte";
     import {onMount} from "svelte";
     import {minutesToCustomString,addTime} from "$helpers";
