@@ -1,22 +1,24 @@
 <script lang="ts">
-    import { AlarmClock,Maximize2,Play,Pause } from 'lucide-svelte';
+    import { AlarmClock,Maximize2,Play,Pause,AlarmClockOff } from 'lucide-svelte';
     import {PomoPopup, PomoForm} from "$components";
     import {browser} from '$app/environment';
     import {settings} from "$stores/useLocStorage.js";
     import { tippy } from '$actions';
     import {getContext, onMount, setContext} from 'svelte';
     import {writable} from "svelte/store";
-    import {pomoKey,getFriendlyTime} from './pomodoro.js';
+    import {pomoKey} from './pomodoro.js';
+    import {minutesToCustomString} from '$helpers';
     import { ConicGradient } from '@skeletonlabs/skeleton';
     import type { ConicStop } from '@skeletonlabs/skeleton';
 
     const conicStops: ConicStop[] = [
         { color: 'transparent', start: 0, end: 25 },
         { color: 'rgb(var(--color-pomodoro-800))', start: 85, end: 100 }
-    ];
+    ]; //for timer state
     setContext(pomoKey, writable({
         isRunning:false,
         timerStatus:"IDLE",
+        date:"",
         startTime:"",
         endTime:"",
         timeLeft:0,
@@ -63,7 +65,7 @@
     >
         <span><AlarmClock size={16} /></span>
         <span class="font-digital text-[1rem]">
-            {getFriendlyTime($pomoInfo.timeLeft)}
+            {minutesToCustomString($pomoInfo.timeLeft)}
         </span>
     </div>
 
@@ -90,7 +92,11 @@
         {#if $pomoInfo.timerStatus === "IDLE"}
             <Play size={16} class="fill-current" strokeWidth={2.5}/>
         {:else}
-            <ConicGradient stops={conicStops} spin width="w-4"></ConicGradient>
+            {#if $pomoInfo.timerStatus === "WORKING"}
+                <ConicGradient stops={conicStops} spin width="w-4"></ConicGradient>
+            {:else}
+                <AlarmClockOff size={16} strokeWidth={2.5} class="scale-[110%]"/>
+            {/if}
         {/if}
     </button>
 

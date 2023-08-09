@@ -16,21 +16,21 @@
     ///////////////////// timer operation  ///////////////////////
     import {onMount, getContext, onDestroy} from "svelte";
     import moment from "moment";
-    import {pomoKey,getFriendlyTime} from "./pomodoro.ts";
+    import {pomoKey} from "./pomodoro.ts";
+    import {minutesToCustomString} from "$helpers";
     $:pomoInfo= getContext(pomoKey);
 
     let playInterval = null;
     let pauseInterval = null;
     let pausedTime = 0;
     let totalPausedTime = 0;
-    let totalStudyTime = 0;
 
     onMount(()=>{
         // 타이머 초기값 세팅 (IDLE -> WORKING)
         pausedTime = 0;
         totalPausedTime = 0;
-        totalStudyTime = 0;
         $pomoInfo.isRunning = true;
+        $pomoInfo.date = moment().format('MMMM Do YYYY');
         $pomoInfo.startTime = moment().format('hh:mm');
         $pomoInfo.endTime = moment().add($settings.working * $settings.repeat + $settings.breaking*($settings.repeat-1), 'minutes').format('hh:mm');
         $pomoInfo.timerStatus = "WORKING";
@@ -51,8 +51,7 @@
         clearInterval(playInterval);
         $pomoInfo.endTime = moment().format('hh:mm');
         saveCycle();
-        //todo cycles[], startTime, endTime DB저장
-        addTimerData();
+        saveTimerDataToDB();
     }
     function startInterval(){
         playInterval = setInterval(()=>{
@@ -127,14 +126,15 @@
     //connect db
     import {db} from "$stores/appDB.ts";
     let status = "";
-    async function addTimerData(){
+    async function saveTimerDataToDB(){
         try{
             const id = await db.timers.add({
-                startTime: $pomoInfo.startTime,
+                start_at: $pomoInfo.startTime,
                 working: $settings.working,
                 breaking: $settings.breaking,
                 cycles: $pomoInfo.cycles,
-                createdAt: moment().format('MMMM Do YYYY, h:mm:ss a'),
+                end_at: $pomoInfo.endTime,
+                date: $pomoInfo.date
             });
             status = `timer data added successfully, id ${id}`;
             resetTimer();
@@ -153,7 +153,7 @@
         >
             <button class="w-full h-full flex-col items-center justify-center py-1 m-auto divide-y-2 divide-white !bg-rose-950 !rounded-2xl border-emerald-800 border-4 "
                     on:click={toggleRunning}>
-                <span class="text-[19px] w-full h-1/2 font-digital font-bold text-white absolute left-0 top-2">{getFriendlyTime($pomoInfo.timeLeft)}</span>
+                <span class="text-[19px] w-full h-1/2 font-digital font-bold text-white absolute left-0 top-2">{minutesToCustomString($pomoInfo.timeLeft)}</span>
                 <span class="text-[19px] w-full h-1/2   font-digital font-bold text-emerald-500 absolute left-0 bottom-0"> {$pomoInfo.timerStatus}</span>
             </button>
         </div>
@@ -182,7 +182,7 @@
 
     <!--  goal, curret cycle 정보: isRunning, cycle정보 사용 -->
     <div class="w-full h-[60px] p-2 flex justify-around">
-        <CycleInfo pausedTime = {getFriendlyTime(pausedTime)}/>
+        <CycleInfo pausedTime = {minutesToCustomString(pausedTime)}/>
     </div>
 </div>
 
