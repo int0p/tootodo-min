@@ -16,7 +16,7 @@
     ///////////////////// timer operation  ///////////////////////
     import {onMount, getContext, onDestroy} from "svelte";
     import moment from "moment";
-    import {pomoKey,getFriendlyTime} from "./pomodoro.js";
+    import {pomoKey,getFriendlyTime} from "./pomodoro.ts";
     $:pomoInfo= getContext(pomoKey);
 
     let playInterval = null;
@@ -43,21 +43,16 @@
     });
 
     onDestroy(()=>{
-        terminateTimer();
+        clearInterval(playInterval);
+        clearInterval(pauseInterval);
+        resetTimer();
     });
-
     function terminateTimer(){
         clearInterval(playInterval);
         $pomoInfo.endTime = moment().format('hh:mm');
         saveCycle();
         //todo cycles[], startTime, endTime DB저장
-
-        //pomoInfo 초기화.
-        $pomoInfo.cycles = [];
-        $pomoInfo.isRunning = false;
-        $pomoInfo.timeLeft = $settings.working*60;
-        $pomoInfo.cycle.count = 1;
-        $pomoInfo.timerStatus = "IDLE";
+        addTimerData();
     }
     function startInterval(){
         playInterval = setInterval(()=>{
@@ -121,6 +116,33 @@
         }
     }
 
+    function resetTimer(){
+        //pomoInfo 초기화.
+        $pomoInfo.cycles = [];
+        $pomoInfo.isRunning = false;
+        $pomoInfo.timeLeft = $settings.working*60;
+        $pomoInfo.cycle.count = 1;
+        $pomoInfo.timerStatus = "IDLE";
+    }
+    //connect db
+    import {db} from "$stores/appDB.ts";
+    let status = "";
+    async function addTimerData(){
+        try{
+            const id = await db.timers.add({
+                startTime: $pomoInfo.startTime,
+                working: $settings.working,
+                breaking: $settings.breaking,
+                cycles: $pomoInfo.cycles,
+                createdAt: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            });
+            status = `timer data added successfully, id ${id}`;
+            resetTimer();
+        }catch{
+            status = "timer data add failed";
+        }
+        console.log(status);
+    }
 </script>
 
 <div class="clock w-full h-full mb-3 mx-auto">

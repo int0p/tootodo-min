@@ -50,6 +50,7 @@
 		"@sveltejs/adapter-vercel": "^3.0.1",
 		"@types/spotify-api": "^0.0.22",
 		"@unsass/breakpoint": "^2.3.0",
+		"dexie": "^4.0.1-alpha.25",
 		"lucide-svelte": "^0.252.0",
 		"micromodal": "^0.4.10",
 		"moment": "^2.29.4",

@@ -7,7 +7,7 @@ generator client {
   output        = "./generated/client"
 }
 
-datasource db {
+datasource appDB {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
