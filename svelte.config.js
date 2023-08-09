@@ -1,5 +1,5 @@
-import adapter from '@sveltejs/adapter-static';
-// import adapter from '@sveltejs/adapter-vercel';
+// import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-vercel';
 // import { vitePreprocess } from '@sveltejs/kit/vite';
 import preprocess from 'svelte-preprocess';
 import tailwind from 'tailwindcss';
@@ -26,16 +26,15 @@ const config = {
 	kit: {
 
 		// static adapter
-		adapter: adapter({
-			out:'build',
-			pages: 'build',
-			assets: 'build',
-			fallback: 'index.html',
-			precompress: false,
-		}),
+		// adapter: adapter({
+		// 	out:'build',
+		// 	pages: 'build',
+		// 	assets: 'build',
+		// 	fallback: 'index.html',
+		// 	precompress: false,
+		// }),
 		// vercel adapter
-		// adapter: adapter(),
-
+		adapter: adapter(),
 		alias: {
 			$schedule:'src/routes/(schedule)',
 			$components: 'src/lib/components',
