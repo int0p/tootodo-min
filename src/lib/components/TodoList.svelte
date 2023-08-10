@@ -20,6 +20,7 @@
         inputChipList = inputChipList;
     }
     export let showWeekly=true;
+    let selectedDate;
 </script>
 
 <div class="card w-full h-full p-2 bg-white/20 dark:bg-black/10" tabindex="-1">

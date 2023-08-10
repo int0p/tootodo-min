@@ -4,10 +4,11 @@
     import SideShell from "$schedule/SideShell.svelte";
     import {SelectDateSmall} from "$components/index.ts";
     import {LampDesk} from "lucide-svelte";
+    import moment from "moment";
 
     let showTargetTodoList = true;
     let showWeekly=false;
-    let selectedDate=true;
+    let selectedDate= moment().format("YYYY-MM-DD");
 </script>
 
 <div class="flex w-full h-full">
