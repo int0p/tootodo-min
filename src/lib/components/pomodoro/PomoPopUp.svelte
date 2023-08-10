@@ -124,7 +124,7 @@
         $pomoInfo.timerStatus = "IDLE";
     }
     //connect db
-    import {db} from "$stores/appDB.ts";
+    import {db} from "$stores/indexedDB.ts";
     let status = "";
     async function saveTimerDataToDB(){
         try{

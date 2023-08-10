@@ -1,19 +1,30 @@
 <script lang="ts">
     import moment from "moment";
     import { CalendarRange} from 'lucide-svelte';
+    import DateTime from "$components/gantt/DateTime.svelte";
     let week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT','SUN'];
     // let week = ['일', '월', '화', '수', '목', '금', '토'];
 
     export let showWeekly=false;
-    export let showCalendar=true;
+    let showCalendar=false;
+    let dateStr = '';
 </script>
 
-<div class="flex w-full justify-center space-x-2 font-bold mx-2 -my-0.5">
+<div class="flex w-full justify-center space-x-2 font-bold mx-2 -my-0.5 relative">
     <!--            choose another date-->
-    <button class="chip variant-soft-primary w-1/6 flex-col items-center text-lg px-2">
+    <button class="chip variant-soft-primary w-1/6 flex-col items-center text-lg px-2"
+            on:click={()=>showCalendar = !showCalendar}
+    >
         <CalendarRange size="22" />
     </button>
-
+    {#if showCalendar}
+        <input type="date" bind:value={dateStr}
+               class="absolute -left-2 top-12 z-50"
+               on:change={()=>{
+                   showCalendar=false;
+               }}
+        >
+    {/if}
     <!--    week-->
     <button
             class="chip variant-soft-secondary w-1/5 flex-col justify-center items-center divide-y-2 text-[0.9rem]"

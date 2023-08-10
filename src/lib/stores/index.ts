@@ -1,2 +1,2 @@
 export { default as toasts } from './toasts';
-export {db, AppDatabase} from './appDB';
+export {db, AppDatabase} from './indexedDB';

@@ -7,7 +7,7 @@
 
     let showTargetTodoList = true;
     let showWeekly=false;
-    let showCalendar=true;
+    let selectedDate=true;
 </script>
 
 <div class="flex w-full h-full">
@@ -15,8 +15,8 @@
     {#if showTargetTodoList}
         <!--290px-->
         <SideShell>
-            <svelte:fragment slot="navi"><SelectDateSmall bind:showWeekly bind:showCalendar/></svelte:fragment>
-            <svelte:fragment slot="content"><TodoList {showWeekly} {showCalendar}/></svelte:fragment>
+            <svelte:fragment slot="navi"><SelectDateSmall bind:showWeekly bind:selectedDate/></svelte:fragment>
+            <svelte:fragment slot="content"><TodoList {showWeekly} {selectedDate}/></svelte:fragment>
         </SideShell>
     {/if}
 

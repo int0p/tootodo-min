@@ -15,12 +15,13 @@
     import {Blinds} from "lucide-svelte";
     export let showDailyLog = true;
 
-    let selectedDate = moment().format('MMMM Do YYYY');
+    export let selectedDate;
     let totalStudyTime = 0;
     let studyTime = [];
     let startTime = [];
     let endTime = [];
 
+    onMount(()=>selectedDate = moment().format('MMMM Do YYYY'));
     $: pomoRecords = liveQuery(()=>{
             const collection = db.timers.where('date').equals(selectedDate).toArray();
             return collection;
