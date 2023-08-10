@@ -4,11 +4,11 @@
     import SideShell from "$schedule/SideShell.svelte";
     import {SelectDateSmall} from "$components/index.ts";
     import {LampDesk} from "lucide-svelte";
+    import {writable} from "svelte/store";
     import moment from "moment";
 
     let showTargetTodoList = true;
     let showWeekly=false;
-    let selectedDate= moment().format("YYYY-MM-DD");
 </script>
 
 <div class="flex w-full h-full">
@@ -16,8 +16,9 @@
     {#if showTargetTodoList}
         <!--290px-->
         <SideShell>
-            <svelte:fragment slot="navi"><SelectDateSmall bind:showWeekly bind:selectedDate/></svelte:fragment>
-            <svelte:fragment slot="content"><TodoList {showWeekly} {selectedDate}/></svelte:fragment>
+<!--            날짜 선택-->
+            <svelte:fragment slot="navi"><SelectDateSmall bind:showWeekly /></svelte:fragment>
+            <svelte:fragment slot="content"><TodoList {showWeekly}/></svelte:fragment>
         </SideShell>
     {/if}
 

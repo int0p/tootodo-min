@@ -16,7 +16,7 @@
     ///////////////////// timer operation  ///////////////////////
     import {onMount, getContext, onDestroy} from "svelte";
     import moment from "moment";
-    import {pomoKey} from "./pomodoro.ts";
+    import {pomoKey} from "./key.js";
     import {minutesToCustomString} from "$helpers";
     $:pomoInfo= getContext(pomoKey);
 
@@ -30,7 +30,7 @@
         pausedTime = 0;
         totalPausedTime = 0;
         $pomoInfo.isRunning = true;
-        $pomoInfo.date = moment().format('MMMM Do YYYY');
+        $pomoInfo.date = moment().format('YYYY-MM-DD');
         $pomoInfo.startTime = moment().format('hh:mm');
         $pomoInfo.endTime = moment().add($settings.working * $settings.repeat + $settings.breaking*($settings.repeat-1), 'minutes').format('hh:mm');
         $pomoInfo.timerStatus = "WORKING";
@@ -85,6 +85,7 @@
         };
     }
     function switchSession(){
+        playAlarm();
         if($pomoInfo.timerStatus === "WORKING") {
             clearInterval(playInterval);
             saveCycle();
@@ -122,6 +123,16 @@
         $pomoInfo.timeLeft = $settings.working*60;
         $pomoInfo.cycle.count = 1;
         $pomoInfo.timerStatus = "IDLE";
+    }
+
+    let alarmSound = null;
+    function playAlarm() {
+        if (alarmSound === null) {
+            alarmSound = new Audio(
+                "https://freesound.org/data/previews/80/80921_1022651-lq.mp3"
+            );
+        }
+        alarmSound.play();
     }
     //connect db
     import {db} from "$stores/indexedDB.ts";

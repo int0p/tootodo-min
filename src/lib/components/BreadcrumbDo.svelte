@@ -1,9 +1,9 @@
 <script>
 // import {currentTime} from "$stores/time.ts";
 import moment from "moment";
-import {TableOfContents} from "@skeletonlabs/skeleton";
-import {Blinds, LampDesk, Plus} from "lucide-svelte";
+import {selectedDate} from "$stores/useLocStorage.js";
 import {page} from "$app/stores";
+import {onMount} from "svelte";
 export let showDailyLog;
 
 </script>
@@ -14,7 +14,7 @@ export let showDailyLog;
 
 <!--        show daily log-->
         <li><button on:click={()=>showDailyLog = true} >
-            {moment().format("MMM Do")}
+            {moment($selectedDate).format('MMM Do')}
         </button></li>
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
 

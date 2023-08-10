@@ -2,7 +2,7 @@
     // import {defaultdaySet as defaultday} from "$stores/defaultSet.ts";
     import {settings} from "$stores/useLocStorage.js";
     // import daySetting from "$stores/daySetting.js";
-    import {onMount,onDestroy,afterUpdate,beforeUpdate} from "svelte";
+    import {onMount,onDestroy} from "svelte";
     import {LightSwitch} from "@skeletonlabs/skeleton";
     import {RotateCcw} from "lucide-svelte";
 

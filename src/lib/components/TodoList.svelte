@@ -12,6 +12,8 @@
         { label: 'Peach', value: 'peach', keywords: 'fruit', meta: { healthy: true } },
     ];
     import {InputChip} from "$components"
+    import {selectedDate} from "$stores/useLocStorage.js";
+
     let inputChip = '';
     let inputChipList: string[] = [];
     function onInputChipSelect(event: any): void {
@@ -20,7 +22,6 @@
         inputChipList = inputChipList;
     }
     export let showWeekly=true;
-    let selectedDate;
 </script>
 
 <div class="card w-full h-full p-2 bg-white/20 dark:bg-black/10" tabindex="-1">

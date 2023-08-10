@@ -1,7 +1,7 @@
 <script>
     import {settings} from "$stores/useLocStorage.js";
     import {onMount,onDestroy,getContext} from "svelte";
-    import {pomoKey} from "./pomodoro.ts";
+    import {pomoKey} from "./key.js";
     import {RotateCcw} from "lucide-svelte";
 
     let timerDefaultSet;

@@ -1,11 +1,13 @@
 <script lang="ts">
     import moment from "moment";
     import { CalendarRange} from 'lucide-svelte';
-
+    import {selectedDate} from "$stores/useLocStorage.js";
+    import {onMount} from "svelte";
+    onMount(()=>$selectedDate = moment().format('YYYY-MM-DD'));
     export let showWeekly=false;
     let showCalendar=false;
-    export let selectedDate:string;
-    $:console.log(moment(selectedDate).weeks())
+    let selectedDateInput:string;
+    $:console.log($selectedDate);
 </script>
 
 <div class="flex w-full justify-center space-x-2 font-bold mx-2 -my-0.5 relative">
@@ -16,10 +18,11 @@
         <CalendarRange size="22" />
     </button>
     {#if showCalendar}
-        <input type="date" bind:value={selectedDate}
+        <input type="date" bind:value={selectedDateInput}
                class="absolute -left-2 top-12 z-50"
                on:change={()=>{
                    showCalendar=false;
+                   $selectedDate = selectedDateInput;
                }}
         >
     {/if}
@@ -30,7 +33,7 @@
                 showWeekly=true;
             }}
     >
-         [ {moment(selectedDate).weeks()} ]
+         [ {moment($selectedDate).weeks()} ]
     </button>
 
     <!--    date-->
@@ -41,9 +44,9 @@
             }}
     >
         <div class="flex w-full h-full justify-center items-center space-x-2">
-            <div class="text-lg text-white">{moment(selectedDate).format('ddd')}</div>
+            <div class="text-lg text-white">{moment($selectedDate).format('ddd')}</div>
             <div class="bg-white/50 text-secondary-900 border-primary-400 leading-5 text-[1rem] w-full h-full rounded-md border-t-2">
-                {moment(selectedDate).format('D')}
+                {moment($selectedDate).format('D')}
             </div>
         </div>
     </button>

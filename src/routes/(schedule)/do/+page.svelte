@@ -1,29 +1,28 @@
 <script >
     import {liveQuery} from "dexie";
     import {db} from "$stores";
-    import {BadgeCheck} from "lucide-svelte";
+    import {Blinds} from "lucide-svelte";
     import {onMount} from "svelte";
+    import {PomoIcon} from "$components";
     import {minutesToCustomString,addTime} from "$helpers";
     import {browser} from "$app/environment";
     import {get} from 'svelte/store';
     import {Editor} from "$components";
     import DailyLog from "$schedule/dailyLog/[date]/+page.svelte";
     // import {currentTime} from "$stores/time";
-    import moment from "moment";
     import {BreadcrumbDo} from "$components";
     import {TableOfContents} from "@skeletonlabs/skeleton";
-    import {Blinds} from "lucide-svelte";
     export let showDailyLog = true;
-
-    export let selectedDate;
+    import {selectedDate} from "$stores/useLocStorage.js";
+    import moment from "moment";
     let totalStudyTime = 0;
     let studyTime = [];
     let startTime = [];
     let endTime = [];
 
-    onMount(()=>selectedDate = moment().format('MMMM Do YYYY'));
+    // onMount(()=>$selectedDate = moment().format('MMMM Do YYYY'));
     $: pomoRecords = liveQuery(()=>{
-            const collection = db.timers.where('date').equals(selectedDate).toArray();
+            const collection = db.timers.where('date').equals($selectedDate).toArray();
             return collection;
         }
     );
@@ -78,7 +77,7 @@
                 <div class="w-full  h-full bg-white/40 dark:bg-black/30  relative  border-0  rounded-xl"
                     >
 <!--                    today, date-->
-                    <div class="absolute left-3 top-3 text-lg font-semibold">{selectedDate}</div>
+                    <div class="absolute left-3 top-3 text-lg font-semibold">{moment($selectedDate).format("MMMM Do YYYY")}</div>
 
 <!--                    record-->
                     <div class="w-full h-[calc(100%-46px)] max-h-[calc(100%-46px)] overflow-y-scroll hide-scrollbar
@@ -105,8 +104,10 @@
                                         <table class="w-full text-center border">
                                             <thead >
                                                 <tr class="border">
-                                                    <th class="!py-1.5 !px-1"><BadgeCheck color="rgb(6 95 70)" fill="rgb(var(--color-pomodoro-500))"/></th>
-                                                    <th class="!py-1.5 ">start</th>
+                                                    <th class="!py-1.5 relative px-2">
+                                                        <span class="absolute left-1 top-1.5"><PomoIcon/></span>
+                                                    </th>
+                                                    <th class="!py-1.5">start</th>
                                                     <th class="!py-1.5">end</th>
                                                     <th class="!py-1.5">study time</th>
                                                 </tr>

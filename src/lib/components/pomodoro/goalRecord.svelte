@@ -3,7 +3,7 @@
     import type { ConicStop } from '@skeletonlabs/skeleton';
     import {getContext} from "svelte";
     import {settings} from "$stores/useLocStorage.js";
-    import {pomoKey} from "./pomodoro.js";
+    import {pomoKey} from "./key.js";
     $:pomoInfo = getContext(pomoKey);
 
     let donePercent = 0;

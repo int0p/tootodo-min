@@ -6,7 +6,7 @@
     import { tippy } from '$actions';
     import {getContext, onMount, setContext} from 'svelte';
     import {writable} from "svelte/store";
-    import {pomoKey} from './pomodoro.js';
+    import {pomoKey} from './key.js';
     import {minutesToCustomString} from '$helpers';
     import { ConicGradient } from '@skeletonlabs/skeleton';
     import type { ConicStop } from '@skeletonlabs/skeleton';

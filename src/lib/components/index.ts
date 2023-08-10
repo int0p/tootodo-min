@@ -1,6 +1,7 @@
 export { default as PomoPopup } from './pomodoro/PomoPopUp.svelte'
 export { default as PomoForm } from './pomodoro/PomoForm.svelte'
 export{default as Pomodoro} from './pomodoro/Pomodoro.svelte';
+export{default as PomoIcon} from './pomodoro/PomoIcon.svelte';
 export {default as SettingForm} from './SettingForm.svelte';
 
 export { default as Editor } from './editor/Editor.svelte'

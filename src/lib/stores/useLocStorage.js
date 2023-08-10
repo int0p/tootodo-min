@@ -2,7 +2,7 @@
 
 import {writable} from 'svelte/store';
 import {browser} from '$app/environment';
-
+import moment from 'moment';
 export function createLocStorage(key ,initialValue){
     let serialize = JSON.stringify;
     let deserialize = JSON.parse;
@@ -24,6 +24,8 @@ export function createLocStorage(key ,initialValue){
 }
 
 export const todoList = createLocStorage('todoList', []);
+
+export const selectedDate = createLocStorage('selectedDate', moment());
 
 export const settings = createLocStorage('settings', {
         working: 50,

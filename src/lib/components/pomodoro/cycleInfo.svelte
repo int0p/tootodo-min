@@ -1,7 +1,7 @@
 <script lang="ts">
     import {settings} from "$stores/useLocStorage.js";
     import {getContext} from "svelte";
-    import {pomoKey} from "./pomodoro.js";
+    import {pomoKey} from "./key.js";
     import {Pause} from "lucide-svelte";
     $:pomoInfo= getContext(pomoKey);
 
