@@ -5,7 +5,7 @@ mod database;
 mod state;
 
 use state::{AppState, ServiceAccess};
-use tauri::{State, Manager, AppHandle};
+use tauri::{AppHandle, Manager, State};
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
@@ -22,13 +22,18 @@ fn greet(app_handle: AppHandle, name: &str) -> String {
 
 fn main() {
     tauri::Builder::default()
-        .manage(AppState { db: Default::default() })
+        .manage(AppState {
+            db: Default::default(),
+        })
         .invoke_handler(tauri::generate_handler![greet])
         .setup(|app| {
             let handle = app.handle();
 
             let app_state: State<AppState> = handle.state();
-            let db = database::initialize_database(&handle).expect("Database initialize should succeed");
+            let db =
+                database::initialize_database(&handle).expect("Database initialize should succeed");
+            dbg!(&db);
+
             *app_state.db.lock().unwrap() = Some(db);
 
             Ok(())
