@@ -16,7 +16,7 @@
 		}}>Greet</button
 	>
 </div>
-
+<!--test database-->
 <p id="greet-msg">{message}</p>
 
 <!--<div class="container h-full w-full m-auto flex justify-center items-center">-->
