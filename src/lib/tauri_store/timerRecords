@@ -1,0 +1,31 @@
+// https://github.com/the-orchard/timer/blob/main/src/lib/store.ts
+import { Store } from "tauri-plugin-store-api";
+import moment from "moment";
+const tauriStore = new Store(".timerRecord.dat");
+
+export interface TimerRecord {
+    id: string;
+    working: number;
+    breaking: number;
+    cycles: Array<number>;
+    date: string;
+}
+
+export saveTauriStore = create<TimerRecord>()((set) => ({
+    id: uuid(),
+    working: 25,
+    breaking: 5,
+    cycles: [],
+    date: moment().format("YYYY-MM-DD"),
+
+    setWorking: (working) => set(() => ({ working })),
+    setBreaking: (breaking) => set(() => ({ breaking })),
+    setCycles: (cycles) => set(() => ({ cycles })),
+    setDate: (date) => set(() => ({ date })),
+    reset: () => set(() => ({
+        working: 25,
+        breaking: 5,
+        cycles: [],
+        date: moment().format("YYYY-MM-DD"),
+    })),
+}))
