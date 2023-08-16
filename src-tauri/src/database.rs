@@ -21,6 +21,7 @@ pub fn initialize_database(app_handle: &AppHandle) -> Result<Connection, rusqlit
     drop(user_pragma);
 
     upgrade_database_if_needed(&mut db, existing_user_version)?;
+
     Ok(db)
 }
 

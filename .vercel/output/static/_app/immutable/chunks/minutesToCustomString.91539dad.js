@@ -1,0 +1,1 @@
+function u(t){const o=Math.floor(t/3600).toString().padStart(2,"0"),r=Math.floor(t%3600/60).toString().padStart(2,"0"),n=Math.floor(t%60).toString().padStart(2,"0");return`${o}:${r}:${n}`}function i(t){let o=0;t.forEach(s=>{const[a,c,e]=s.split(":").map(Number);o+=a*3600+c*60+e});const r=Math.floor(o/3600),n=Math.floor(o%3600/60);return`${r}H ${n}M`}export{i as a,u as m};

@@ -1,0 +1,1 @@
+import{a}from"./singletons.3a082244.js";const e=a("goto"),o=a("invalidate"),i=a("invalidate_all"),n=a("preload_data"),s=a("before_navigate"),l=a("after_navigate");export{o as a,s as b,l as c,e as g,i,n as p};

@@ -1,0 +1,1 @@
+import{S as o,i as r,s as i,t as c,k as p,p as l,M as e,l as m}from"../chunks/index.62fc0439.js";function u(s){let t;return{c(){t=c("map")},l(a){t=p(a,"map")},m(a,n){l(a,t,n)},p:e,i:e,o:e,d(a){a&&m(t)}}}class x extends o{constructor(t){super(),r(this,t,null,u,i,{})}}export{x as component};

@@ -2,8 +2,8 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod database;
+mod model;
 mod state;
-
 use state::{AppState, ServiceAccess};
 use tauri::{AppHandle, Manager, State};
 
@@ -32,7 +32,6 @@ fn main() {
             let app_state: State<AppState> = handle.state();
             let db =
                 database::initialize_database(&handle).expect("Database initialize should succeed");
-            dbg!(&db);
 
             *app_state.db.lock().unwrap() = Some(db);
 

@@ -1,0 +1,23 @@
+DROP TABLE IF EXISTS person;
+CREATE TABLE IF NOT EXISTS person (
+    id    INTEGER PRIMARY KEY AUTOINCREMENT,
+    name  TEXT NOT NULL,
+    data  BLOB
+);
+
+DROP TABLE IF EXISTS pet;
+CREATE TABLE IF NOT EXISTS pet (
+    id    INTEGER PRIMARY KEY AUTOINCREMENT,
+    name  TEXT NOT NULL
+);
+
+DROP TABLE IF EXISTS pet_owner;
+CREATE TABLE IF NOT EXISTS pet_owner (
+    id    INTEGER PRIMARY KEY AUTOINCREMENT,
+    pet_id  INTEGER NOT NULL,
+    person_id  INTEGER NOT NULL,
+    FOREIGN KEY(pet_id) REFERENCES pet(id),
+    FOREIGN KEY(person_id) REFERENCES person(id),
+    UNIQUE(pet_id, person_id)
+);
+
