@@ -1,6 +1,16 @@
 use rusqlite::{named_params, Connection};
 use std::fs;
+use std::fs::File;
+use std::io::prelude::*;
 use tauri::AppHandle;
+fn read_sql_from_file(path: &str) -> String {
+    let mut file = File::open(path).expect("file not found");
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)
+        .expect("something went wrong reading the file");
+
+    contents
+}
 
 const CURRENT_DB_VERSION: u32 = 1;
 
@@ -36,13 +46,9 @@ pub fn upgrade_database_if_needed(
         let tx = db.transaction()?;
 
         tx.pragma_update(None, "user_version", CURRENT_DB_VERSION)?;
+        let sql_file_contets: String = read_sql_from_file("schemas.sql");
 
-        tx.execute_batch(
-            "
-      CREATE TABLE items (
-        title TEXT NOT NULL
-      );",
-        )?;
+        tx.execute_batch(&sql_file_contets.as_str())?;
 
         tx.commit()?;
     }
@@ -50,22 +56,22 @@ pub fn upgrade_database_if_needed(
     Ok(())
 }
 
-pub fn add_item(title: &str, db: &Connection) -> Result<(), rusqlite::Error> {
-    let mut statement = db.prepare("INSERT INTO items (title) VALUES (@title)")?;
-    statement.execute(named_params! { "@title": title })?;
+// pub fn add_item(title: &str, db: &Connection) -> Result<(), rusqlite::Error> {
+//     let mut statement = db.prepare("INSERT INTO items (title) VALUES (@title)")?;
+//     statement.execute(named_params! { "@title": title })?;
 
-    Ok(())
-}
+//     Ok(())
+// }
 
-pub fn get_all(db: &Connection) -> Result<Vec<String>, rusqlite::Error> {
-    let mut statement = db.prepare("SELECT * FROM items")?;
-    let mut rows = statement.query([])?;
-    let mut items = Vec::new();
-    while let Some(row) = rows.next()? {
-        let title: String = row.get("title")?;
+// pub fn get_all(db: &Connection) -> Result<Vec<String>, rusqlite::Error> {
+//     let mut statement = db.prepare("SELECT * FROM items")?;
+//     let mut rows = statement.query([])?;
+//     let mut items = Vec::new();
+//     while let Some(row) = rows.next()? {
+//         let title: String = row.get("title")?;
 
-        items.push(title);
-    }
+//         items.push(title);
+//     }
 
-    Ok(items)
-}
+//     Ok(items)
+// }

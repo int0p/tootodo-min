@@ -1,1 +1,2 @@
-mod example;
+// mod example;
+pub mod timer;

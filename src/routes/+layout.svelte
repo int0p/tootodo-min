@@ -65,7 +65,6 @@
 			onSpotify = false;
 		}
 	}
-
 </script>
 
 <svelte:head>
@@ -124,6 +123,7 @@
 
 		<!--		tab-->
 		<div
+			data-sveltekit-reload
 			class="flex justify-between w-[calc(100%-400px)] max-w-[70%] space-x-2 relative -top-1.5 -left-3.5"
 		>
 			<TabGroup justify="justify-start" class="w-[220px] lg:relative lg:-top-1">

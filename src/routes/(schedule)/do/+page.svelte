@@ -1,6 +1,4 @@
 <script>
-	import { liveQuery } from 'dexie';
-	import { db } from '$stores';
 	import { Blinds } from 'lucide-svelte';
 	import { PomoIcon } from '$components';
 	import { minutesToCustomString, addTime } from '$helpers';
@@ -8,26 +6,51 @@
 	import DailyLog from '$schedule/dailyLog/[date]/+page.svelte';
 	import { BreadcrumbDo } from '$components';
 	import { TableOfContents } from '@skeletonlabs/skeleton';
-	export let showDailyLog = true;
 	import { selectedDate } from '$stores/useLocStorage.js';
 	import moment from 'moment';
 	import { afterUpdate, onMount } from 'svelte';
+	export let showDailyLog = true;
+
+	//tauri sqlite db
+	import { invoke } from '@tauri-apps/api/tauri';
+	let pomoRecords = [];
+
+	onMount(async () => {
+		pomoRecords = await getPomoRecords();
+	});
+
+	afterUpdate(async () => {
+		totalStudyTime = 0;
+		studyTime = [];
+		startTime = [];
+		endTime = [];
+		pomoRecords = await getPomoRecords();
+	});
+
+	async function getPomoRecords() {
+		if (!$selectedDate) return;
+		let data = JSON.parse(
+			JSON.parse(
+				await invoke('get_timer_by_date', {
+					date: $selectedDate
+				})
+			)
+		);
+		data.forEach((pomoRecord) => {
+			pomoRecord.cycles = JSON.parse(pomoRecord.cycles);
+		});
+
+		return data;
+	}
+	//show pomodoro records
 	let totalStudyTime = 0;
 	let studyTime = [];
 	let startTime = [];
 	let endTime = [];
-
-	// onMount(()=>$selectedDate = moment().format('MMMM Do YYYY'));
-	$: pomoRecords = liveQuery(() => {
-		const collection = db.timers.where('date').equals($selectedDate).toArray();
-		return collection;
-	});
-
-	//show pomodoro records
 	$: {
-		if ($pomoRecords) {
+		if (pomoRecords && Array.isArray(pomoRecords)) {
 			//get total study time
-			$pomoRecords.forEach((pomoRecord) => {
+			pomoRecords.forEach((pomoRecord) => {
 				let total = 0;
 				pomoRecord.cycles.forEach((cycle) => {
 					total += cycle.studyTime;
@@ -36,25 +59,28 @@
 			});
 
 			//get start time
-			$pomoRecords.forEach((pomoRecord) => {
+			pomoRecords.forEach((pomoRecord) => {
 				startTime.push(pomoRecord.cycles[0].start);
 			});
 
 			//get end time
-			$pomoRecords.forEach((pomoRecord) => {
+			pomoRecords.forEach((pomoRecord) => {
 				endTime.push(pomoRecord.cycles[pomoRecord.cycles.length - 1].end);
 			});
 
 			totalStudyTime = addTime(studyTime);
 		}
 	}
-	afterUpdate(() => {
-		totalStudyTime = 0;
-		studyTime = [];
-		startTime = [];
-		endTime = [];
-	});
-	// onMount(()=>indexedDB.deleteDatabase('AppDatabase'));
+
+	//indexed db
+	// import { liveQuery } from 'dexie';
+	// import { db } from '$stores';
+	// onMount(() => indexedDB.deleteDatabase('AppDatabase'));
+
+	// $: pomoRecords = liveQuery(() => {
+	// 	const collection = db.timers.where('date').equals($selectedDate).toArray();
+	// 	return collection;
+	// });
 </script>
 
 <div class="flex-col space-y-2 items-center justify-center w-full h-full relative">
@@ -88,8 +114,8 @@
                                         absolute bottom-0 border-0 rounded-xl flex flex-wrap justify-center
                                         text-surface-900-50-token bg-white/75 dark:bg-black/50"
 					>
-						{#if $pomoRecords}
-							{#each $pomoRecords as pomoRecord, id}
+						{#if pomoRecords}
+							{#each pomoRecords as pomoRecord, id}
 								<div
 									class="card p-4 rounded-tr-none space-y-2 m-3
                                                     variant-ringed-surface

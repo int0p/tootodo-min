@@ -52,11 +52,14 @@
 		clearInterval(pauseInterval);
 		resetTimer();
 	});
+
 	function terminateTimer() {
 		clearInterval(playInterval);
 		$pomoInfo.endTime = moment().format('hh:mm');
 		saveCycle();
-		saveTimerDataToDB();
+		// saveTimerDataToDB();
+		toDesktopDB();
+		resetTimer();
 	}
 	function startInterval() {
 		playInterval = setInterval(() => {
@@ -136,24 +139,39 @@
 		alarmSound.play();
 	}
 	//connect db
-	import { db } from '$stores/indexedDB.ts';
-	let status = '';
-	async function saveTimerDataToDB() {
-		try {
-			const id = await db.timers.add({
-				working: $settings.working,
-				breaking: $settings.breaking,
-				cycles: $pomoInfo.cycles,
-				date: $pomoInfo.date
-			});
-			status = `timer data added successfully, id ${id}`;
-			resetTimer();
-		} catch {
-			status = 'timer data add failed';
-		}
-		console.log(status);
+	// import { db } from '$stores/indexedDB.ts';
+	// let status = '';
+	// async function saveTimerDataToDB() {
+	// 	try {
+	// 		const id = await db.timers.add({
+	// 			working: $settings.working,
+	// 			breaking: $settings.breaking,
+	// 			cycles: $pomoInfo.cycles,
+	// 			date: $pomoInfo.date
+	// 		});
+	// 		status = `timer data added successfully, id ${id}`;
+	// 		resetTimer();
+	// 	} catch {
+	// 		status = 'timer data add failed';
+	// 	}
+	// 	// console.log(status);
+	// }
+
+	// send to tauri
+	import { invoke } from '@tauri-apps/api/tauri';
+	async function toDesktopDB() {
+		if ($pomoInfo.cycles[0].studyTime < 6 && $pomoInfo.cycles.length <= 1) return;
+		const timerData = JSON.stringify({
+			working: $settings.working,
+			breaking: $settings.breaking,
+			cycles: JSON.stringify($pomoInfo.cycles),
+			date: $pomoInfo.date
+		});
+
+		const timer_object = await invoke('timer_to_desktop_db', {
+			timerData
+		});
 	}
-	//store in tauri-store
 </script>
 
 <div class="clock w-full h-full mb-3 mx-auto">
