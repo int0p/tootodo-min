@@ -2,6 +2,8 @@
 	import { Blinds } from 'lucide-svelte';
 	import { PomoIcon } from '$components';
 	import { minutesToCustomString, addTime } from '$helpers';
+	import { TenMtable } from '$components';
+
 	import { Editor } from '$components';
 	import DailyLog from '$schedule/dailyLog/[date]/+page.svelte';
 	import { BreadcrumbDo } from '$components';
@@ -71,13 +73,8 @@
 
 	<div class="flex w-full h-[calc(100%-50px)]">
 		{#if showDailyLog}
-			<!--ten M planner-->
-			<div class="w-1/3 min-w-[320px] max-w-[360px] h-full">
-				<DailyLog />
-			</div>
-
 			<!--            detail daily log-->
-			<div class="flex-col relative w-full h-full ml-4 mt-0.5">
+			<div class="flex-col relative w-full h-full mt-0.5">
 				<div class="flex space-x-2 absolute right-0 top-1 text-lg z-10">
 					<code class="relative bottom-1.5 code text-lg font-digital font-bold">
 						{totalStudyTime}
@@ -91,70 +88,84 @@
 
 					<!--                    record-->
 					<div
-						class="w-full h-[calc(100%-46px)] max-h-[calc(100%-46px)] overflow-y-scroll hide-scrollbar
-                                        absolute bottom-0 border-0 rounded-xl flex flex-wrap justify-center
-                                        text-surface-900-50-token bg-white/75 dark:bg-black/50"
+						class="w-full h-[calc(100%-46px)] max-h-[calc(100%-46px)] overflow-y-clip
+								absolute bottom-0 border-0 rounded-xl flex justify-center space-x-0
+								text-surface-900-50-token bg-white/75 dark:bg-black/50"
 					>
-						{#if pomoRecords}
-							{#each pomoRecords as pomoRecord, id}
-								<div
-									class="card p-4 rounded-tr-none space-y-2 m-3
+						<!--ten M planner-->
+						<div
+							class="w-full min-w-[310px] max-w-[360px] max-h-full overflow-y-auto hide-scrollbar relative"
+						>
+							<TenMtable />
+						</div>
+
+						<div
+							class="flex flex-wrap justify-center w-full max-h-full overflow-y-auto hide-scrollbar relative"
+						>
+							{#if pomoRecords}
+								{#each pomoRecords as pomoRecord, id}
+									<div
+										class="card p-4 rounded-tr-none space-y-2 m-3
                                                     variant-ringed-surface
                                                     w-full lg:w-1/4 2xl:w-1/6 min-w-[300px] h-auto
                                 "
-								>
-									<header class="flex justify-between items-center">
-										<big class="font-bold px-3 py-1.5 shadow shadow-sm shadow-primary-600"
-											>{id + 1}</big
-										>
-										<big class="font-bold">{startTime[id]} - {endTime[id]}</big>
-										<div class="flex-col">
-											<small class="opacity-75 block">
-												<span class="text-tertiary-500">Working:</span>
-												{pomoRecord.working}min
-											</small>
-											<small class="opacity-75 block">
-												<span class="text-secondary-600">Breaking:</span>
-												{pomoRecord.breaking}min
-											</small>
-										</div>
-									</header>
-									<table class="w-full text-center border">
-										<thead>
-											<tr class="border">
-												<th class="!py-1.5 relative px-2">
-													<span class="absolute left-1 top-1.5"><PomoIcon /></span>
-												</th>
-												<th class="!py-1.5">start</th>
-												<th class="!py-1.5">end</th>
-												<th class="!py-1.5">study time</th>
-											</tr>
-										</thead>
-										<tbody>
-											{#each pomoRecord.cycles as cycle, id}
-												<tr class="">
-													<td class="!py-2 !px-0 border-r">{id + 1}</td>
-													<td class="!py-2 border-r">{cycle.start} </td>
-													<td class="!py-2 border-r">{cycle.end}</td>
-													<td class="!py-2">{minutesToCustomString(cycle.studyTime)}</td>
+									>
+										<header class="flex relative space-x-4 items-center">
+											<!-- <big class="font-bold px-3 py-1.5 shadow-sm shadow-primary-600">{id + 1}</big> -->
+											<div class="flex-col">
+												<big class="font-bold">
+													<span class="text-primary-600">[ {id + 1} ]</span>
+													{startTime[id]} - {endTime[id]}
+												</big>
+												<div class="flex space-x-2">
+													<small class="opacity-75 block">
+														<span class="text-tertiary-500">Working:</span>
+														{pomoRecord.working}min
+													</small>
+													<small class="opacity-75 block">
+														<span class="text-secondary-600">Breaking:</span>
+														{pomoRecord.breaking}min
+													</small>
+												</div>
+											</div>
+										</header>
+										<table class="w-full text-center border">
+											<thead>
+												<tr class="border">
+													<th class="!py-1.5 relative px-2">
+														<span class="absolute left-1 top-1.5"><PomoIcon /></span>
+													</th>
+													<th class="!py-1.5">start</th>
+													<th class="!py-1.5">end</th>
+													<th class="!py-1.5">study time</th>
 												</tr>
-											{/each}
-										</tbody>
-										<tfoot>
-											<tr class="border">
-												<td
-													colspan="3"
-													class="!py-2 text-[rgb(var(--color-pomodoro-700))] dark:text-[rgb(var(--color-pomodoro-100))]"
-												>
-													Total Study Time.
-												</td>
-												<td>{studyTime[id]}</td>
-											</tr>
-										</tfoot>
-									</table>
-								</div>
-							{/each}
-						{/if}
+											</thead>
+											<tbody>
+												{#each pomoRecord.cycles as cycle, id}
+													<tr class="">
+														<td class="!py-2 !px-0 border-r">{id + 1}</td>
+														<td class="!py-2 border-r">{cycle.start} </td>
+														<td class="!py-2 border-r">{cycle.end}</td>
+														<td class="!py-2">{minutesToCustomString(cycle.studyTime)}</td>
+													</tr>
+												{/each}
+											</tbody>
+											<tfoot>
+												<tr class="border">
+													<td
+														colspan="3"
+														class="!py-2 text-[rgb(var(--color-pomodoro-700))] dark:text-[rgb(var(--color-pomodoro-100))]"
+													>
+														Total Study Time.
+													</td>
+													<td>{studyTime[id]}</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								{/each}
+							{/if}
+						</div>
 					</div>
 				</div>
 			</div>

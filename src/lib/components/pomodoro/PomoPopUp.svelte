@@ -31,19 +31,19 @@
 		totalPausedTime = 0;
 		$pomoInfo.isRunning = true;
 		$pomoInfo.date = moment().format('YYYY-MM-DD');
-		$pomoInfo.startTime = moment().format('hh:mm');
+		$pomoInfo.startTime = moment().format('hh:mm A');
 		$pomoInfo.endTime = moment()
 			.add(
 				$settings.working * $settings.repeat + $settings.breaking * ($settings.repeat - 1),
 				'minutes'
 			)
-			.format('hh:mm');
+			.format('hh:mm A');
 		$pomoInfo.timerStatus = 'WORKING';
 		$pomoInfo.timeLeft = $settings.working * 60;
 		$pomoInfo.cycles = [];
 		$pomoInfo.cycle.count = 1;
-		$pomoInfo.cycle.start = moment().format('hh:mm');
-		$pomoInfo.cycle.end = moment().add($settings.working, 'minutes').format('hh:mm');
+		$pomoInfo.cycle.start = moment().format('hh:mm A');
+		$pomoInfo.cycle.end = moment().add($settings.working, 'minutes').format('hh:mm A');
 		startInterval();
 	});
 
@@ -55,7 +55,7 @@
 
 	function terminateTimer() {
 		clearInterval(playInterval);
-		$pomoInfo.endTime = moment().format('hh:mm');
+		$pomoInfo.endTime = moment().format('hh:mm A');
 		saveCycle();
 		// saveTimerDataToDB();
 		toDesktopDB();
@@ -85,10 +85,12 @@
 		}
 	}
 	function saveCycle() {
+		const studyTime = $settings.working * 60 - $pomoInfo.timeLeft - totalPausedTime;
+		if (studyTime < 60) return; //1분 미만의 기록은 저장하지 않는다.
 		$pomoInfo.cycles[$pomoInfo.cycle.count - 1] = {
 			start: $pomoInfo.cycle.start,
-			end: moment().format('hh:mm'),
-			studyTime: $settings.working * 60 - $pomoInfo.timeLeft - totalPausedTime
+			end: moment().format('hh:mm A'),
+			studyTime: studyTime
 		};
 	}
 	function switchSession() {
@@ -104,8 +106,8 @@
 			}
 			$pomoInfo.isRunning = true;
 			$pomoInfo.timerStatus = 'BREAKING';
-			$pomoInfo.cycle.start = moment().format('hh:mm');
-			$pomoInfo.cycle.end = moment().add($settings.breaking, 'minutes').format('hh:mm');
+			$pomoInfo.cycle.start = moment().format('hh:mm A');
+			$pomoInfo.cycle.end = moment().add($settings.breaking, 'minutes').format('hh:mm A');
 			$pomoInfo.timeLeft = $settings.breaking * 60;
 			totalPausedTime = 0;
 			startInterval();
@@ -114,8 +116,8 @@
 			$pomoInfo.cycle.count++; //breaking session에서 working session으로 전환시 count 증가
 			$pomoInfo.isRunning = true;
 			$pomoInfo.timerStatus = 'WORKING';
-			$pomoInfo.cycle.start = moment().format('hh:mm');
-			$pomoInfo.cycle.end = moment().add($settings.working, 'minutes').format('hh:mm');
+			$pomoInfo.cycle.start = moment().format('hh:mm A');
+			$pomoInfo.cycle.end = moment().add($settings.working, 'minutes').format('hh:mm A');
 			$pomoInfo.timeLeft = $settings.working * 60;
 			totalPausedTime = 0;
 			startInterval();
@@ -138,6 +140,22 @@
 		}
 		alarmSound.play();
 	}
+
+	// send to tauri
+	import { invoke } from '@tauri-apps/api/tauri';
+	async function toDesktopDB() {
+		const timerData = JSON.stringify({
+			working: $settings.working,
+			breaking: $settings.breaking,
+			cycles: JSON.stringify($pomoInfo.cycles),
+			date: $pomoInfo.date
+		});
+
+		const timer_object = await invoke('timer_to_desktop_db', {
+			timerData
+		});
+	}
+
 	//connect db
 	// import { db } from '$stores/indexedDB.ts';
 	// let status = '';
@@ -156,22 +174,6 @@
 	// 	}
 	// 	// console.log(status);
 	// }
-
-	// send to tauri
-	import { invoke } from '@tauri-apps/api/tauri';
-	async function toDesktopDB() {
-		if ($pomoInfo.cycles[0].studyTime < 6 && $pomoInfo.cycles.length <= 1) return;
-		const timerData = JSON.stringify({
-			working: $settings.working,
-			breaking: $settings.breaking,
-			cycles: JSON.stringify($pomoInfo.cycles),
-			date: $pomoInfo.date
-		});
-
-		const timer_object = await invoke('timer_to_desktop_db', {
-			timerData
-		});
-	}
 </script>
 
 <div class="clock w-full h-full mb-3 mx-auto">
