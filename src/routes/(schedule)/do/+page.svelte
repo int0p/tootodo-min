@@ -110,14 +110,14 @@
                                                     w-full lg:w-1/4 2xl:w-1/6 min-w-[300px] h-auto
                                 "
 									>
-										<header class="flex relative space-x-4 items-center">
+										<header class="flex space-x-4 items-center w-full">
 											<!-- <big class="font-bold px-3 py-1.5 shadow-sm shadow-primary-600">{id + 1}</big> -->
-											<div class="flex-col">
+											<div class="flex-col space-y-0.5 relative h-10 w-full">
 												<big class="font-bold">
-													<span class="text-primary-600">[ {id + 1} ]</span>
+													<span class="text-primary-500">[ {id + 1} ]</span>
 													{startTime[id]} - {endTime[id]}
 												</big>
-												<div class="flex space-x-2">
+												<div class="flex space-x-2 absolute right-0">
 													<small class="opacity-75 block">
 														<span class="text-tertiary-500">Working:</span>
 														{pomoRecord.working}min

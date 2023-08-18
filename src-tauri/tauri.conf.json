@@ -62,7 +62,7 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 670,
+        "height": 638,
         "resizable": true,
         "title": "tootodo",
         "width": 990
