@@ -5,6 +5,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { RotateCcw } from 'lucide-svelte';
+	import { dataset_dev } from 'svelte/internal';
 
 	let dayDefaultSet;
 
@@ -24,6 +25,13 @@
 	onDestroy(() => {
 		daySet = { ...dayDefaultSet };
 	});
+
+	$: {
+		if (daySet.dayEndTime > 24) daySet.dayEndTime = 24;
+		if (daySet.dayStartTime > 24) daySet.dayStartTime = 24;
+		if (daySet.dayEndTime < 1) daySet.dayEndTime = 1;
+		if (daySet.dayStartTime < 1) daySet.dayStartTime = 1;
+	}
 </script>
 
 <form
@@ -45,7 +53,7 @@
 				type="number"
 				step="1"
 				max="24"
-				min="0"
+				min="1"
 				name="day start time"
 				required
 				class="w-full"
@@ -58,7 +66,7 @@
 				type="number"
 				step="1"
 				max="24"
-				min="0"
+				min="1"
 				name="day end time"
 				required
 				class="w-full"

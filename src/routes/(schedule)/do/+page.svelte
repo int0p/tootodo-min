@@ -94,7 +94,7 @@
 					>
 						<!--ten M planner-->
 						<div
-							class="w-full min-w-[310px] max-w-[360px] max-h-full overflow-y-auto hide-scrollbar relative"
+							class="w-full min-w-[310px] max-w-[350px] max-h-full overflow-y-auto hide-scrollbar relative"
 						>
 							<TenMtable />
 						</div>
