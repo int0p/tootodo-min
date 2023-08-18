@@ -2,8 +2,7 @@
 	import moment from 'moment';
 	import { CalendarRange } from 'lucide-svelte';
 	import { selectedDate } from '$stores/useLocStorage.js';
-	import { onMount } from 'svelte';
-	onMount(() => ($selectedDate = moment().format('YYYY-MM-DD')));
+
 	export let showWeekly = false;
 	let showCalendar = false;
 	let selectedDateInput: string;

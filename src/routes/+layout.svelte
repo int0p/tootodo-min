@@ -7,16 +7,6 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
-	// import '@skeletonlabs/skeleton/themes/theme-gold-nouveau.css';
-	// import '@skeletonlabs/skeleton/themes/theme-modern.css'; //팝팦 핑크
-	// import '@skeletonlabs/skeleton/themes/theme-skeleton.css'; //깔끔초록
-	// import '@skeletonlabs/skeleton/themes/theme-rocket.css'; //옥..? 이상함.
-	// import '@skeletonlabs/skeleton/themes/theme-seafoam.css'; //별로인 초록
-	// import '@skeletonlabs/skeleton/themes/theme-sahara.css'; //별로인 빨강 -> primary바꾸면 예쁠듯.
-	// import '@skeletonlabs/skeleton/themes/theme-hamlindigo.css'; //파스텔 퍼렁
-	// import '@skeletonlabs/skeleton/themes/theme-crimson.css'; //깔끔 빨강
-	// import '@skeletonlabs/skeleton/themes/theme-seasonal.css'; //깔끔 초록
-	// import '@skeletonlabs/skeleton/themes/theme-vintage.css'; //옛 주황
 
 	// page info
 	// $:console.log($page.data.title);
@@ -36,14 +26,16 @@
 		console.log();
 	});
 
-	// get current time
+	// get current time and day
 	import { onDestroy, onMount } from 'svelte';
+	import { selectedDate } from '$stores/useLocStorage.js';
 	import moment from 'moment';
 	let currentTime;
 	onMount(() => {
 		currentTime = setInterval(() => {
 			currentTime = moment().format('hh:mm A');
 		}, 1000);
+		$selectedDate = moment().format('YYYY-MM-DD');
 	});
 	onDestroy(() => {
 		clearInterval(currentTime);

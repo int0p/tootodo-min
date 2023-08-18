@@ -12,37 +12,18 @@
 	export let showDailyLog = true;
 
 	//tauri sqlite db
-	import { invoke } from '@tauri-apps/api/tauri';
+	import { getPomoRecords } from '$stores/useTauriStorage';
 	let pomoRecords = [];
-
-	onMount(async () => {
-		pomoRecords = await getPomoRecords();
-	});
 
 	afterUpdate(async () => {
 		totalStudyTime = 0;
 		studyTime = [];
 		startTime = [];
 		endTime = [];
-		pomoRecords = await getPomoRecords();
+		pomoRecords = await getPomoRecords($selectedDate);
 	});
 
-	async function getPomoRecords() {
-		if (!$selectedDate) return;
-		let data = JSON.parse(
-			JSON.parse(
-				await invoke('get_timer_by_date', {
-					date: $selectedDate
-				})
-			)
-		);
-		data.forEach((pomoRecord) => {
-			pomoRecord.cycles = JSON.parse(pomoRecord.cycles);
-		});
-
-		return data;
-	}
-	//show pomodoro records
+	//display pomodoro records
 	let totalStudyTime = 0;
 	let studyTime = [];
 	let startTime = [];
