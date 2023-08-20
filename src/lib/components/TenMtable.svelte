@@ -90,17 +90,17 @@
 	class="text-center text-sm
          w-full h-full"
 >
-	<table class="w-full border-collapse">
+	<table
+		class="w-full border-collapse border-2 border-l-0 border-primary-600 dark:border-primary-100"
+	>
 		<!--        몇분?-->
 		<tr class="sticky top-0">
-			<th class="p-2 bg-primary-100 border border-primary-100" />
+			<th class="p-2 bg-primary-100 !border-primary-100" />
 			<td
 				class="text-xs sticky text-center py-0.5 px-1
 						border border-primary-100
 						bg-primary-600"
-			>
-				<span class="font-digital font-bold text-primary-50 dark:text-secondary-900" />
-			</td>
+			/>
 			<td
 				class="text-xs sticky text-center py-0.5 px-1
 						border border-primary-100
@@ -121,7 +121,7 @@
 		</tr>
 
 		{#each dayHours as hour, i}
-			<tr class="border-r-2 border-primary-600 dark:border-primary-100">
+			<tr class="">
 				<!--                row header -> 몇시-->
 				<th rowspan="2" class="text-xs py-0 px-0.5 border bg-primary-700 text-white font-bold">
 					<span class="font-digital text-primary-50 dark:text-secondary-50">{hour}</span>
