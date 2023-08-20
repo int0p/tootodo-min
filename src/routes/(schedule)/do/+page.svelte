@@ -94,20 +94,22 @@
 					>
 						<!--ten M planner-->
 						<div
-							class="w-full min-w-[310px] max-w-[350px] max-h-full overflow-y-auto hide-scrollbar relative"
+							class="w-full min-w-[340px] max-w-[340px]
+							max-h-full overflow-y-auto hide-scrollbar relative"
 						>
 							<TenMtable />
 						</div>
 
 						<div
-							class="flex flex-wrap justify-center w-full max-h-full overflow-y-auto hide-scrollbar relative"
+							class="flex flex-wrap justify-evenly
+									w-full max-h-full overflow-y-auto hide-scrollbar relative"
 						>
 							{#if pomoRecords}
 								{#each pomoRecords as pomoRecord, id}
 									<div
-										class="card p-4 rounded-tr-none space-y-2 m-3
+										class="card p-4 rounded-tr-none space-y-2 mt-4
                                                     variant-ringed-surface
-                                                    w-full lg:w-1/4 2xl:w-1/6 min-w-[300px] h-auto
+                                                    w-[280px] h-auto
                                 "
 									>
 										<header class="flex space-x-4 items-center w-full">
@@ -144,8 +146,8 @@
 												{#each pomoRecord.cycles as cycle, id}
 													<tr class="">
 														<td class="!py-2 !px-0 border-r">{id + 1}</td>
-														<td class="!py-2 border-r">{cycle.start} </td>
-														<td class="!py-2 border-r">{cycle.end}</td>
+														<td class="!py-2 border-r">{cycle.start.split(' ')[0]} </td>
+														<td class="!py-2 border-r">{cycle.end.split(' ')[0]}</td>
 														<td class="!py-2">{minutesToCustomString(cycle.studyTime)}</td>
 													</tr>
 												{/each}

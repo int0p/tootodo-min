@@ -9,7 +9,11 @@
 	let dayHours = [];
 	let dayStartTime = 11;
 	let table = [];
-	onMount(() => {
+	let color = '';
+
+	afterUpdate(async () => {
+		pomoRecords = await getPomoRecords($selectedDate);
+
 		dayStartTime = $settings.dayStartTime;
 		let dayEndTime = $settings.dayEndTime;
 		if (dayStartTime > dayEndTime) {
@@ -19,11 +23,6 @@
 		dayHours = Array.from({ length: hourLength }, (_, i) => ((i + dayStartTime - 1) % 12) + 1);
 		table = Array.from(Array(dayHours.length), () => Array(60).fill(color));
 	});
-
-	afterUpdate(async () => {
-		pomoRecords = await getPomoRecords($selectedDate);
-	});
-	let color = '#';
 	//cycles -> table
 	$: {
 		if (pomoRecords && Array.isArray(pomoRecords)) {
@@ -36,7 +35,7 @@
 					let end = cycle.end;
 					//todo: color
 					// let todoColor = pomoRecord.todo.color;
-					let todoColor = 'O';
+					let todoColor = '#c32734';
 
 					let startHour = Number(start.split(':')[0]);
 					let startMin = Number(start.split(':')[1].split(' ')[0]);
@@ -121,7 +120,7 @@
 			{/each}
 		</tr>
 
-		{#each dayHours as hour}
+		{#each dayHours as hour, i}
 			<tr class="border-r-2 border-primary-600 dark:border-primary-100">
 				<!--                row header -> 몇시-->
 				<th rowspan="2" class="text-xs py-0 px-0.5 border bg-primary-700 text-white font-bold">
@@ -139,13 +138,13 @@
 					{#if min % 10 == 0}
 						<td
 							rowspan="2"
-							bgcolor={color}
+							style="background-color: {table[i][min]}"
 							class="py-0 border-l border-b border-primary-600 dark:border-primary-100"
 						/>
 					{:else}
 						<td
 							rowspan="2"
-							bgcolor={color}
+							style="background-color: {table[i][min]}"
 							class="py-0 border-l border-b border-b-primary-600 border-primary-100
                                     dark:border-primary-900 dark:border-b-primary-50"
 						/>
