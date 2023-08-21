@@ -24,6 +24,36 @@
   border-right-color: var(--menu-background-color);
 }
 
+/////////////////////// Ten Minutes Table ///////////////////////
+.tippy-box[data-theme~='tenMtable'] {
+  @apply bg-zinc-50 mx-2 text-surface-900;
+  border-radius: 10%;
+  box-shadow: 0 13px 20px rgba(0, 0, 0, 0.3);
+}
+
+.tippy-box[data-theme~='tenMtable'] .tippy-content {
+  padding: 0px;
+  width: 100px;
+}
+
+.tippy-box[data-theme~='tenMtable'][data-placement^='top']>.tippy-arrow::before {
+  border-top-color: rgb(24 24 27); //bg-zinc-900
+}
+
+.tippy-box[data-theme~='tenMtable'][data-placement^='bottom']>.tippy-arrow::before {
+  border-bottom-color: rgb(250 250 250);
+}
+
+.tippy-box[data-theme~='tenMtable'][data-placement^='left']>.tippy-arrow::before {
+  border-left-color: rgb(24 24 27);
+}
+
+.tippy-box[data-theme~='tenMtable'][data-placement^='right']>.tippy-arrow::before {
+  border-right-color: rgb(24 24 27);
+}
+
+
+
 /////////////////////// POMODORO ///////////////////////
 .tippy-box[data-theme~='pomodoro'] {
   @apply bg-zinc-50 mx-2 text-surface-900;
