@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { selectedDate } from '$stores/useLocStorage.js';
-	import { onMount, afterUpdate } from 'svelte';
+	import { afterUpdate } from 'svelte';
 	import { getPomoRecords } from '$stores/useTauriStorage';
 	import { settings } from '$stores/useLocStorage.js';
 	let pomoRecords = [];
@@ -139,15 +139,16 @@
 						<td
 							rowspan="2"
 							style="background-color: {table[i][min]}"
-							class="py-0 border-l border-b border-primary-600 dark:border-primary-100"
+							class="py-0 border-l border-dashed border-b border-primary-500 dark:border-primary-50"
 						/>
-					{:else}
+					{:else if min % 2 == 0}
 						<td
 							rowspan="2"
 							style="background-color: {table[i][min]}"
-							class="py-0 border-l border-b border-b-primary-600 border-primary-100
-                                    dark:border-primary-900 dark:border-b-primary-50"
+							class="py-0 border-b border-b-primary-500 dark:border-b-primary-50"
 						/>
+					{:else}
+						<td rowspan="2" style="background-color: {table[i][min]}" class="py-0" />
 					{/if}
 				{/each}
 			</tr>

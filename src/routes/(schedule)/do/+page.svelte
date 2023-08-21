@@ -101,13 +101,13 @@
 						</div>
 
 						<div
-							class="flex flex-wrap justify-evenly
+							class="flex flex-wrap justify-evenly my-4 space-y-4 items-center
 									w-full max-h-full overflow-y-auto hide-scrollbar relative"
 						>
 							{#if pomoRecords}
 								{#each pomoRecords as pomoRecord, id}
 									<div
-										class="card p-4 rounded-tr-none space-y-2 mt-4
+										class="card p-4 rounded-tr-none space-y-2
                                                     variant-ringed-surface
                                                     w-[280px] h-auto
                                 "
