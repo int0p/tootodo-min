@@ -4,6 +4,7 @@
 	import { getPomoRecords } from '$stores/useTauriStorage';
 	import { settings } from '$stores/useLocStorage.js';
 	import { minutesToCustomString, addTime } from '$helpers';
+	import { SlideToggle } from '@skeletonlabs/skeleton';
 
 	let pomoRecords = [];
 	let dayMinutes = ['10', '20', '30', '40', '50', '60'];
@@ -53,7 +54,7 @@
 
 					let { hour: startHour, minute: startMin } = parseTime(cycle.start);
 					let { hour: endHour, minute: endMin } = parseTime(cycle.end);
-					let todoColor = '#c32734';
+					let todoColor = 'rgb(var(--color-pomodoro-600)';
 
 					//하루가 지났을 경우
 					if (endHour < startHour) {
@@ -144,10 +145,12 @@
 
 		return { hour, minute };
 	}
+
+	let showStudyRecord = false;
 </script>
 
 <!-- result table-->
-<div class="text-center text-sm h-full">
+<div class="text-center text-sm h-full relative">
 	<table
 		class="w-full relative border-collapse border-2 border-l-0 border-primary-600 dark:border-primary-100"
 	>
@@ -202,7 +205,7 @@
 							? 'border-b border-b-primary-500 dark:border-b-primary-50'
 							: ''}"
 					>
-						{#if colorTable[i][min].studyTime}
+						{#if colorTable[i][min].studyTime && showStudyRecord}
 							<div class={min > 50 ? 'studyTime-bottom' : 'studyTime'}>
 								{minutesToCustomString(colorTable[i][min].studyTime).slice(0, 5)}
 							</div>
@@ -217,13 +220,22 @@
 			</tr>
 		{/each}
 	</table>
+	<SlideToggle
+		size="sm"
+		bind:checked={showStudyRecord}
+		class="sticky z-10 bottom-2 transform translate-x-[140px] shadow"
+		active="bg-rose-950"
+		background="bg-primary-600"
+	/>
 </div>
 
 <style>
 	.studyTime {
-		@apply absolute opacity-90 transform translate-x-1.5 -translate-y-4 bg-white text-primary-700 rounded-md px-1;
+		@apply absolute opacity-90 transform translate-x-1.5 -translate-y-4 rounded-md px-1
+			 bg-rose-950  text-white border-emerald-700 border-2;
 	}
 	.studyTime-bottom {
-		@apply absolute opacity-90 transform -translate-x-11 -translate-y-1 bg-white text-primary-700 rounded-md px-1;
+		@apply absolute opacity-90 transform -translate-x-11 -translate-y-1 rounded-md px-1
+			 bg-rose-950  text-white border-emerald-700 border-2;
 	}
 </style>
