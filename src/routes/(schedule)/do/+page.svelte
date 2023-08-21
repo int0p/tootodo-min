@@ -5,7 +5,6 @@
 	import { TenMtable } from '$components';
 
 	import { Editor } from '$components';
-	import DailyLog from '$schedule/dailyLog/[date]/+page.svelte';
 	import { BreadcrumbDo } from '$components';
 	import { TableOfContents } from '@skeletonlabs/skeleton';
 	import { selectedDate } from '$stores/useLocStorage.js';
@@ -94,8 +93,7 @@
 					>
 						<!--ten M planner-->
 						<div
-							class="w-full min-w-[340px] max-w-[340px]
-							max-h-full overflow-y-auto hide-scrollbar relative"
+							class="w-full min-w-[340px] max-w-[340px] max-h-full overflow-y-auto hide-scrollbar relative"
 						>
 							<TenMtable />
 						</div>

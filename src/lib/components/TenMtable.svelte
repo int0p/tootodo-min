@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { selectedDate } from '$stores/useLocStorage.js';
-	import { afterUpdate } from 'svelte';
+	import { afterUpdate, onMount } from 'svelte';
 	import { getPomoRecords } from '$stores/useTauriStorage';
 	import { settings } from '$stores/useLocStorage.js';
 	let pomoRecords = [];
@@ -94,7 +94,7 @@
 		class="w-full border-collapse border-2 border-l-0 border-primary-600 dark:border-primary-100"
 	>
 		<!--        몇분?-->
-		<tr class="sticky top-0">
+		<tr class="sticky -top-0.5">
 			<th class="p-2 bg-primary-100 !border-primary-100" />
 			<td
 				class="text-xs sticky text-center py-0.5 px-1
