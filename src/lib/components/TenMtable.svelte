@@ -1,6 +1,6 @@
-<script lang="ts">
+<script>
 	import { selectedDate } from '$stores/useLocStorage.js';
-	import { afterUpdate, onMount } from 'svelte';
+	import { afterUpdate } from 'svelte';
 	import { getPomoRecords } from '$stores/useTauriStorage';
 	import { settings } from '$stores/useLocStorage.js';
 	let pomoRecords = [];
@@ -8,79 +8,115 @@
 
 	let dayHours = [];
 	let dayStartTime = 11;
-	let table = [];
+	let dayEndTime = 23;
+	let colorTable = [];
 	let color = '';
 
 	afterUpdate(async () => {
-		pomoRecords = await getPomoRecords($selectedDate);
-
-		dayStartTime = $settings.dayStartTime;
-		let dayEndTime = $settings.dayEndTime;
-		if (dayStartTime > dayEndTime) {
-			dayEndTime += 24;
+		try {
+			pomoRecords = await getPomoRecords($selectedDate);
+			getDayHours();
+			colorTable = Array.from(Array(dayHours.length), () => Array(60).fill(color));
+			getColorTableFromPomoRecords();
+		} catch (error) {
+			console.error('Failed to update pomoRecords:', error);
 		}
-		let hourLength = dayEndTime - dayStartTime;
-		dayHours = Array.from({ length: hourLength }, (_, i) => ((i + dayStartTime - 1) % 12) + 1);
-		table = Array.from(Array(dayHours.length), () => Array(60).fill(color));
 	});
+
+	function getDayHours() {
+		if ($settings) {
+			dayStartTime = $settings.dayStartTime;
+			dayEndTime = $settings.dayEndTime;
+			if (dayStartTime && dayEndTime) {
+				if (dayStartTime > dayEndTime) {
+					dayEndTime += 24;
+				}
+				let hourLength = dayEndTime - dayStartTime;
+				dayHours = Array.from({ length: hourLength }, (_, i) => ((i + dayStartTime - 1) % 12) + 1);
+			}
+		}
+	}
+	function parseTime(timeStr) {
+		let [hourStr, minutePart] = timeStr.split(':');
+		let [minuteStr, amPm] = minutePart.trim().split(' ');
+
+		let hour = Number(hourStr);
+		let minute = Number(minuteStr);
+
+		if (amPm === 'PM' && hour !== 12) {
+			hour += 12;
+		} else if (amPm === 'AM' && hour === 12) {
+			hour = 0;
+		}
+
+		return { hour, minute };
+	}
 	//cycles -> table
-	$: {
-		if (pomoRecords && Array.isArray(pomoRecords)) {
+	function getColorTableFromPomoRecords() {
+		if (colorTable && pomoRecords && Array.isArray(pomoRecords)) {
 			pomoRecords.forEach((pomoRecord) => {
 				pomoRecord.cycles.forEach((cycle) => {
 					//cycle = {start: "03:23 PM", end: "03:28 PM", studyTime: 300}
 					//end시간이 dayStart ~ dayEnd 범위 밖일 경우 고려 안 함.
 
-					let start = cycle.start;
-					let end = cycle.end;
-					//todo: color
-					// let todoColor = pomoRecord.todo.color;
+					let { hour: startHour, minute: startMin } = parseTime(cycle.start);
+					let { hour: endHour, minute: endMin } = parseTime(cycle.end);
 					let todoColor = '#c32734';
 
-					let startHour = Number(start.split(':')[0]);
-					let startMin = Number(start.split(':')[1].split(' ')[0]);
-					let startAmPm = String(start.split(':')[1].split(' ')[1]);
+					//하루가 지났을 경우
+					if (endHour < startHour) {
+						endHour += 24;
+					}
 
-					let endHour = Number(end.split(':')[0]);
-					let endMin = Number(end.split(':')[1].split(' ')[0]);
-					let endAmPm = String(end.split(':')[1].split(' ')[1]);
+					//boundary conditon, hour
+					if (startHour < dayStartTime && endHour < dayStartTime) {
+						return;
+					}
 
-					let startHourIdx =
-						startAmPm === 'AM' && startHour !== 12
-							? startHour - dayStartTime
-							: startHour + 12 - dayStartTime;
-					let endHourIdx =
-						endAmPm === 'AM' && startHour !== 12
-							? endHour - dayStartTime
-							: endHour + 12 - dayStartTime;
+					if (startHour < dayStartTime && endHour >= dayStartTime) {
+						startHour = dayStartTime;
+						startMin = 0;
+					}
+
+					if (startHour < dayEndTime && endHour > dayEndTime) {
+						endHour = dayEndTime - 1;
+						endMin = 60;
+					}
+
+					if (startHour > dayEndTime && endHour > dayEndTime) {
+						return;
+					}
+
+					let startHourIdx = startHour - dayStartTime;
+					let endHourIdx = endHour - dayStartTime;
 					let startMinIdx = startMin;
 					let endMinIdx = endMin;
 
 					if (startHourIdx === endHourIdx) {
-						for (let min = startMinIdx; min <= endMinIdx; min++) {
-							table[startHourIdx][min] = todoColor;
+						for (let min = startMinIdx; min < endMinIdx; min++) {
+							colorTable[startHourIdx][min] = todoColor;
 						}
 					} else {
 						//startHour
 						for (let min = startMinIdx; min < 60; min++) {
-							table[startHourIdx][min] = todoColor;
+							colorTable[startHourIdx][min] = todoColor;
 						}
 
 						//startHour + 1 ~ endHour - 1
 						for (let hour = startHourIdx + 1; hour < endHourIdx; hour++) {
 							for (let min = 0; min < 60; min++) {
-								table[hour][min] = todoColor;
+								colorTable[hour][min] = todoColor;
 							}
 						}
 
 						//endHour
-						for (let min = 0; min <= endMinIdx; min++) {
-							table[endHourIdx][min] = todoColor;
+						for (let min = 0; min < endMinIdx; min++) {
+							colorTable[endHourIdx][min] = todoColor;
 						}
 					}
 				});
 			});
-			// console.log(table);
+			// console.log(colorTable);
 		}
 	}
 </script>
@@ -138,17 +174,17 @@
 					{#if min % 10 == 0}
 						<td
 							rowspan="2"
-							style="background-color: {table[i][min]}"
+							style="background-color: {colorTable[i][min]}"
 							class="py-0 border-l border-dashed border-b border-primary-500 dark:border-primary-50"
 						/>
 					{:else if min % 2 == 0}
 						<td
 							rowspan="2"
-							style="background-color: {table[i][min]}"
+							style="background-color: {colorTable[i][min]}"
 							class="py-0 border-b border-b-primary-500 dark:border-b-primary-50"
 						/>
 					{:else}
-						<td rowspan="2" style="background-color: {table[i][min]}" class="py-0" />
+						<td rowspan="2" style="background-color: {colorTable[i][min]}" class="py-0" />
 					{/if}
 				{/each}
 			</tr>
