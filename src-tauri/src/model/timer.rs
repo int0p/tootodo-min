@@ -15,20 +15,6 @@ CREATE Timer (
     memo TEXT NOT NULL
 );
  */
-#[derive(Debug, Deserialize)]
-
-struct Cycle {
-    start_time: String,
-    end_time: String,
-    study_time: String,
-}
-#[derive(Debug, Deserialize)]
-
-struct Todo {
-    id: i32,
-    title: String,
-    done: i16,
-}
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Timer {

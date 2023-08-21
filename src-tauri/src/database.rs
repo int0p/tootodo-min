@@ -46,6 +46,7 @@ pub fn upgrade_database_if_needed(
         let tx = db.transaction()?;
 
         tx.pragma_update(None, "user_version", CURRENT_DB_VERSION)?;
+
         let sql_file_contets: String = read_sql_from_file("schemas.sql");
 
         tx.execute_batch(&sql_file_contets.as_str())?;
