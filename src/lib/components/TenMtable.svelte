@@ -224,18 +224,18 @@
 		size="sm"
 		bind:checked={showStudyRecord}
 		class="sticky z-10 bottom-2 transform translate-x-[140px] shadow"
-		active="bg-rose-950"
-		background="bg-primary-600"
+		active="bg-emerald-900 dark:bg-emerald-800"
+		background="bg-rose-950 dark:bg-rose-900"
 	/>
 </div>
 
 <style>
 	.studyTime {
 		@apply absolute opacity-90 transform translate-x-1.5 -translate-y-4 rounded-md px-1
-			 bg-rose-950  text-white border-emerald-700 border-2;
+			 text-emerald-900 font-semibold bg-white shadow;
 	}
 	.studyTime-bottom {
 		@apply absolute opacity-90 transform -translate-x-11 -translate-y-1 rounded-md px-1
-			 bg-rose-950  text-white border-emerald-700 border-2;
+			text-emerald-900 font-semibold bg-white shadow;
 	}
 </style>

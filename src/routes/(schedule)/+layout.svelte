@@ -12,11 +12,15 @@
 	<!-- left-->
 	{#if showTargetTodoList}
 		<!--290px-->
-		<SideShell>
-			<!--            날짜 선택-->
-			<svelte:fragment slot="navi"><SelectDateSmall bind:showWeekly /></svelte:fragment>
-			<svelte:fragment slot="content"><TodoList {showWeekly} /></svelte:fragment>
-		</SideShell>
+		<div class="flex-col dailyTodo w-[290px] min-w-[290px] h-full relative mr-4">
+			<div class="header h-8 my-2 flex justify-between bg-none">
+				<SelectDateSmall bind:showWeekly />
+			</div>
+			<hr class="!border-dashed border-2 mb-2" />
+			<div class="w-full h-[clac(100%-80px)] overflow-y-auto">
+				<TodoList {showWeekly} />
+			</div>
+		</div>
 	{/if}
 
 	<!-- right-->
@@ -35,6 +39,7 @@
 		<slot />
 	</div>
 </div>
+
 <!--    <div class="flex-col w-1/3 h-full relative min-w-[330px] max-w-[380px]">-->
 <!--        <slot/>-->
 <!--    </div>-->
@@ -69,5 +74,8 @@
 
 	.flip {
 		transform: scaleX(-1);
+	}
+	.dailyTodo {
+		@apply rounded-r-2xl rounded-l-none border-double border-4 border-primary-400 dark:border-primary-700;
 	}
 </style>
