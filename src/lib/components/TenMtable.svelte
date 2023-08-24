@@ -13,7 +13,7 @@
 	let dayStartTime = 11;
 	let dayEndTime = 23;
 	let colorTable = [];
-
+	
 	afterUpdate(async () => {
 		try {
 			pomoRecords = await getPomoRecords($selectedDate);

@@ -16,7 +16,7 @@ function addTime(times:string[]){
     const seconds = totalSeconds % 60;
     return `${hours}H ${minutes}M`
     // return [hours, minutes, seconds]
-    //     .map(value => String(value).padStart(2, '0')) // 두 자리 숫자로 패딩
+    //     .workingBoard(value => String(value).padStart(2, '0')) // 두 자리 숫자로 패딩
     //     .join(':');
 }
 export { minutesToCustomString,addTime}

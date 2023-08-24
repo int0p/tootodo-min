@@ -8,6 +8,10 @@
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
 
+	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
+	import { storePopup } from '@skeletonlabs/skeleton';
+	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
+
 	// page info
 	// $:console.log($page.data.title);
 	import { page } from '$app/stores';

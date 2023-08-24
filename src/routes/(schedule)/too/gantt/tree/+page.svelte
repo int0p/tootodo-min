@@ -255,7 +255,7 @@
 
 <div class="container w-full h-full  !max-w-[calc(100%-5px)]">
     <div id="new-task"
-         class="absolute right-5 bottom-6 z-20 px-3 py-2
+         class="absolute right-5 bottom-16 z-20 px-3 py-2
     bg-tertiary-500 shadow-lg shadow-black/30 rounded-lg text-white text-center font-bold cursor-grab
     border-r-8 border-tertiary-900
 "><Plus/></div>

@@ -4,43 +4,142 @@ import {page} from "$app/stores";
 let flavors: Record<string, boolean> = {
     vanilla: true,
     chocolate: false,
+    cake: false,
+    milk: false,
+    candy: false,
     strawberry: false
 };
+let showAllProjects = false;
+
+import { ListBox, ListBoxItem } from '@skeletonlabs/skeleton';
+import { popup, type PopupSettings } from '@skeletonlabs/skeleton';
+
+let selectedArea: string;
+
+const popupFeatured: PopupSettings = {
+    // Represents the type of event that opens/closed the popup
+    event: 'click',
+    // Matches the data-popup value on your popup element
+    target: 'popupFeatured',
+    // Defines which side of your trigger the popup will appear
+    placement: 'bottom',
+    closeQuery: '.listbox-item'
+};
+
+import { Maximize2, PenLine, Trash2,Cog} from 'lucide-svelte';
+import { Modal, modalStore } from '@skeletonlabs/skeleton';
+import ProjectForm from "$lib/components/form/createProject.svelte";
+import type { ModalSettings, ModalComponent } from '@skeletonlabs/skeleton';
+
+const modalComponent: ModalComponent = {
+    ref: ProjectForm,
+};
+
+
+function modalForm(){
+    const modal: ModalSettings = {
+        type: 'component',
+        component: modalComponent,
+
+        title: 'Create Project',
+        body: 'Provide your first name in the field below.',
+        response: (r: string) => console.log('response:', r),
+        // Pass the component directly:
+    };
+    modalStore.trigger(modal);
+}
+// function modalPrompt(): void {
+//     const modal: ModalSettings = {
+//         type: 'prompt',
+//         title: 'Create Project',
+//         body: 'Provide your first name in the field below.',
+//         value: 'Project Name',
+//         valueAttr: { type: 'text', minlength: 3, maxlength: 10, required: true },
+//         response: (r: string) => console.log('response:', r)
+//     };
+//     modalStore.trigger(modal);
+// }
+
 </script>
 
+<Modal/>
 <!--sidebar toggle하는 녀석땜에 left-7 -->
-<div class="w-full h-full relative left-7 top-1">
-    <ol class="breadcrumb relative h-full">
+<div class="w-full h-full relative left-7 top-1 flex">
+    <!--    select Area-->
+    <ol class="breadcrumb h-full w-[140px]">
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
-
         <li>
-            <button >
-                Projects
+            <button class="btn w-20 py-1" use:popup={popupFeatured}>
+                <span class="capitalize font-semibold">{selectedArea ?? 'Area'}</span>
+                <span>↓</span>
             </button>
         </li>
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
-
-        <li class="crumb"><button >
-            <span
-                    class="chip mr-2 variant-filled-tertiary"
-                    on:click={() => { }}
-            ><Plus size={10} class="scale-[120%]"/></span>
-
-            {#each Object.keys(flavors) as f}
-                <span
-                        class="chip mr-2 {flavors[f] ? 'variant-filled' : 'variant-soft'}"
-                        on:click={() => { flavors[f] = !flavors[f];}}
-                        on:keypress
-                >
-                    {#if flavors[f]}<span><Check size={10} class="scale-[120%]"/></span>{/if}
-                    <span class="capitalize">{f}</span>
-                </span>
-            {/each}
-        </button></li>
-
-<!--        <button type="button" class="btn-icon variant-ghost-primary absolute right-7 !rounded-b scale-[80%] ">-->
-<!--            <Plus class="scale-95"/>-->
-<!--        </button>-->
     </ol>
+<!--    project list-->
+    <div class="w-[calc(100%-170px)] max-h-full max-w-[calc(100%-170px)] overflow-x-scroll overflow-y-clip hide-scrollbar whitespace-nowrap ">
+        <button
+                class="chip mr-2 variant-filled-tertiary fixed z-10 transform translate-y-2 "
+                on:click={ modalForm}
+        > <Plus size={10} class="scale-[120%]"/>
+        </button>
+
+        <span class="w-[40px] inline-block z-10"></span>
+
+        <button
+                class="chip mr-2 variant-filled-tertiary font-bold {showAllProjects ? 'variant-filled' : 'variant-soft'}"
+                on:click={() =>  {
+                            showAllProjects = !showAllProjects;
+                            Object.keys(flavors).forEach(f => flavors[f] = showAllProjects);
+                        }}
+        >ALL
+            <span
+                    class="chip ml-2 variant-glass-tertiary"
+                    on:click={() => { }}
+            ><Maximize2 size={10} class="scale-[120%]"/></span>
+        </button>
+
+        {#each Object.keys(flavors) as f}
+            <button
+                    class="chip mr-2 font-semibold {flavors[f] ? 'variant-filled' : 'variant-soft'}"
+                    on:click={() => { flavors[f] = !flavors[f];}}
+                    on:keypress
+            >
+                {#if flavors[f]}<span><Check size={10} class="scale-[120%]"/></span>{/if}
+                <span class="capitalize">{f}</span>
+                <span
+                        class="chip mx-2 variant-glass-secondary"
+                        on:click={() => { }}
+                ><PenLine  size={10} class="scale-[120%]"/></span>
+            </button>
+        {/each}
+    </div>
+</div>
+
+<!--Area popup combobox -> select area -->
+<div class="card p-4 w-48 shadow-xl z-10" data-popup="popupFeatured">
+    <div class="arrow bg-surface-100-800-token" />
+
+    <ListBox rounded="rounded-none" class="max-h-[130px] overflow-y-scroll hide-scrollbar">
+        <ListBoxItem bind:group={selectedArea} name="medium" value="books">Books</ListBoxItem>
+        <ListBoxItem bind:group={selectedArea} name="medium" value="movies">Movies</ListBoxItem>
+        <ListBoxItem bind:group={selectedArea} name="medium" value="television">TV</ListBoxItem>
+        <ListBoxItem bind:group={selectedArea} name="medium" value="movies">Movies</ListBoxItem>
+        <ListBoxItem bind:group={selectedArea} name="medium" value="television">TV</ListBoxItem>
+        <ListBoxItem bind:group={selectedArea} name="medium" value="movies">Movies</ListBoxItem>
+        <ListBoxItem bind:group={selectedArea} name="medium" value="television">TV</ListBoxItem>
+    </ListBox>
+
+    <button class="btn w-full">
+        <span
+                class="chip mr-2 variant-filled-tertiary"
+                on:click={() => { }}
+        ><Plus size={10} class="scale-[120%]"/></span>
+        New
+        <span
+                class="chip mr-2 variant-filled-tertiary"
+                on:click={() => { }}
+        ><Cog size={10} class="scale-[130%]"/></span>
+    </button>
 </div>
 

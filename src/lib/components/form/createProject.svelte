@@ -8,9 +8,11 @@
 
     // Form Data
     const formData = {
-        name: 'Jane Doe',
-        tel: '214-555-1234',
-        email: 'jdoe@email.com'
+        title:"",
+        color:"",
+        description:"",
+        duration_start:"",
+        duration_end:"",
     };
 
     // We've created a custom submit function to pass the response and close the modal.
@@ -18,7 +20,6 @@
         if ($modalStore[0].response) $modalStore[0].response(formData);
         modalStore.close();
     }
-
     // Base Classes
     const cBase = 'card p-4 w-modal shadow-xl space-y-4';
     const cHeader = 'text-2xl font-bold';
@@ -26,7 +27,6 @@
 </script>
 
 <!-- @component This example creates a simple form modal. -->
-
 {#if $modalStore[0]}
     <div class="modal-example-form {cBase}">
         <header class={cHeader}>{$modalStore[0].title ?? '(title missing)'}</header>
@@ -34,19 +34,24 @@
         <!-- Enable for debugging: -->
         <form class="modal-form {cForm}">
             <label class="label">
-                <span>Name</span>
-                <input class="input" type="text" bind:value={formData.name} placeholder="Enter name..." />
+                <span>Project Title</span>
+                <input class="input" type="text" bind:value={formData.title} placeholder="Enter Project Title..." />
             </label>
             <label class="label">
-                <span>Phone Number</span>
-                <input class="input" type="tel" bind:value={formData.tel} placeholder="Enter phone..." />
+                <span>Project Color</span>
+                <input class="input" type="color" bind:value={formData.color} placeholder="Enter Project Color..." />
             </label>
             <label class="label">
-                <span>Email</span>
-                <input class="input" type="email" bind:value={formData.email} placeholder="Enter email address..." />
+                <span>Description</span>
+                <input class="input" type="email" bind:value={formData.description} placeholder="Enter Project Info..." />
+            </label>
+            <label class="label">
+                <span>Duration</span>
+                <input class="input" type="date" bind:value={formData.duration_start} />
+                <input class="input" type="date" bind:value={formData.duration_end} />
             </label>
         </form>
-        <!-- prettier-ignore -->
+    <!--     prettier-ignore -->
         <footer class="modal-footer {parent.regionFooter}">
             <button class="btn {parent.buttonNeutral}" on:click={parent.onClose}>{parent.buttonTextCancel}</button>
             <button class="btn {parent.buttonPositive}" on:click={onFormSubmit}>Submit Form</button>
