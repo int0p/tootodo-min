@@ -29,7 +29,7 @@
         <slot/>
     </div>
     <div class="w-full">
-        <RadioGroup class="border-none py-2.5  bg-white/80 w-full relative"
+        <RadioGroup class="w-full relative border-none py-2.5  bg-white/80 dark:bg-black/50 "
                     background="none" display="flex items-center justify-end" active="variant-filled-primary" hover="hover:variant-soft-primary">
             <div class="w-[184px] flex space-x-2 absolute left-3">
                 <RadioItem bind:group={value} name="justify" value={1}><Map class="scale-[90%] rotate-90" /></RadioItem>

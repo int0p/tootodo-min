@@ -10,7 +10,7 @@
 <!--no dependency-->
 
 <!---->
-<div class="w-full h-full max-h-full max-w-full overflow-x-scroll overflow-y-clip hide-scrollbar text-token flex gap-4 p-0.5 pr-2 py-2">
+<div class="w-full h-full max-h-full max-w-full overflow-x-scroll overflow-y-clip hide-scrollbar text-token flex gap-4 p-0.5 pr-2 py-1">
     {#each Array(6) as _, i}
         <div class="card w-1/3  min-w-[300px] card-hover border-black dark:border-white border space-y-2 bg-white/30 dark:bg-black/30" >
 

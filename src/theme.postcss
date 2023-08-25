@@ -97,17 +97,17 @@
 	--color-error-800: 135 1 42; /* ⬅ #87012a */
 	--color-error-900: 110 0 34; /* ⬅ #6e0022 */
 
-	/* surface | #a38e81 */
-	--color-surface-50: 241 238 236; /* ⬅ #f1eeec */
-	--color-surface-100: 237 232 230; /* ⬅ #ede8e6 */
-	--color-surface-200: 232 227 224; /* ⬅ #e8e3e0 */
-	--color-surface-300: 218 210 205; /* ⬅ #dad2cd */
-	--color-surface-400: 191 176 167; /* ⬅ #bfb0a7 */
-	--color-surface-500: 163 142 129; /* ⬅ #a38e81 */
-	--color-surface-600: 147 128 116; /* ⬅ #938074 */
-	--color-surface-700: 122 107 97; /* ⬅ #7a6b61 */
-	--color-surface-800: 98 85 77; /* ⬅ #62554d */
-	--color-surface-900: 80 70 63; /* ⬅ #50463f */
+	/* surface | #bfb0a7 */
+    	--color-surface-50: 245 243 242; /* ⬅ #f5f3f2 */
+    	--color-surface-100: 242 239 237; /* ⬅ #f2efed */
+    	--color-surface-200: 239 235 233; /* ⬅ #efebe9 */
+    	--color-surface-300: 229 223 220; /* ⬅ #e5dfdc */
+    	--color-surface-400: 210 200 193; /* ⬅ #d2c8c1 */
+    	--color-surface-500: 191 176 167; /* ⬅ #bfb0a7 */
+    	--color-surface-600: 172 158 150; /* ⬅ #ac9e96 */
+    	--color-surface-700: 143 132 125; /* ⬅ #8f847d */
+    	--color-surface-800: 115 106 100; /* ⬅ #736a64 */
+    	--color-surface-900: 94 86 82; /* ⬅ #5e5652 */
 }
 /* =~= Gold Nouveau (dark mode overrides) =~= */
 .dark  {
@@ -146,9 +146,9 @@
 [data-theme='gold-nouveau'] {
 	background-image:
         radial-gradient(at 100% 0%, hsla(135,34%,70%,0.14) 0px, transparent 50%),
-        radial-gradient(at 85% 100%, hsla(31,83%,50%,0.14) 0px, transparent 50%),
+        radial-gradient(at 85% 100%, rgba(var(--color-tertiary-500) / 0.33) 0px, transparent 50%),
 		radial-gradient(at 0% 100%, rgba(var(--color-secondary-500) / 0.33) 0px, transparent 50%),
-		radial-gradient(at 98% 100%, rgba(var(--color-error-500) / 0.33) 0px, transparent 50%);
+		radial-gradient(at 100% 100%, rgba(var(--color-error-500) / 0.33) 0px, transparent 50%);
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;

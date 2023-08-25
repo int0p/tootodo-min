@@ -7,7 +7,11 @@ let flavors: Record<string, boolean> = {
     cake: false,
     milk: false,
     candy: false,
-    strawberry: false
+    strawberry: false,
+    cookie: false,
+    mint: false,
+    caramel: false,
+    coffee: false,
 };
 let showAllProjects = false;
 
@@ -78,28 +82,21 @@ function modalCreateProject(){
 
     </ol>
 <!--    project list-->
-    <div class="w-[calc(100%-170px)] max-h-full max-w-[calc(100%-170px)] overflow-x-scroll overflow-y-clip hide-scrollbar whitespace-nowrap ">
-        <button
-                class="chip mr-2 variant-filled-primary fixed z-10 transform translate-y-2 "
-                on:click={ modalCreateProject}
-        > <Plus size={10} class="scale-[120%]"/>
-        </button>
-
-        <span class="w-[40px] inline-block z-10"></span>
-
-        <button
-                class="chip mr-2 variant-filled-tertiary font-bold {showAllProjects ? 'variant-filled' : 'variant-soft'}"
-                on:click={() =>  {
+    <button
+            class="chip my-1 mr-2 variant-soft-primary font-bold w-[90px] {showAllProjects ? 'variant-filled' : 'variant-soft'}"
+            on:click={() =>  {
                             showAllProjects = !showAllProjects;
                             Object.keys(flavors).forEach(f => flavors[f] = showAllProjects);
                         }}
-        >ALL
-            <span
-                    class="chip ml-2 variant-glass-tertiary"
-                    on:click={() => { }}
-            ><Maximize2 size={10} class="scale-[120%]"/></span>
+    >ALL
+        <button
+                class="chip mr-2  z-0 transform translate-x-3 variant-soft-tertiary"
+                on:click={ modalCreateProject}
+        > <Plus size={10} class="scale-[120%]"/>
         </button>
+    </button>
 
+    <div class="w-[calc(100%-265px)] max-h-full max-w-[calc(100%-265px)] overflow-x-scroll overflow-y-clip hide-scrollbar whitespace-nowrap transform translate-y-1.5">
         {#each Object.keys(flavors) as f}
             <button
                     class="chip mr-2 font-semibold {flavors[f] ? 'variant-filled' : 'variant-soft'}"
@@ -111,10 +108,10 @@ function modalCreateProject(){
             >
                 {#if flavors[f]}<span><Check size={10} class="scale-[120%]"/></span>{/if}
                 <span class="capitalize">{f}</span>
-                <span
-                        class="chip mx-2 variant-glass-secondary"
-                        on:click={() => { }}
-                ><PenLine  size={10} class="scale-[120%]"/></span>
+<!--                <span-->
+<!--                        class="chip mx-2 variant-glass-secondary"-->
+<!--                        on:click={() => { }}-->
+<!--                ><PenLine  size={10} class="scale-[120%]"/></span>-->
             </button>
         {/each}
     </div>
