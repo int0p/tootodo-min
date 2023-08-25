@@ -59,7 +59,6 @@ function modalCreateProject(){
 //     };
 //     modalStore.trigger(modal);
 // }
-
 </script>
 
 <Modal/>
@@ -70,7 +69,7 @@ function modalCreateProject(){
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
         <li>
             <button class="btn w-20 py-1" use:popup={popupFeatured}>
-                <span class="capitalize font-semibold">{selectedArea ?? 'Area'}</span>
+                <span class="capitalize ">{selectedArea ?? 'Area'}</span>
                 <span>↓</span>
             </button>
         </li>
@@ -104,7 +103,10 @@ function modalCreateProject(){
         {#each Object.keys(flavors) as f}
             <button
                     class="chip mr-2 font-semibold {flavors[f] ? 'variant-filled' : 'variant-soft'}"
-                    on:click={() => { flavors[f] = !flavors[f];}}
+                    on:click={() => {
+                        if(flavors[f] === true) showAllProjects = false;
+                        flavors[f] = !flavors[f];
+                    }}
                     on:keypress
             >
                 {#if flavors[f]}<span><Check size={10} class="scale-[120%]"/></span>{/if}

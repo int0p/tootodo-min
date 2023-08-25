@@ -12,18 +12,19 @@
 <!---->
 <div class="w-full h-full max-h-full max-w-full overflow-x-scroll overflow-y-clip hide-scrollbar text-token flex gap-4 p-0.5 pr-2 py-2">
     {#each Array(6) as _, i}
-        <div class="card w-1/3  min-w-[300px] {currentVariant} card-hover border-black dark:border-white border space-y-2" >
+        <div class="card w-1/3  min-w-[300px] card-hover border-black dark:border-white border space-y-2 bg-white/30 dark:bg-black/30" >
 
             <header class="relative overflow-hidden text-black border-b border-black border-dashed dark:border-white
                                     {showTodo ? "h-[54px]" :"h-[128px]"}">
-                <button class="btn absolute top-2 right-1 bg-surface-50 w-[30px] h-[24px] z-20 " on:click={()=>showTodo = !showTodo}>
+                                    <img src={"/city.png"} class="w-full absolute  aspect-[21/9] -z-10 dark:z-0 dark:opacity-80"/>
+                <button class="btn absolute top-2 right-1 bg-surface-50 w-[30px] h-[24px]  " on:click={()=>showTodo = !showTodo}>
                     {#if showTodo}
                         <span><ChevronDown color="#775f5f" /></span>
                     {:else}
                         <span><ChevronUp color="#775f5f" /></span>
                     {/if}
                 </button>
-                <div class="px-4 py-1.5 absolute h-full w-5/6 bg-white/90 z-20 flex-col space-y-0">
+                <div class="px-4 py-1.5 absolute h-full w-5/6 bg-white/80 dark:bg-black/70 dark:text-white   flex-col space-y-0">
                         <div class="flex justify-between">
                             <h6 class="text-sm">project </h6>
                             <h3 class="text-xl" >Milestone {i+1}</h3>
@@ -32,16 +33,13 @@
                             description of the project description of the project description of the project description of the project
                         </p>
                     </div>
-                    <img src={'' +
-                'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80'
-                 +
-                 ''} class="w-full absolute top-0 aspect-[21/9]" alt="Post" />
+
             </header>
 
 <!--            heatmap-->
             {#if !showTodo}
                 <div class="flex w-[280px] h-[140px] m-auto">
-                    <div class="day h-full mr-1 text-xs text-center ">
+                    <div class="day h-full mr-1 text-xs text-center">
                         <div>S</div>
                         <div>M</div>
                         <div>T</div>
@@ -56,7 +54,7 @@
                             <tr>
                                 <!-- 주당 7일 반복 -->
                                 {#each Array(2) as _,j}
-                                    <td data-commit="2"></td>
+                                    <td data-commit="0"></td>
                                     <td data-commit="1"></td>
                                     <td data-commit="2"></td>
                                     <td data-commit="3"></td>
@@ -69,7 +67,7 @@
 
                         <tr class="text-xs text-center bg-transparent">
                             {#each Array(14) as _, i}
-                                <td>{i+1}</td>
+                                <td class="!border-0">{i+1}</td>
                             {/each}
                         </tr>
 
@@ -79,13 +77,19 @@
             {/if}
 
             <footer class="px-3 py-1 flex justify-between items-center">
-                <small class="text-primary-600-300-token">FROM </small>
-                <small>{new Date().toLocaleDateString()}</small>
-                <small> - </small>
-                <small>{new Date().toLocaleDateString()}</small>
+                <small class="text-primary-600-300-token ">FROM </small>
+                <small class="">{new Date().toLocaleDateString()}</small>
+                <small class="font-semibold"> -- </small>
+                <small class="">{new Date().toLocaleDateString()}</small>
                 <small class="text-primary-600-300-token">TO </small>
             </footer>
             <hr class="opacity-50" />
+
+            {#if !showTodo}
+                <div class="px-2">
+                    memo
+                </div>
+            {/if}
 
 <!--            todolist-->
             {#if showTodo}
@@ -130,16 +134,43 @@
     height: calc(120px / 7);             /* 각 셀의 세로 길이 */
   }
 
+
   .grass-table td {
     width: calc(120px / 7);   /* 각 셀의 가로 길이 (300을 13으로 나눈 값) */
     height: calc(120px / 7);             /* 각 셀의 세로 길이 */
-    border: 1px solid #ebedf0;  /* 경계선 색상 */
+    border: 1px solid #f1eff5;  /* 경계선 색상 */
+  }
+  .grass-table td[data-commit="0"] { background-color: #d9d4e4 ; }//300
+  .grass-table td[data-commit="1"] { background-color: #bdb3cf; } //400
+  .grass-table td[data-commit="2"] { background-color: #a193bb ; } //500
+  .grass-table td[data-commit="3"] { background-color: #796e8c; } //700
+  .grass-table td[data-commit="4"] { background-color: #4f485c; } //900
+
+  .primary{
+    .grass-table td {
+      width: calc(120px / 7);   /* 각 셀의 가로 길이 (300을 13으로 나눈 값) */
+      height: calc(120px / 7);             /* 각 셀의 세로 길이 */
+      border: 1px solid #e1e8ea;  /* 경계선 색상,50 */
+    }
+    /* 커밋 수에 따른 배경색 변경 */
+    .grass-table td[data-commit="0"] { background-color: #d6e0e2; } //100
+    .grass-table td[data-commit="1"] { background-color: #aec1c6; } //300
+    .grass-table td[data-commit="2"] { background-color: #71929b; } //400
+    .grass-table td[data-commit="3"] { background-color: #2f5965 ; }//600
+    .grass-table td[data-commit="4"] { background-color: #1f3b43; } //800
   }
 
-  /* 커밋 수에 따른 배경색 변경 */
-  .grass-table td[data-commit="0"] { background-color: #ebedf0; }
-  .grass-table td[data-commit="1"] { background-color: #9be9a8; }
-  .grass-table td[data-commit="2"] { background-color: #40c463; }
-  .grass-table td[data-commit="3"] { background-color: #30a14e; }
-  .grass-table td[data-commit="4"] { background-color: #216e39; }
+  .primary-dark{
+    .grass-table td {
+      width: calc(120px / 7);   /* 각 셀의 가로 길이 (300을 13으로 나눈 값) */
+      height: calc(120px / 7);             /* 각 셀의 세로 길이 */
+      border: 1px solid #fefaea;  /* 경계선 색상 */
+    }
+    .grass-table td[data-commit="0"] { background-color: #fdf8e3; } //100
+    .grass-table td[data-commit="1"] { background-color: #fcf1c7; } //300
+    .grass-table td[data-commit="2"] { background-color: #f7db73; } //500
+    .grass-table td[data-commit="3"] { background-color: #dec568 ; }//600
+    .grass-table td[data-commit="4"] { background-color: #796b38; } //900
+  }
+
 </style>

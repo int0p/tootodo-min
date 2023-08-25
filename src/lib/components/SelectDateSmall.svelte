@@ -9,32 +9,15 @@
 </script>
 
 <div class="flex w-full justify-center space-x-2 font-bold mx-2 -my-0.5 relative">
-	<!--            choose another date-->
-	<button
-		class="chip variant-soft-primary w-1/6 flex-col items-center text-lg px-2"
-		on:click={() => (showCalendar = !showCalendar)}
-	>
-		<CalendarRange size="22" />
-	</button>
-	{#if showCalendar}
-		<input
-			type="date"
-			bind:value={selectedDateInput}
-			class="absolute -left-2 top-12 z-50"
-			on:change={() => {
-				showCalendar = false;
-				$selectedDate = selectedDateInput;
-			}}
-		/>
-	{/if}
+
 	<!--    week-->
 	<button
-		class="chip variant-soft-secondary w-1/5 flex-col justify-center items-center divide-y-2 text-[0.9rem]"
+		class="chip variant-soft-secondary w-2/5 flex-col justify-center items-center divide-y-2 text-[0.9rem]"
 		on:click={() => {
 			showWeekly = true;
 		}}
 	>
-		[ {moment($selectedDate).weeks()} ]
+		Week {moment($selectedDate).weeks()}
 	</button>
 
 	<!--    date-->
@@ -53,4 +36,23 @@
 			</div>
 		</div>
 	</button>
+
+	<!--            choose another date-->
+	<button
+			class="chip variant-soft-primary w-1/6 flex-col items-center text-lg px-2"
+			on:click={() => (showCalendar = !showCalendar)}
+	>
+		<CalendarRange size="22" />
+	</button>
+	{#if showCalendar}
+		<input
+				type="date"
+				bind:value={selectedDateInput}
+				class="absolute -right-2 top-12 z-50"
+				on:change={() => {
+				showCalendar = false;
+				$selectedDate = selectedDateInput;
+			}}
+		/>
+	{/if}
 </div>
