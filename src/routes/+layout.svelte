@@ -153,20 +153,20 @@
 					class="relative w-full h-full"
 				>
 					<Music4 size="23" class="relative top-1 -left-2" strokeWidth={1.5} />
-					<div class="chip absolute top-1 left-4 w-[calc(100%-130px)] h-full px-2 text-[1rem]">
-						재생중인 노래가 없습니다
+					<div class="chip absolute top-1 left-5 w-[calc(100%-130px)] h-full px-2 text-[1rem]">
+						재생중인 노래가 없습니다.
 					</div>
 					<div
 						class="chip variant-glass-primary py-1 px-2 absolute bottom-1 right-24
     									dark:bg-primary-500/50 dark:text-white z-10"
 					>
-						<span><Repeat1 size={16} /></span>
+<!--						<span><Repeat1 size={16} /></span>-->
 					</div>
 				</TabAnchor>
 
 				<!--				music controller-->
 				<div
-					class="absolute flex -right-2 top-[0.55rem] z-10 rounded-lg text-black
+					class="absolute flex -right-1 top-[0.55rem] z-10 rounded-lg text-black
 				divide-x divide-black dark:text-white dark:divide-white
 				border border-surface-400-500-token
 				 "

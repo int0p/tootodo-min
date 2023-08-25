@@ -16,8 +16,8 @@
 
             <header class="relative overflow-hidden text-black border-b border-black border-dashed dark:border-white
                                     {showTodo ? "h-[54px]" :"h-[128px]"}">
-                                    <img src={"/city.png"} class="w-full absolute  aspect-[21/9] -z-10 dark:z-0 dark:opacity-80"/>
-                <button class="btn absolute top-2 right-1 bg-surface-50 w-[30px] h-[24px]  " on:click={()=>showTodo = !showTodo}>
+                                    <img src={"/city.png"} class="w-full absolute  aspect-[21/9] -z-10 dark:z-0 dark:opacity-70"/>
+                <button class="btn absolute top-2 right-1 bg-surface-50 w-[30px] h-[24px] opacity-60  " on:click={()=>showTodo = !showTodo}>
                     {#if showTodo}
                         <span><ChevronDown color="#775f5f" /></span>
                     {:else}

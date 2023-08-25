@@ -118,7 +118,7 @@ function modalCreateProject(){
 </div>
 
 <!--Area popup combobox -> select area -->
-<div class="card p-4 w-48 shadow-xl z-10 flex-col space-y-2" data-popup="popupFeatured">
+<div class="card p-4 w-48 shadow-xl z-50 flex-col space-y-2" data-popup="popupFeatured">
     <div class="arrow bg-surface-100-800-token" />
     <button class="btn w-full absolute top-0 -right-16" on:click={() => { }}>
             <span
