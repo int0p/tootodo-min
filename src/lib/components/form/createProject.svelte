@@ -24,6 +24,7 @@
     const cBase = 'card p-4 w-modal shadow-xl space-y-4';
     const cHeader = 'text-2xl font-bold';
     const cForm = 'border border-surface-500 p-4 space-y-4 rounded-container-token';
+    const cTitle = 'text-lg font-bold';
 </script>
 
 <!-- @component This example creates a simple form modal. -->
@@ -34,21 +35,29 @@
         <!-- Enable for debugging: -->
         <form class="modal-form {cForm}">
             <label class="label">
-                <span>Project Title</span>
+                <span class={cTitle}>Project Title</span>
                 <input class="input" type="text" bind:value={formData.title} placeholder="Enter Project Title..." />
             </label>
             <label class="label">
-                <span>Project Color</span>
-                <input class="input" type="color" bind:value={formData.color} placeholder="Enter Project Color..." />
+                <span class={cTitle}>Project Color</span>
+                <input class="input !h-[24px] relative top-1.5 left-1.5" type="color" bind:value={formData.color} />
             </label>
             <label class="label">
-                <span>Description</span>
+                <span class={cTitle}>Description</span>
                 <input class="input" type="email" bind:value={formData.description} placeholder="Enter Project Info..." />
             </label>
             <label class="label">
-                <span>Duration</span>
-                <input class="input" type="date" bind:value={formData.duration_start} />
-                <input class="input" type="date" bind:value={formData.duration_end} />
+                <span class={cTitle}>Duration</span>
+                <div class="flex space-x-3">
+                    <div class="w-1/2">
+                        <span class="font-semibold">from</span>
+                        <input class="input" type="date" bind:value={formData.duration_start} />
+                    </div>
+                    <div class = "w-1/2">
+                        <span class="font-semibold">to</span>
+                        <input class="input" type="date" bind:value={formData.duration_end} />
+                    </div>
+                </div>
             </label>
         </form>
     <!--     prettier-ignore -->

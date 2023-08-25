@@ -36,13 +36,13 @@ const modalComponent: ModalComponent = {
 };
 
 
-function modalForm(){
+function modalCreateProject(){
     const modal: ModalSettings = {
         type: 'component',
         component: modalComponent,
 
         title: 'Create Project',
-        body: 'Provide your first name in the field below.',
+        body: '새로 추가할 프로젝트의 정보를 입력하세요',
         response: (r: string) => console.log('response:', r),
         // Pass the component directly:
     };
@@ -74,13 +74,15 @@ function modalForm(){
                 <span>↓</span>
             </button>
         </li>
+
         <li class="crumb-separator" aria-hidden>&rsaquo;</li>
+
     </ol>
 <!--    project list-->
     <div class="w-[calc(100%-170px)] max-h-full max-w-[calc(100%-170px)] overflow-x-scroll overflow-y-clip hide-scrollbar whitespace-nowrap ">
         <button
-                class="chip mr-2 variant-filled-tertiary fixed z-10 transform translate-y-2 "
-                on:click={ modalForm}
+                class="chip mr-2 variant-filled-primary fixed z-10 transform translate-y-2 "
+                on:click={ modalCreateProject}
         > <Plus size={10} class="scale-[120%]"/>
         </button>
 
@@ -117,29 +119,29 @@ function modalForm(){
 </div>
 
 <!--Area popup combobox -> select area -->
-<div class="card p-4 w-48 shadow-xl z-10" data-popup="popupFeatured">
+<div class="card p-4 w-48 shadow-xl z-10 flex-col space-y-2" data-popup="popupFeatured">
     <div class="arrow bg-surface-100-800-token" />
-
+    <button class="btn w-full absolute top-0 -right-16" on:click={() => { }}>
+            <span
+                    class="chip mr-2 variant-filled-tertiary"
+            ><Cog size={10} class="scale-[130%]"/></span>
+    </button>
     <ListBox rounded="rounded-none" class="max-h-[130px] overflow-y-scroll hide-scrollbar">
         <ListBoxItem bind:group={selectedArea} name="medium" value="books">Books</ListBoxItem>
         <ListBoxItem bind:group={selectedArea} name="medium" value="movies">Movies</ListBoxItem>
         <ListBoxItem bind:group={selectedArea} name="medium" value="television">TV</ListBoxItem>
-        <ListBoxItem bind:group={selectedArea} name="medium" value="movies">Movies</ListBoxItem>
-        <ListBoxItem bind:group={selectedArea} name="medium" value="television">TV</ListBoxItem>
-        <ListBoxItem bind:group={selectedArea} name="medium" value="movies">Movies</ListBoxItem>
-        <ListBoxItem bind:group={selectedArea} name="medium" value="television">TV</ListBoxItem>
+        <ListBoxItem bind:group={selectedArea} name="medium" value="gpt">GPT</ListBoxItem>
     </ListBox>
 
-    <button class="btn w-full">
-        <span
-                class="chip mr-2 variant-filled-tertiary"
-                on:click={() => { }}
-        ><Plus size={10} class="scale-[120%]"/></span>
-        New
-        <span
-                class="chip mr-2 variant-filled-tertiary"
-                on:click={() => { }}
-        ><Cog size={10} class="scale-[130%]"/></span>
-    </button>
+    <div class="flex relative">
+        <input type="text" placeholder="Add Area" class="w-full"/>
+        <button class="btn absolute -right-8 -top-0.5" on:click={() => { }}>
+            <span
+                    class="chip mr-2 variant-filled-primary"
+            ><Plus size={10} class="scale-[120%]"/></span>
+        </button>
+    </div>
+
+
 </div>
 

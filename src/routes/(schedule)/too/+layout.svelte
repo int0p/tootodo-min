@@ -1,7 +1,7 @@
 
 <script lang="ts">
     import { TreeView, TreeViewItem, RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
-    import {Map, BarChartHorizontalBig,Presentation, Library } from "lucide-svelte";
+    import {Map, BarChartHorizontalBig,Presentation, Library,Plus,Castle } from "lucide-svelte";
     import {BreadcrumbToo} from "$components";
     import {browser} from "$app/environment";
     import {goto} from "$app/navigation";
@@ -25,18 +25,24 @@
     <div class="h-10 w-full">
         <BreadcrumbToo/>
     </div>
-
-    <RadioGroup class="justify-end border-none py-2.5  z-10 absolute bottom-0 w-full  bg-white/90 "
-                background="none" display="flex" active="variant-filled-primary" hover="hover:variant-soft-primary">
-
-        <RadioItem bind:group={value} name="justify" value={1}><BarChartHorizontalBig class="scale-[90%]" /></RadioItem>
-        <RadioItem bind:group={value} name="justify" value={2}><Map class="scale-[90%]" /></RadioItem>
-        <RadioItem bind:group={value} name="justify" value={0}><Library  class="scale-[90%]" /></RadioItem>
-    </RadioGroup>
-
-    <div class="w-full h-[calc(100%-50px)]">
+    <div class="w-full h-[calc(100%-108px)]">
         <slot/>
     </div>
+    <div class="w-full">
+        <RadioGroup class="border-none py-2.5  bg-white/80 w-full relative"
+                    background="none" display="flex items-center justify-end" active="variant-filled-primary" hover="hover:variant-soft-primary">
+            <div class="w-[184px] flex space-x-2 absolute left-3">
+                <RadioItem bind:group={value} name="justify" value={1}><Map class="scale-[90%] rotate-90" /></RadioItem>
+                <RadioItem bind:group={value} name="justify" value={2}><Map class="scale-[90%]" /></RadioItem>
+                <RadioItem bind:group={value} name="justify" value={0}><Castle  class="scale-[90%]" /></RadioItem>
+            </div>
+            <div class="w-[calc(100%-200px)] h-[32px] flex !rounded-2xl rounded-l ">
+                <input type="text" class="w-full !rounded-xl shadow z-10 transform -translate-y-0.5" placeholder="add todo"/>
+                <RadioItem name="justify"  class="transform -translate-x-2"><Plus  class="scale-[90%]" /></RadioItem>
+            </div>
+        </RadioGroup>
+    </div>
+
 
 </div>
 
