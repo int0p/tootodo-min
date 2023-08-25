@@ -16,7 +16,11 @@
 	
 	afterUpdate(async () => {
 		try {
-			pomoRecords = await getPomoRecords($selectedDate);
+			if (typeof window.tauri !== "undefined") {
+				pomoRecords = await getPomoRecords($selectedDate);
+			} else {
+				console.log("ten minutes table, 웹 브라우저에서 실행 중");
+			}
 			getDayHours();
 			colorTable = Array.from(Array(dayHours.length), () =>
 				Array(60).fill({

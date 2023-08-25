@@ -21,7 +21,11 @@
 		studyTime = [];
 		startTime = [];
 		endTime = [];
-		pomoRecords = await getPomoRecords($selectedDate);
+		if (typeof window.tauri !== "undefined") {
+			pomoRecords = await getPomoRecords($selectedDate);
+		} else {
+			console.log("do page, 웹 브라우저에서 실행 중");
+		}
 	});
 
 	//display pomodoro records
