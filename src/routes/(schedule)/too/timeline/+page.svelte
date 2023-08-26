@@ -1,4 +1,27 @@
-<script>
+<script lang="ts">
+    import {Plus} from "lucide-svelte";
+    import { Modal, modalStore } from '@skeletonlabs/skeleton';
+    import ProjectForm from "$lib/components/form/createProject.svelte";
+    import type { ModalSettings, ModalComponent } from '@skeletonlabs/skeleton';
+
+    const modalComponent: ModalComponent = {
+        ref: ProjectForm,
+    };
+
+
+    function modalCreateProject(){
+        const modal: ModalSettings = {
+            type: 'component',
+            component: modalComponent,
+
+            title: 'Create Project',
+            body: '새로 추가할 프로젝트의 정보를 입력하세요',
+            response: (r: string) => console.log('response:', r),
+            // Pass the component directly:
+        };
+        modalStore.trigger(modal);
+    }
+
     const dayInMs = 24 * 60 * 60 * 1000;
 
     function daysBetween(start, end) {
@@ -18,15 +41,16 @@
     ];
 </script>
 
+<Modal/>
 
 <table class="w-full bg-white h-[50px] rounded-t-xl border-b text-black">
     <thead class="">
     <tr class="sticky">
-        <th rowspan="2" class="border-r w-[4%]"><button class="">v</button></th>
+        <th rowspan="2" class="border-r w-[5%]"><button class="">v</button></th>
         <th rowspan="2" class="border-r w-[20%]">milestone</th>
         <th rowspan="2" class="border-r w-[7%]">status</th>
         <th rowspan="2" class="border-r w-[13%]">duration</th>
-        <th class="border-b w-[56%]"><input type="date"/>            -            <input type="date"/></th>
+        <th class="border-b w-[55%]"><input type="date"/>            -            <input type="date"/></th>
     </tr>
     <tr class="">
         <td>            start        </td>
@@ -37,20 +61,22 @@
 <div class="w-[calc(100%+8px)] h-[calc(100%-70px)] overflow-y-scroll flex-col space-y-2">
     {#each Array(3) as _,i}
     <div class="my-2 border-b-2">
-        <header class="h-[40px] bg-white/40 dark:bg-white/20">
-            <button class="btn">
-                +
+        <header class="h-[40px] bg-white/40 dark:bg-white/20 flex items-center space-x-2 p-2">
+            <button
+                    class="chip z-0 variant-soft-secondary"
+                    on:click={ modalCreateProject}
+            > <Plus size={10} class="scale-[120%]"/>
             </button>
             <span class="font-bold text-xl ">Project {i}</span>
         </header>
         <table class="w-full bg-white text-black">
             <thead class="">
             <tr >
-                <th class="w-[4%]"></th>
+                <th class="w-[5%]"></th>
                 <th class="w-[20%]"></th>
                 <th class="w-[7%]"></th>
                 <th class=" w-[13%]"></th>
-                <th class="w-[56%]"></th>
+                <th class="w-[55%]"></th>
             </tr>
             </thead>
             <tbody class="">
@@ -101,7 +127,7 @@
         height: 30px;
         margin: 5px 0;
         color:white;
-        background-color: #4CAF50;
+        background-color: #a193bb;
         line-height: 30px;
         text-align: center;
     }
@@ -110,7 +136,7 @@
         height: 30px;
         margin: 5px 0;
         color:white;
-        background-color: #6a806a;
+        background-color: #4f485c ;
         line-height: 30px;
         text-align: center;
     }

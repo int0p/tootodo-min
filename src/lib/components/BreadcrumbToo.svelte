@@ -31,41 +31,10 @@ const popupFeatured: PopupSettings = {
 };
 
 import { Maximize2, PenLine, Trash2,Cog} from 'lucide-svelte';
-import { Modal, modalStore } from '@skeletonlabs/skeleton';
-import ProjectForm from "$lib/components/form/createProject.svelte";
-import type { ModalSettings, ModalComponent } from '@skeletonlabs/skeleton';
 
-const modalComponent: ModalComponent = {
-    ref: ProjectForm,
-};
-
-
-function modalCreateProject(){
-    const modal: ModalSettings = {
-        type: 'component',
-        component: modalComponent,
-
-        title: 'Create Project',
-        body: '새로 추가할 프로젝트의 정보를 입력하세요',
-        response: (r: string) => console.log('response:', r),
-        // Pass the component directly:
-    };
-    modalStore.trigger(modal);
-}
-// function modalPrompt(): void {
-//     const modal: ModalSettings = {
-//         type: 'prompt',
-//         title: 'Create Project',
-//         body: 'Provide your first name in the field below.',
-//         value: 'Project Name',
-//         valueAttr: { type: 'text', minlength: 3, maxlength: 10, required: true },
-//         response: (r: string) => console.log('response:', r)
-//     };
-//     modalStore.trigger(modal);
-// }
 </script>
 
-<Modal/>
+
 <!--sidebar toggle하는 녀석땜에 left-7 -->
 <div class="w-full h-full relative left-7 top-1 flex">
     <!--    select Area-->
@@ -83,17 +52,12 @@ function modalCreateProject(){
     </ol>
 <!--    project list-->
     <button
-            class="chip my-1 mr-2 variant-soft-primary font-bold w-[90px] {showAllProjects ? 'variant-filled' : 'variant-soft'}"
+            class="chip my-1 mr-2 font-bold w-[40px] {showAllProjects ? 'variant-filled-tertiary' : 'variant-soft-tertiary'}"
             on:click={() =>  {
                             showAllProjects = !showAllProjects;
                             Object.keys(flavors).forEach(f => flavors[f] = showAllProjects);
                         }}
     >ALL
-        <button
-                class="chip mr-2  z-0 transform translate-x-3 variant-soft-tertiary"
-                on:click={ modalCreateProject}
-        > <Plus size={10} class="scale-[120%]"/>
-        </button>
     </button>
 
     <div class="w-[calc(100%-265px)] max-h-full max-w-[calc(100%-265px)] overflow-x-scroll overflow-y-clip hide-scrollbar whitespace-nowrap transform translate-y-1.5">

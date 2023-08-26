@@ -1,13 +1,10 @@
 <script>
     import {X, ChevronDown,ChevronUp} from "lucide-svelte";
 
-    let currentVariant = '!bg-transparent';
     let todoSelected = false;
     let todo = "hello  world";
     let showTodo = false;
 </script>
-
-<!--no dependency-->
 
 <!---->
 <div class="w-full h-full max-h-full max-w-full overflow-x-scroll overflow-y-clip hide-scrollbar text-token flex gap-4 p-0.5 pr-2 py-1">
