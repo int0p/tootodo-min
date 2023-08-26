@@ -12,6 +12,7 @@ let flavors: Record<string, boolean> = {
     mint: false,
     caramel: false,
     coffee: false,
+    peanut: false,
 };
 let showAllProjects = false;
 
@@ -60,7 +61,7 @@ import { Maximize2, PenLine, Trash2,Cog} from 'lucide-svelte';
     >ALL
     </button>
 
-    <div class="w-[calc(100%-265px)] max-h-full max-w-[calc(100%-265px)] overflow-x-scroll overflow-y-clip hide-scrollbar whitespace-nowrap transform translate-y-1.5">
+    <div class="w-[calc(100%-216px)] max-h-full max-w-[calc(100%-216px)] overflow-x-scroll overflow-y-clip hide-scrollbar whitespace-nowrap transform translate-y-1.5">
         {#each Object.keys(flavors) as f}
             <button
                     class="chip mr-2 font-semibold {flavors[f] ? 'variant-filled' : 'variant-soft'}"
@@ -100,7 +101,7 @@ import { Maximize2, PenLine, Trash2,Cog} from 'lucide-svelte';
         <input type="text" placeholder="Add Area" class="w-full"/>
         <button class="btn absolute -right-8 -top-0.5" on:click={() => { }}>
             <span
-                    class="chip mr-2 variant-filled-primary"
+                    class="chip mr-2 variant-filled-tertiary"
             ><Plus size={10} class="scale-[120%]"/></span>
         </button>
     </div>

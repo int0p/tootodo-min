@@ -1,5 +1,4 @@
 <script lang="ts">
-    import {Plus} from "lucide-svelte";
     import { Modal, modalStore } from '@skeletonlabs/skeleton';
     import ProjectForm from "$lib/components/form/createProject.svelte";
     import type { ModalSettings, ModalComponent } from '@skeletonlabs/skeleton';
@@ -31,6 +30,7 @@
     let tasks = [
         { id: 1, name: "Task 1", start: new Date(2023, 0, 1), end: new Date(2023, 0, 5) },
         { id: 2, name: "Task 2", start: new Date(2023, 0, 3), end: new Date(2023, 0, 8) },
+        { id: 3, name: "Task 3", start: new Date(2023, 0, 3), end: new Date(2023, 0, 8) },
         // ... other tasks
     ];
 
@@ -63,9 +63,9 @@
     <div class="my-2 border-b-2">
         <header class="h-[40px] bg-white/40 dark:bg-white/20 flex items-center space-x-2 p-2">
             <button
-                    class="chip z-0 variant-soft-secondary"
+                    class="chip variant-soft-primary w-8 h-6 "
                     on:click={ modalCreateProject}
-            > <Plus size={10} class="scale-[120%]"/>
+            > <span class=" text-primary-700 scale-110">+</span>
             </button>
             <span class="font-bold text-xl ">Project {i}</span>
         </header>
@@ -79,10 +79,16 @@
                 <th class="w-[55%]"></th>
             </tr>
             </thead>
-            <tbody class="">
+            <tbody class="border-b-2">
             {#each milestones as milestone,i}
                 <tr class="border-t-2">
-                    <td class="border-r text-center">+</td>
+                    <td class="border-r text-center">
+                        <button
+                                class="chip variant-soft-secondary w-7 h-6"
+                                on:click={ modalCreateProject}
+                        > <span class=" text-secondary-700">+</span>
+                        </button>
+                    </td>
                     <td class="border-r pl-2">milestone-name {i}</td>
                     <td class="border-r pl-2">state {i}</td>
                     <td class="border-r">
@@ -101,7 +107,13 @@
 
                 {#each tasks as task (task.id)}
                     <tr>
-                        <td class="border text-end p-2">+</td>
+                        <td class="border text-end p-2">
+                            <button
+                                    class="chip variant-soft-surface w-7 h-5"
+                                    on:click={ modalCreateProject}
+                            > <span class=" text-surface-700 ">+</span>
+                            </button>
+                        </td>
                         <td class="border pl-4">{task.name}</td>
                         <td class="border">{i}</td>
                         <td class="border">0825 - 9023</td>
