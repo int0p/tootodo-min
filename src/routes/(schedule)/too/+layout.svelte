@@ -11,7 +11,7 @@
 
     $:{
         if(browser){
-            if(value===0) goto('/too');
+            if(value===0) goto('/too/timeline');
             if(value===1) goto('/too/gantt/tree');
             if(value===2) goto('/too/workingBoard');
         }
@@ -32,9 +32,9 @@
         <RadioGroup class="w-full relative border-none py-2.5  bg-white/80 dark:bg-black/50 "
                     background="none" display="flex items-center justify-end" active="variant-filled-primary" hover="hover:variant-soft-primary">
             <div class="w-[184px] flex space-x-2 absolute left-3">
-                <RadioItem bind:group={value} name="justify" value={1}><Map class="scale-[90%] rotate-90" /></RadioItem>
+                <RadioItem bind:group={value} name="justify" value={0}><Map class="scale-[90%] rotate-90" /></RadioItem>
                 <RadioItem bind:group={value} name="justify" value={2}><Map class="scale-[90%]" /></RadioItem>
-                <RadioItem bind:group={value} name="justify" value={0}><Castle  class="scale-[90%]" /></RadioItem>
+                <RadioItem bind:group={value} name="justify" value={1}><Castle  class="scale-[90%]" /></RadioItem>
             </div>
             <div class="w-[calc(100%-200px)] h-[32px] flex !rounded-2xl rounded-l ">
                 <input type="text" class="w-full !rounded-xl shadow z-10 transform -translate-y-0.5" placeholder="add todo"/>

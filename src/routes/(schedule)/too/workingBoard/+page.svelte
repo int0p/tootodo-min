@@ -12,8 +12,7 @@
 <!---->
 <div class="w-full h-full max-h-full max-w-full overflow-x-scroll overflow-y-clip hide-scrollbar text-token flex gap-4 p-0.5 pr-2 py-1">
     {#each Array(6) as _, i}
-        <div class="card w-1/3  min-w-[300px] card-hover border-black dark:border-white border space-y-2 bg-white/30 dark:bg-black/30" >
-
+        <div class="card w-1/3  min-w-[300px] card-hover border-black dark:border-white border space-y-2 bg-white/40 dark:bg-black/30" >
             <header class="relative overflow-hidden text-black border-b border-black border-dashed dark:border-white
                                     {showTodo ? "h-[54px]" :"h-[128px]"}">
                                     <img src={"/city.png"} class="w-full absolute  aspect-[21/9] -z-10 dark:z-0 dark:opacity-70"/>
@@ -33,7 +32,6 @@
                             description of the project description of the project description of the project description of the project
                         </p>
                     </div>
-
             </header>
 
 <!--            heatmap-->
