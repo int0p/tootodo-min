@@ -34,10 +34,10 @@
     </thead>
 </table>
 
-<div class="w-[calc(100%+8px)] h-[calc(100%-70px)] overflow-y-scroll ">
+<div class="w-[calc(100%+8px)] h-[calc(100%-70px)] overflow-y-scroll flex-col space-y-2">
     {#each Array(3) as _,i}
     <div class="my-2 border-b-2">
-        <header class="h-[40px] bg-white/40">
+        <header class="h-[40px] bg-white/40 dark:bg-white/20">
             <button class="btn">
                 +
             </button>
@@ -100,6 +100,7 @@
     #task {
         height: 30px;
         margin: 5px 0;
+        color:white;
         background-color: #4CAF50;
         line-height: 30px;
         text-align: center;
@@ -108,6 +109,7 @@
     #milestone {
         height: 30px;
         margin: 5px 0;
+        color:white;
         background-color: #6a806a;
         line-height: 30px;
         text-align: center;
