@@ -1,5 +1,7 @@
 <script lang="ts">
     import { Modal, modalStore } from '@skeletonlabs/skeleton';
+    import {X, ChevronDown,ChevronUp} from "lucide-svelte";
+
     import ProjectForm from "$lib/components/form/createProject.svelte";
     import type { ModalSettings, ModalComponent } from '@skeletonlabs/skeleton';
 
@@ -39,6 +41,8 @@
         { id: 2, name: "Milestone 2", start: new Date(2023, 0, 3), end: new Date(2023, 0, 8) },
         // ... other tasks
     ];
+
+    let showTodo = true;
 </script>
 
 <Modal/>
@@ -46,7 +50,13 @@
 <table class="w-full bg-white h-[50px] rounded-t-xl border-b text-black">
     <thead class="">
     <tr class="sticky">
-        <th rowspan="2" class="border-r w-[5%]"><button class="">v</button></th>
+        <th rowspan="2" class="border-r w-[5%]"><button on:click={()=>showTodo = !showTodo}>
+            {#if showTodo}
+                <span><ChevronUp color="#775f5f" /></span>
+            {:else}
+                <span><ChevronDown color="#775f5f" /></span>
+            {/if}
+        </button></th>
         <th rowspan="2" class="border-r w-[20%]">milestone</th>
         <th rowspan="2" class="border-r w-[7%]">status</th>
         <th rowspan="2" class="border-r w-[13%]">duration</th>
@@ -105,6 +115,7 @@
                     </div></td>
                 </tr>
 
+                {#if showTodo}
                 {#each tasks as task (task.id)}
                     <tr>
                         <td class="border text-end p-2">
@@ -126,6 +137,7 @@
                         </div></td>
                     </tr>
                 {/each}
+                {/if}
             {/each}
             </tbody>
         </table>
