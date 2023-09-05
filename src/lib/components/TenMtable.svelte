@@ -15,8 +15,8 @@
 	let colorTable = [];
 	
 	afterUpdate(async () => {
-		try {
-			if (typeof window.tauri !== "undefined") {
+		try {			
+			if (typeof window.__TUARI__ !== undefined && $selectedDate) {
 				pomoRecords = await getPomoRecords($selectedDate);
 			} else {
 				console.log("ten minutes table, 웹 브라우저에서 실행 중");

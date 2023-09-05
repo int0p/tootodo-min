@@ -144,6 +144,7 @@
 	// send to tauri
 	import { invoke } from '@tauri-apps/api/tauri';
 	async function toDesktopDB() {
+		if($pomoInfo.cycles.length === 0) return;
 		const timerData = JSON.stringify({
 			working: $settings.working,
 			breaking: $settings.breaking,

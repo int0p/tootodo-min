@@ -4,7 +4,6 @@
 	import { minutesToCustomString, addTime } from '$helpers';
 	import { TenMtable } from '$components';
 
-	import { Editor } from '$components';
 	import { BreadcrumbDo } from '$components';
 	import { TableOfContents } from '@skeletonlabs/skeleton';
 	import { selectedDate } from '$stores/useLocStorage.js';
@@ -14,26 +13,31 @@
 
 	//tauri sqlite db
 	import { getPomoRecords } from '$stores/useTauriStorage';
-	let pomoRecords = [];
-
-	afterUpdate(async () => {
-		totalStudyTime = 0;
-		studyTime = [];
-		startTime = [];
-		endTime = [];
-		if (typeof window.tauri !== "undefined") {
-			pomoRecords = await getPomoRecords($selectedDate);
-		} else {
-			console.log("do page, 웹 브라우저에서 실행 중");
-		}
-	});
-
+	let pomoRecords;
 	//display pomodoro records
-	let totalStudyTime = 0;
+	let totalStudyTime;
 	let studyTime = [];
 	let startTime = [];
 	let endTime = [];
-	$: {
+
+	afterUpdate(async () => {
+		try {			
+			if (typeof window.__TUARI__ !== undefined && $selectedDate) {
+				pomoRecords = await getPomoRecords($selectedDate);
+			} else {
+				console.log("do page, 웹 브라우저에서 실행 중");
+			}
+			totalStudyTime = 0;
+			studyTime = [];
+			startTime = [];
+			endTime = [];
+		} catch (error) {
+			console.error('Failed to update pomoRecords:', error);
+		}				
+	});
+	
+
+	$:{
 		if (pomoRecords && Array.isArray(pomoRecords)) {
 			//get total study time
 			pomoRecords.forEach((pomoRecord) => {
@@ -57,6 +61,7 @@
 			totalStudyTime = addTime(studyTime);
 		}
 	}
+	
 
 	//indexed db
 	// import { liveQuery } from 'dexie';
